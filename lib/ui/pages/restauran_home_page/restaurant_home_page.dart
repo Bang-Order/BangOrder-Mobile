@@ -1,33 +1,6 @@
 part of '../pages.dart';
 
 class RestaurantHomePage extends StatelessWidget {
-  List<Text> _list = [
-    Text('1'),
-    Text('2'),
-    Text('3'),
-    Text('1'),
-    Text('2'),
-    Text('3'),
-    Text('1'),
-    Text('2'),
-    Text('3'),
-    Text('1'),
-    Text('2'),
-    Text('3'),
-    Text('1'),
-    Text('2'),
-    Text('3'),
-    Text('1'),
-    Text('2'),
-    Text('3'),
-    Text('1'),
-    Text('2'),
-    Text('3'),
-    Text('1'),
-    Text('2'),
-    Text('3'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +12,7 @@ class RestaurantHomePage extends StatelessWidget {
         ),
         actions: [
           Container(
-            margin: EdgeInsets.only(right: 5),
+            margin: EdgeInsets.only(right: 4),
             child: IconButton(
               icon: Icon(Icons.search_rounded),
               onPressed: () {},

@@ -8,20 +8,15 @@ class MenuList extends StatefulWidget {
 }
 
 class _MenuListState extends State<MenuList> {
-  late Future<List> futureCategoryHeader;
-  late Future<List> futureMenuItem;
-
-  @override
-  void initState() {
-    super.initState();
-    futureCategoryHeader = fetchCategoryHeader();
-  }
-
   @override
   Widget build(BuildContext context) {
+    return _fetchCategoryHeader();
+  }
+
+  Widget _fetchCategoryHeader() {
     return Container(
-      child: FutureBuilder<List>(
-        future: futureCategoryHeader,
+      child: FutureBuilder<List<MenuCategories>>(
+        future: fetchCategoryHeader(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
@@ -40,69 +35,81 @@ class _MenuListState extends State<MenuList> {
     );
   }
 
-  Widget _categoryHeader(data) {
-    futureMenuItem = fetchMenuItems(data['kategori_menu']);
-
+  Widget _categoryHeader(MenuCategories data) {
     return Card(
       elevation: 0,
       margin: EdgeInsets.symmetric(vertical: defaultMargin / 2),
       child: ExpansionTile(
+        collapsedIconColor: Colors.black,
+        iconColor: Colors.black,
+        tilePadding: EdgeInsets.symmetric(horizontal: defaultMargin),
         title: Text(
-          data['kategori_menu'],
+          data.kategoriMenu,
           style: categoryHeaderStyle,
         ),
-        children: [
-          FutureBuilder<List>(
-            future: futureMenuItem,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  controller: ScrollController(),
-                  shrinkWrap: true,
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, i) {
-                    return _menuItem(snapshot.data![i]);
-                  },
-                );
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              return SizedBox();
-            },
-          )
-        ],
+        children: [_fetchMenuItem(data)],
       ),
     );
   }
 
-  Widget _menuItem(data) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: defaultMargin / 2,
-        horizontal: defaultMargin,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(data['nama'], style: menuTitleStyle),
-                SizedBox(height: defaultMargin / 2),
-                Text(data['deskripsi'], style: menudescriptionStyle),
-                SizedBox(height: defaultMargin / 2),
-                Text(data['harga'].toString(), style: menuPriceStyle),
-              ],
+  Widget _fetchMenuItem(MenuCategories data) {
+    return FutureBuilder<List<Menus>>(
+      future: fetchMenuItem(data.kategoriMenu),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            controller: ScrollController(),
+            shrinkWrap: true,
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, i) {
+              return _menuItem(snapshot.data![i]);
+            },
+          );
+        } else if (snapshot.hasError) {
+          return Text("${snapshot.error}");
+        }
+        return SizedBox();
+      },
+    );
+  }
+
+  Widget _menuItem(Menus data) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailMenuPage(data)),
+        );
+      },
+      splashColor: Colors.grey[100],
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: defaultMargin / 2,
+          horizontal: defaultMargin,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(data.nama, style: menuTitleStyle),
+                  SizedBox(height: defaultMargin / 2),
+                  Text(data.deskripsi, style: menudescriptionStyle),
+                  SizedBox(height: defaultMargin / 2),
+                  Text(data.harga.toString(), style: menuPriceStyle),
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(data['gambar']),
-            ),
-          )
-        ],
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image.network(data.gambar),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
