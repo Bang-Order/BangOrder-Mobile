@@ -15,7 +15,7 @@ class _MenuListState extends State<MenuList> {
 
   Widget _fetchCategoryHeader() {
     return Container(
-      child: FutureBuilder<List<MenuCategories>>(
+      child: FutureBuilder<List<MenuCategory>>(
         future: fetchCategoryHeader(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -35,26 +35,31 @@ class _MenuListState extends State<MenuList> {
     );
   }
 
-  Widget _categoryHeader(MenuCategories data) {
+  Widget _categoryHeader(MenuCategory data) {
     return Card(
       elevation: 0,
       margin: EdgeInsets.symmetric(vertical: defaultMargin / 2),
       child: ExpansionTile(
-        collapsedIconColor: Colors.black,
+        childrenPadding: EdgeInsets.symmetric(
+          horizontal: defaultMargin,
+          vertical: defaultMargin / 2,
+        ),
         iconColor: Colors.black,
         tilePadding: EdgeInsets.symmetric(horizontal: defaultMargin),
         title: Text(
-          data.kategoriMenu,
+          data.name,
           style: categoryHeaderStyle,
         ),
-        children: [_fetchMenuItem(data)],
+        children: [
+          _fetchMenuItem(data),
+        ],
       ),
     );
   }
 
-  Widget _fetchMenuItem(MenuCategories data) {
-    return FutureBuilder<List<Menus>>(
-      future: fetchMenuItem(data.kategoriMenu),
+  Widget _fetchMenuItem(MenuCategory data) {
+    return FutureBuilder<List<Menu>>(
+      future: fetchMenuItem(data.id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(
@@ -73,7 +78,7 @@ class _MenuListState extends State<MenuList> {
     );
   }
 
-  Widget _menuItem(Menus data) {
+  Widget _menuItem(Menu data) {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -85,27 +90,30 @@ class _MenuListState extends State<MenuList> {
       child: Container(
         padding: EdgeInsets.symmetric(
           vertical: defaultMargin / 2,
-          horizontal: defaultMargin,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(data.nama, style: menuTitleStyle),
-                  SizedBox(height: defaultMargin / 2),
-                  Text(data.deskripsi, style: menudescriptionStyle),
-                  SizedBox(height: defaultMargin / 2),
-                  Text(data.harga.toString(), style: menuPriceStyle),
-                ],
+              flex: 2,
+              child: Container(
+                margin: EdgeInsets.only(right: defaultMargin / 2),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(data.name, style: menuTitleStyle),
+                    SizedBox(height: defaultMargin / 2),
+                    Text(data.description, style: menudescriptionStyle),
+                    SizedBox(height: defaultMargin / 2),
+                    Text(data.price.toString(), style: menuPriceStyle),
+                  ],
+                ),
               ),
             ),
             Expanded(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Image.network(data.gambar),
+                borderRadius: BorderRadius.circular(2),
+                child: Image.network(data.image),
               ),
             )
           ],

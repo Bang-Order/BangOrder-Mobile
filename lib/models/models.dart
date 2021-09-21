@@ -1,3 +1,3 @@
-part 'menu_categories.dart';
+part 'menu_category.dart';
 
-part 'menus.dart';
+part 'menu.dart';

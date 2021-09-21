@@ -1,7 +1,7 @@
 part of '../pages.dart';
 
 class DetailMenuPage extends StatelessWidget {
-  Menus data;
+  Menu data;
 
   DetailMenuPage(this.data);
 
@@ -9,7 +9,7 @@ class DetailMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(data.nama),
+        title: Text(data.name),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_rounded),

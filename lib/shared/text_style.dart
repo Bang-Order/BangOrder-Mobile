@@ -10,6 +10,7 @@ TextStyle appbarTextStyle = TextStyle(
 TextStyle categoryHeaderStyle = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w500,
+  color: Colors.black,
   fontFamily: 'Manrope',
 );
 
