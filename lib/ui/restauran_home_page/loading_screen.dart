@@ -5,11 +5,10 @@ class HomepageLoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      alignment: Alignment.center,
       height: MediaQuery.of(context).size.height / 1.3,
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
+      child: CircularProgressIndicator(),
     );
   }
 }
