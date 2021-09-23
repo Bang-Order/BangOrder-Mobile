@@ -97,8 +97,9 @@ class DetailMenuPage extends StatelessWidget {
             margin: EdgeInsets.all(defaultMargin),
             padding: EdgeInsets.all(3),
             decoration: BoxDecoration(
-                border: Border.all(color: darkGrayColor),
-                borderRadius: BorderRadius.circular(8)),
+              border: Border.all(color: darkGrayColor),
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -111,13 +112,21 @@ class DetailMenuPage extends StatelessWidget {
                     child: Icon(
                       Icons.remove_rounded,
                       color: Colors.white,
+                      size: 39,
                     ),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.all(0),
                     ),
                   ),
                 ),
-                Text('1'),
+                Text(
+                  '1',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Manrope',
+                  ),
+                ),
                 Container(
                   margin: EdgeInsets.only(left: 20),
                   width: 39,
@@ -127,6 +136,7 @@ class DetailMenuPage extends StatelessWidget {
                     child: Icon(
                       Icons.add_rounded,
                       color: Colors.white,
+                      size: 39,
                     ),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.all(0),
@@ -141,7 +151,14 @@ class DetailMenuPage extends StatelessWidget {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(padding: EdgeInsets.all(12)),
               onPressed: () {},
-              child: Text('Tambahkan ke Keranjang'),
+              child: Text(
+                'Tambahkan ke Keranjang',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Manrope',
+                ),
+              ),
             ),
           ),
         ],
