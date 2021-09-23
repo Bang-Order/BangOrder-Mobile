@@ -34,3 +34,9 @@ TextStyle menuPriceStyle = TextStyle(
   color: Colors.black,
   fontFamily: 'Manrope',
 );
+
+TextStyle detailMenuStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Manrope',
+);
