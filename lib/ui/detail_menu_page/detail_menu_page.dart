@@ -72,11 +72,7 @@ class DetailMenuPage extends StatelessWidget {
                     maxLines: 3,
                     decoration: InputDecoration(
                       contentPadding:
-<<<<<<< HEAD
                       EdgeInsets.symmetric(vertical: 5, horizontal: 7),
-=======
-                          EdgeInsets.symmetric(vertical: 5, horizontal: 7),
->>>>>>> 91cd68e2cf252b4ca33f027acd8d82b71fddf117
                       hintText: 'Eg. Extra pedas pls',
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
