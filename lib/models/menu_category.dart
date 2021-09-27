@@ -2,20 +2,20 @@ part of 'models.dart';
 
 class MenuCategory {
   int id;
-  int restaurantId;
   String name;
+  List<Menu> menus;
 
   MenuCategory({
     required this.id,
-    required this.restaurantId,
     required this.name,
+    required this.menus,
   });
 
   factory MenuCategory.fromJson(Map<String, dynamic> json) {
     return MenuCategory(
       id: json['id'],
-      restaurantId: json['restaurant_id'],
-      name: json['name'],
+      name: json['category-name'],
+      menus: json['menu'],
     );
   }
 }

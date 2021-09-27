@@ -9,10 +9,9 @@ class DetailMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(data.name),
-        centerTitle: true,
+        title: Text(data.name, style: appbarTextStyle),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded),
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: blackColor),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -43,6 +42,7 @@ class DetailMenuPage extends StatelessWidget {
                           data.description,
                           style: TextStyle(
                             fontSize: 12,
+                            color: blackColor,
                             fontWeight: FontWeight.w300,
                             fontFamily: 'Manrope',
                           ),
@@ -55,12 +55,9 @@ class DetailMenuPage extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: defaultMargin / 2),
             Container(
-              padding: EdgeInsets.only(
-                left: defaultMargin,
-                right: defaultMargin,
-                bottom: defaultMargin,
-              ),
+              padding: EdgeInsets.all(defaultMargin),
               child: Column(
                 children: [
                   Row(
@@ -70,13 +67,13 @@ class DetailMenuPage extends StatelessWidget {
                       Text('Optional')
                     ],
                   ),
-                  SizedBox(height: 6),
+                  SizedBox(height: defaultMargin),
                   TextFormField(
                     maxLines: 3,
                     decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 5, horizontal: 7),
-                      hintText: 'Tambah Sambel Please',
+                      hintText: 'Eg. Extra pedas pls',
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xffDADDDF),
@@ -120,9 +117,10 @@ class DetailMenuPage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '1',
+                  '0',
                   style: TextStyle(
                     fontSize: 24,
+                    color: blackColor,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Manrope',
                   ),
@@ -149,12 +147,15 @@ class DetailMenuPage extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(padding: EdgeInsets.all(12)),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(12),
+              ),
               onPressed: () {},
               child: Text(
                 'Tambahkan ke Keranjang',
                 style: TextStyle(
                   fontSize: 14,
+                  color: blackColor,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Manrope',
                 ),
