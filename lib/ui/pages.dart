@@ -17,5 +17,3 @@ part 'restauran_home_page/loading_screen.dart';
 part 'payment_method_page/payment_method_page.dart';
 
 part 'order_status_page/order_status_page.dart';
-
-part 'detail_menu_page/bottom_nav_bar.dart';
