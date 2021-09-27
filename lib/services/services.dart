@@ -7,4 +7,4 @@ part 'fetch_category_header.dart';
 
 part 'fetch_menu_item.dart';
 
-const APIURL = 'http://a84e-140-0-7-173.ngrok.io/api/';
+const APIURL = 'http://192.168.0.7/project/BangOrder-Backend/public/api/';

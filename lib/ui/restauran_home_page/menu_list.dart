@@ -40,9 +40,8 @@ class _MenuListState extends State<MenuList> {
       elevation: 0,
       margin: EdgeInsets.symmetric(vertical: defaultMargin / 2),
       child: ExpansionTile(
-        childrenPadding: EdgeInsets.symmetric(
-          horizontal: defaultMargin,
-          vertical: defaultMargin / 2,
+        childrenPadding: EdgeInsets.only(
+          bottom: defaultMargin / 2,
         ),
         iconColor: Colors.black,
         tilePadding: EdgeInsets.symmetric(horizontal: defaultMargin),
@@ -89,8 +88,7 @@ class _MenuListState extends State<MenuList> {
       splashColor: Colors.grey[100],
       child: Container(
         padding: EdgeInsets.symmetric(
-          vertical: defaultMargin / 2,
-        ),
+            vertical: defaultMargin / 2, horizontal: defaultMargin),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -112,7 +110,7 @@ class _MenuListState extends State<MenuList> {
             ),
             Expanded(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(2),
+                borderRadius: BorderRadius.circular(5),
                 child: Image.network(data.image),
               ),
             )
