@@ -10,69 +10,57 @@ class MenuList extends StatefulWidget {
 class _MenuListState extends State<MenuList> {
   @override
   Widget build(BuildContext context) {
-    return _fetchCategoryHeader();
-  }
-
-  Widget _fetchCategoryHeader() {
-    return Container(
-      child: FutureBuilder<List<MenuCategory>>(
-        future: fetchCategoryHeader(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-                controller: ScrollController(),
-                shrinkWrap: true,
-                itemCount: snapshot.data!.length,
-                itemBuilder: (BuildContext context, int i) {
-                  return _categoryHeader(snapshot.data![i]);
-                });
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return HomepageLoadingScreen();
-        },
-      ),
+    return Consumer<ServicesProvider>(
+      builder: (context, service, _) {
+        final data = service.data['menu-list'];
+        return _categoryHeaderList(data);
+      },
     );
   }
 
-  Widget _categoryHeader(MenuCategory data) {
+  Widget _categoryHeaderList(data) {
+    return ListView.builder(
+      controller: ScrollController(),
+      shrinkWrap: true,
+      itemCount: data.length,
+      itemBuilder: (BuildContext context, int i) {
+        return _categoryHeader(data[i]);
+      },
+    );
+  }
+
+  Widget _categoryHeader(data) {
     return Card(
       elevation: 0,
       margin: EdgeInsets.symmetric(vertical: defaultMargin / 2),
       child: ExpansionTile(
+<<<<<<< HEAD
         childrenPadding: EdgeInsets.only(
           bottom: defaultMargin / 2,
         ),
         iconColor: Colors.black,
+=======
+        childrenPadding: EdgeInsets.only(bottom: defaultMargin / 2),
+        iconColor: blackColor,
+>>>>>>> 91cd68e2cf252b4ca33f027acd8d82b71fddf117
         tilePadding: EdgeInsets.symmetric(horizontal: defaultMargin),
         title: Text(
-          data.name,
+          data['category-name'],
           style: categoryHeaderStyle,
         ),
-        children: [
-          _fetchMenuItem(data),
-        ],
+        children: [_menuItemList(data)],
       ),
     );
   }
 
-  Widget _fetchMenuItem(MenuCategory data) {
-    return FutureBuilder<List<Menu>>(
-      future: fetchMenuItem(data.id),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return ListView.builder(
-            controller: ScrollController(),
-            shrinkWrap: true,
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, i) {
-              return _menuItem(snapshot.data![i]);
-            },
-          );
-        } else if (snapshot.hasError) {
-          return Text("${snapshot.error}");
-        }
-        return SizedBox();
+  Widget _menuItemList(data) {
+    return ListView.builder(
+      controller: ScrollController(),
+      shrinkWrap: true,
+      itemCount: data['menu'].length,
+      itemBuilder: (BuildContext context, int i) {
+        Menu menu = Menu.fromJson(data['menu'][i]);
+        return _menuItem(menu);
       },
     );
   }
@@ -80,10 +68,8 @@ class _MenuListState extends State<MenuList> {
   Widget _menuItem(Menu data) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DetailMenuPage(data)),
-        );
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => DetailMenuPage(data)));
       },
       splashColor: Colors.grey[100],
       child: Container(
