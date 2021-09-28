@@ -1,15 +1,49 @@
 part of '../pages.dart';
 
-class DetailMenuPage extends StatelessWidget {
-  Menu data;
+class DetailMenuPage extends StatefulWidget {
+  Menu _data;
 
-  DetailMenuPage(this.data);
+  DetailMenuPage(this._data);
+
+  @override
+  State<DetailMenuPage> createState() => _DetailMenuPageState();
+}
+
+class _DetailMenuPageState extends State<DetailMenuPage> {
+  TextEditingController _notes = TextEditingController();
+  var _quantity = 1;
+  bool _isUpdate = false;
+  Cart _cart = Cart(notes: TextEditingController(), quantity: 0, menuId: 0);
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      CartProvider cart = Provider.of<CartProvider>(context, listen: false);
+      cart.item.forEach((element) {
+        if (element.menuId == widget._data.id) {
+          setState(() {
+            _isUpdate = true;
+            _cart = element;
+          });
+          return;
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    if (_cart.quantity == 0) _cart.quantity = 1;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: lightGrayColor,
       appBar: AppBar(
-        title: Text(data.name, style: appbarTextStyle),
+        title: Text(widget._data.name, style: appbarTextStyle),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_rounded, color: blackColor),
           onPressed: () => Navigator.pop(context),
@@ -22,11 +56,12 @@ class DetailMenuPage extends StatelessWidget {
             Container(
               height: MediaQuery.of(context).size.height * 0.35,
               child: Image.network(
-                data.image,
+                widget._data.image,
                 fit: BoxFit.cover,
               ),
             ),
             Container(
+              color: Colors.white,
               padding: EdgeInsets.all(defaultMargin),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,10 +71,10 @@ class DetailMenuPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(data.name, style: detailMenuStyle),
+                        Text(widget._data.name, style: detailMenuStyle),
                         SizedBox(height: 6),
                         Text(
-                          data.description,
+                          widget._data.description,
                           style: TextStyle(
                             fontSize: 12,
                             color: blackColor,
@@ -51,12 +86,13 @@ class DetailMenuPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 18),
-                  Text(data.price.toString(), style: detailMenuStyle),
+                  Text(widget._data.price.toString(), style: detailMenuStyle),
                 ],
               ),
             ),
             SizedBox(height: defaultMargin / 2),
             Container(
+              color: Colors.white,
               padding: EdgeInsets.all(defaultMargin),
               child: Column(
                 children: [
@@ -68,11 +104,12 @@ class DetailMenuPage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: defaultMargin),
-                  TextFormField(
+                  TextField(
+                    controller: (_isUpdate) ? _cart.notes : _notes,
                     maxLines: 3,
                     decoration: InputDecoration(
                       contentPadding:
-                      EdgeInsets.symmetric(vertical: 5, horizontal: 7),
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 7),
                       hintText: 'Eg. Extra pedas pls',
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -87,83 +124,170 @@ class DetailMenuPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            margin: EdgeInsets.all(defaultMargin),
-            padding: EdgeInsets.all(3),
-            decoration: BoxDecoration(
-              border: Border.all(color: darkGrayColor),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(right: 20),
-                  width: 39,
-                  height: 39,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.remove_rounded,
-                      color: Colors.white,
-                      size: 39,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.all(0),
-                    ),
-                  ),
-                ),
-                Text(
-                  '0',
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: blackColor,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Manrope',
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  width: 39,
-                  height: 39,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.add_rounded,
-                      color: Colors.white,
-                      size: 39,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.all(0),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.all(12),
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              margin: EdgeInsets.all(defaultMargin),
+              padding: EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                border: Border.all(color: darkGrayColor),
+                borderRadius: BorderRadius.circular(8),
               ),
-              onPressed: () {},
-              child: Text(
-                'Tambahkan ke Keranjang',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: blackColor,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Manrope',
-                ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (_isUpdate && _cart.quantity > 0) ...[
+                    Container(
+                      width: 39,
+                      height: 39,
+                      child: ElevatedButton(
+                        onPressed: decrementCartItem,
+                        child: Icon(
+                          Icons.remove_rounded,
+                          color: Colors.white,
+                          size: 39,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.all(0),
+                        ),
+                      ),
+                    )
+                  ] else if (!_isUpdate && _quantity > 1) ...[
+                    Container(
+                      width: 39,
+                      height: 39,
+                      child: ElevatedButton(
+                        onPressed: decrementMenuItem,
+                        child: Icon(
+                          Icons.remove_rounded,
+                          color: Colors.white,
+                          size: 39,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.all(0),
+                        ),
+                      ),
+                    )
+                  ] else ...[
+                    Container(
+                      width: 39,
+                      height: 39,
+                      child: ElevatedButton(
+                        onPressed: null,
+                        child: Icon(
+                          Icons.remove_rounded,
+                          color: Colors.white,
+                          size: 39,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.all(0),
+                          primary: lightGrayColor,
+                        ),
+                      ),
+                    )
+                  ],
+                  Container(
+                    margin: EdgeInsets.only(left: 20, right: 20),
+                    child: Text(
+                      (_isUpdate)
+                          ? _cart.quantity.toString()
+                          : _quantity.toString(),
+                      style: quantityStyle,
+                    ),
+                  ),
+                  Container(
+                    width: 39,
+                    height: 39,
+                    child: ElevatedButton(
+                      onPressed:
+                          (_isUpdate) ? incrementCartItem : incrementMenuItem,
+                      child: Icon(
+                        Icons.add_rounded,
+                        color: Colors.white,
+                        size: 39,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.all(0),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Consumer<CartProvider>(
+                builder: (context, cart, _) {
+                  return (_isUpdate && _cart.quantity > 1)
+                      ? ElevatedButton(
+                          onPressed: () {
+                            cart.item.forEach((element) {
+                              if (element.menuId == widget._data.id) {
+                                element = _cart;
+                                return;
+                              }
+                            });
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Tambahkan ke Keranjang - ' +
+                                (_cart.quantity * widget._data.price)
+                                    .toString(),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(12),
+                          ),
+                        )
+                      : (_isUpdate && _cart.quantity == 0)
+                          ? ElevatedButton(
+                              onPressed: () {
+                                cart.item.remove(_cart);
+                                Navigator.pop(context);
+                              },
+                              child: Text('Hapus Pesanan', style: deleteStyle),
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.all(12),
+                                primary: redColor,
+                              ),
+                            )
+                          : ElevatedButton(
+                              onPressed: () {
+                                cart.item.add(new Cart(
+                                  menuId: widget._data.id,
+                                  quantity: _quantity,
+                                  notes: _notes,
+                                ));
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'Tambahkan ke Keranjang - ' +
+                                    (_quantity * widget._data.price).toString(),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.all(12),
+                              ),
+                            );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+
+  void incrementMenuItem() => setState(() => _quantity += 1);
+
+  void incrementCartItem() => setState(() => _cart.quantity += 1);
+
+  void decrementMenuItem() => setState(() {
+        if (_quantity != 0) _quantity -= 1;
+      });
+
+  void decrementCartItem() => setState(() {
+        if (_cart.quantity != 0) _cart.quantity -= 1;
+      });
 }
