@@ -41,3 +41,38 @@ TextStyle detailMenuStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'Manrope',
 );
+
+TextStyle cartStyle = TextStyle(
+  fontSize: 14,
+  color: blackColor,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Manrope',
+);
+
+TextStyle quantityStyle = TextStyle(
+  fontSize: 24,
+  color: blackColor,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Manrope',
+);
+
+TextStyle deleteStyle = TextStyle(
+  fontSize: 14,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Manrope',
+);
+
+TextStyle fabCheckoutStyle = TextStyle(
+  fontSize: 14,
+  color: blackColor,
+  fontWeight: FontWeight.w500,
+  fontFamily: 'Manrope',
+);
+
+TextStyle fabTotalStyle = TextStyle(
+  fontSize: 14,
+  color: blackColor,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Manrope',
+);

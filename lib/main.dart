@@ -1,4 +1,3 @@
-import 'package:bangorder_mobile/models/models.dart';
 import 'package:bangorder_mobile/providers/providers.dart';
 import 'package:bangorder_mobile/shared/shared.dart';
 import 'package:bangorder_mobile/ui/pages.dart';
@@ -12,13 +11,18 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Bangorder',
-      theme: ThemeData(
-        primarySwatch: yellowColor,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Bangorder',
+        theme: ThemeData(
+          primarySwatch: yellowColor,
+        ),
+        home: RestaurantHomePage(),
       ),
-      home: RestaurantHomePage(),
     );
   }
 }

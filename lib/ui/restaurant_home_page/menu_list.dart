@@ -19,13 +19,18 @@ class _MenuListState extends State<MenuList> {
         future: fetchCategoryHeader(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ListView.builder(
-                controller: ScrollController(),
-                shrinkWrap: true,
-                itemCount: snapshot.data!.length,
-                itemBuilder: (BuildContext context, int i) {
-                  return _categoryHeader(snapshot.data![i]);
-                });
+            return ListView.separated(
+              controller: ScrollController(),
+              shrinkWrap: true,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (BuildContext context, int i) {
+                return _categoryHeader(snapshot.data![i]);
+              },
+              separatorBuilder: (context, index) => Divider(
+                height: 8,
+                color: lightGrayColor,
+              ),
+            );
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
@@ -36,15 +41,16 @@ class _MenuListState extends State<MenuList> {
   }
 
   Widget _categoryHeader(MenuCategory data) {
-    return Card(
-      elevation: 0,
-      margin: EdgeInsets.symmetric(vertical: defaultMargin / 2),
+    return Container(
+      color: Colors.white,
       child: ExpansionTile(
         childrenPadding: EdgeInsets.only(
           bottom: defaultMargin / 2,
         ),
         iconColor: Colors.black,
-        tilePadding: EdgeInsets.symmetric(horizontal: defaultMargin),
+        tilePadding: EdgeInsets.symmetric(
+          horizontal: defaultMargin,
+        ),
         title: Text(
           data.name,
           style: categoryHeaderStyle,
@@ -82,28 +88,47 @@ class _MenuListState extends State<MenuList> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DetailMenuPage(data)),
+          MaterialPageRoute(
+            builder: (context) => DetailMenuPage(data),
+          ),
         );
       },
       splashColor: Colors.grey[100],
       child: Container(
         padding: EdgeInsets.symmetric(
-            vertical: defaultMargin / 2, horizontal: defaultMargin),
+          vertical: defaultMargin / 2,
+          horizontal: defaultMargin,
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               flex: 2,
               child: Container(
-                margin: EdgeInsets.only(right: defaultMargin / 2),
+                margin: EdgeInsets.only(
+                  right: defaultMargin / 2,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(data.name, style: menuTitleStyle),
-                    SizedBox(height: defaultMargin / 2),
-                    Text(data.description, style: menudescriptionStyle),
-                    SizedBox(height: defaultMargin / 2),
-                    Text(data.price.toString(), style: menuPriceStyle),
+                    Text(
+                      data.name,
+                      style: menuTitleStyle,
+                    ),
+                    SizedBox(
+                      height: defaultMargin / 2,
+                    ),
+                    Text(
+                      data.description,
+                      style: menudescriptionStyle,
+                    ),
+                    SizedBox(
+                      height: defaultMargin / 2,
+                    ),
+                    Text(
+                      currency(data.price),
+                      style: menuPriceStyle,
+                    ),
                   ],
                 ),
               ),
