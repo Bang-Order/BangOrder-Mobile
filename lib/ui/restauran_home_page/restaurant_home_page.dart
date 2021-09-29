@@ -14,7 +14,7 @@ class RestaurantHomePage extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(right: 4),
             child: IconButton(
-              icon: Icon(Icons.search_rounded, color:blackColor),
+              icon: Icon(Icons.search_rounded, color: blackColor),
               onPressed: () {},
             ),
           ),
@@ -29,6 +29,31 @@ class RestaurantHomePage extends StatelessWidget {
             MenuList()
           ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Consumer<CartProvider>(
+        builder: (context, cart, _) {
+          return (cart.item.isNotEmpty)
+              ? ElevatedButton(
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Checkout', style: fabCheckoutStyle),
+                      Text(convertToCurrency(cart.getTotalPrice()),
+                          style: fabTotalStyle),
+                    ],
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      maximumSize: Size.fromWidth(
+                          MediaQuery.of(context).size.width * 0.9),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 16)),
+                )
+              : SizedBox();
+        },
       ),
     );
   }

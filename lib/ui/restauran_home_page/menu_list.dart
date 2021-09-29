@@ -103,7 +103,7 @@ class _MenuListState extends State<MenuList> {
                     SizedBox(height: defaultMargin / 2),
                     Text(data.description, style: menudescriptionStyle),
                     SizedBox(height: defaultMargin / 2),
-                    Text(data.price.toString(), style: menuPriceStyle),
+                    Text(convertToCurrency(data.price), style: menuPriceStyle),
                   ],
                 ),
               ),

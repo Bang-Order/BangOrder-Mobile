@@ -6,6 +6,9 @@ class Menu {
   String description;
   int price;
   String image;
+  TextEditingController textEditingController = TextEditingController();
+  int quantity = 1;
+  bool isUpdate = false;
 
   Menu({
     required this.id,

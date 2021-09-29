@@ -62,3 +62,17 @@ TextStyle deleteStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'Manrope',
 );
+
+TextStyle fabCheckoutStyle = TextStyle(
+  fontSize: 14,
+  color: blackColor,
+  fontWeight: FontWeight.w500,
+  fontFamily: 'Manrope',
+);
+
+TextStyle fabTotalStyle = TextStyle(
+  fontSize: 14,
+  color: blackColor,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Manrope',
+);

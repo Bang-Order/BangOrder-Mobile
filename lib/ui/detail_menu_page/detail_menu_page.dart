@@ -10,31 +10,13 @@ class DetailMenuPage extends StatefulWidget {
 }
 
 class _DetailMenuPageState extends State<DetailMenuPage> {
-  TextEditingController _notes = TextEditingController();
-  var _quantity = 1;
-  bool _isUpdate = false;
-  Cart _cart = Cart(notes: TextEditingController(), quantity: 0, menuId: 0);
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      CartProvider cart = Provider.of<CartProvider>(context, listen: false);
-      cart.item.forEach((element) {
-        if (element.menuId == widget._data.id) {
-          setState(() {
-            _isUpdate = true;
-            _cart = element;
-          });
-          return;
-        }
-      });
-    });
-  }
-
   @override
   void dispose() {
-    if (_cart.quantity == 0) _cart.quantity = 1;
+    if (!widget._data.isUpdate) {
+      widget._data.quantity = 0;
+      widget._data.textEditingController = TextEditingController();
+    }
+    if (widget._data.quantity == 0) widget._data.quantity = 1;
     super.dispose();
   }
 
@@ -86,7 +68,9 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                     ),
                   ),
                   SizedBox(width: 18),
-                  Text(widget._data.price.toString(), style: detailMenuStyle),
+                  // Text(widget._data.price.toString(), style: detailMenuStyle),
+                  Text(convertToCurrency(widget._data.price),
+                      style: detailMenuStyle),
                 ],
               ),
             ),
@@ -105,7 +89,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                   ),
                   SizedBox(height: defaultMargin),
                   TextField(
-                    controller: (_isUpdate) ? _cart.notes : _notes,
+                    controller: widget._data.textEditingController,
                     maxLines: 3,
                     decoration: InputDecoration(
                       contentPadding:
@@ -139,12 +123,12 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (_isUpdate && _cart.quantity > 0) ...[
+                  if (widget._data.isUpdate && widget._data.quantity > 0) ...[
                     Container(
                       width: 39,
                       height: 39,
                       child: ElevatedButton(
-                        onPressed: decrementCartItem,
+                        onPressed: decrementMenuItem,
                         child: Icon(
                           Icons.remove_rounded,
                           color: Colors.white,
@@ -155,7 +139,8 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                         ),
                       ),
                     )
-                  ] else if (!_isUpdate && _quantity > 1) ...[
+                  ] else if (!widget._data.isUpdate &&
+                      widget._data.quantity > 1) ...[
                     Container(
                       width: 39,
                       height: 39,
@@ -192,9 +177,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                   Container(
                     margin: EdgeInsets.only(left: 20, right: 20),
                     child: Text(
-                      (_isUpdate)
-                          ? _cart.quantity.toString()
-                          : _quantity.toString(),
+                      widget._data.quantity.toString(),
                       style: quantityStyle,
                     ),
                   ),
@@ -202,8 +185,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                     width: 39,
                     height: 39,
                     child: ElevatedButton(
-                      onPressed:
-                          (_isUpdate) ? incrementCartItem : incrementMenuItem,
+                      onPressed: incrementMenuItem,
                       child: Icon(
                         Icons.add_rounded,
                         color: Colors.white,
@@ -221,51 +203,56 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
               width: MediaQuery.of(context).size.width,
               child: Consumer<CartProvider>(
                 builder: (context, cart, _) {
-                  return (_isUpdate && _cart.quantity > 1)
+                  return (widget._data.isUpdate && widget._data.quantity == 0)
                       ? ElevatedButton(
                           onPressed: () {
-                            cart.item.forEach((element) {
-                              if (element.menuId == widget._data.id) {
-                                element = _cart;
-                                return;
-                              }
-                            });
+                            widget._data.isUpdate = false;
+                            cart.deleteItem(widget._data.id);
                             Navigator.pop(context);
                           },
-                          child: Text(
-                            'Tambahkan ke Keranjang - ' +
-                                (_cart.quantity * widget._data.price)
-                                    .toString(),
-                          ),
+                          child: Text('Hapus Pesanan', style: deleteStyle),
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.all(12),
+                            primary: redColor,
                           ),
                         )
-                      : (_isUpdate && _cart.quantity == 0)
+                      : (widget._data.isUpdate)
                           ? ElevatedButton(
                               onPressed: () {
-                                cart.item.remove(_cart);
+                                cart.updateItem(
+                                  widget._data.id,
+                                  new Cart(
+                                      menuId: widget._data.id,
+                                      quantity: widget._data.quantity,
+                                      notes: widget._data.textEditingController,
+                                      price: widget._data.price),
+                                );
                                 Navigator.pop(context);
                               },
-                              child: Text('Hapus Pesanan', style: deleteStyle),
+                              child: Text(
+                                  'Tambahkan ke Keranjang - ' +
+                                      convertToCurrency(widget._data.quantity *
+                                          widget._data.price),
+                                  style: cartStyle),
                               style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.all(12),
-                                primary: redColor,
                               ),
                             )
                           : ElevatedButton(
                               onPressed: () {
-                                cart.item.add(new Cart(
-                                  menuId: widget._data.id,
-                                  quantity: _quantity,
-                                  notes: _notes,
-                                ));
+                                widget._data.isUpdate = true;
+                                cart.addItem(new Cart(
+                                    menuId: widget._data.id,
+                                    price: widget._data.price,
+                                    quantity: widget._data.quantity,
+                                    notes: widget._data.textEditingController));
                                 Navigator.pop(context);
                               },
                               child: Text(
-                                'Tambahkan ke Keranjang - ' +
-                                    (_quantity * widget._data.price).toString(),
-                              ),
+                                  'Tambahkan ke Keranjang - ' +
+                                      convertToCurrency(widget._data.quantity *
+                                          widget._data.price),
+                                  style: cartStyle),
                               style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.all(12),
                               ),
@@ -279,15 +266,9 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
     );
   }
 
-  void incrementMenuItem() => setState(() => _quantity += 1);
-
-  void incrementCartItem() => setState(() => _cart.quantity += 1);
+  void incrementMenuItem() => setState(() => widget._data.quantity += 1);
 
   void decrementMenuItem() => setState(() {
-        if (_quantity != 0) _quantity -= 1;
-      });
-
-  void decrementCartItem() => setState(() {
-        if (_cart.quantity != 0) _cart.quantity -= 1;
+        if (widget._data.quantity != 0) widget._data.quantity -= 1;
       });
 }
