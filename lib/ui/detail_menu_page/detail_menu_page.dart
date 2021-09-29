@@ -12,11 +12,11 @@ class DetailMenuPage extends StatefulWidget {
 class _DetailMenuPageState extends State<DetailMenuPage> {
   @override
   void dispose() {
-    if (!widget._data.isUpdate) {
-      widget._data.quantity = 0;
-      widget._data.textEditingController = TextEditingController();
+    if (!_menu.isUpdate) {
+      _menu.quantity = 0;
+      _menu.notes = TextEditingController();
     }
-    if (widget._data.quantity == 0) widget._data.quantity = 1;
+    if (_menu.quantity == 0) _menu.quantity = 1;
     super.dispose();
   }
 
@@ -25,9 +25,15 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
     return Scaffold(
       backgroundColor: lightGrayColor,
       appBar: AppBar(
-        title: Text(widget._data.name, style: appbarTextStyle),
+        title: Text(
+          _menu.name,
+          style: appbarTextStyle,
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded, color: blackColor),
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: blackColor,
+          ),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -38,7 +44,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
             Container(
               height: MediaQuery.of(context).size.height * 0.35,
               child: Image.network(
-                widget._data.image,
+                _menu.image,
                 fit: BoxFit.cover,
               ),
             ),
@@ -53,10 +59,13 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget._data.name, style: detailMenuStyle),
+                        Text(
+                          _menu.name,
+                          style: detailMenuStyle,
+                        ),
                         SizedBox(height: 6),
                         Text(
-                          widget._data.description,
+                          _menu.description,
                           style: TextStyle(
                             fontSize: 12,
                             color: blackColor,
@@ -68,9 +77,10 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                     ),
                   ),
                   SizedBox(width: 18),
-                  // Text(widget._data.price.toString(), style: detailMenuStyle),
-                  Text(convertToCurrency(widget._data.price),
-                      style: detailMenuStyle),
+                  Text(
+                    currency(_menu.price),
+                    style: detailMenuStyle,
+                  ),
                 ],
               ),
             ),
@@ -84,16 +94,18 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                     children: [
                       Text('Note', style: detailMenuStyle),
                       SizedBox(width: 13),
-                      Text('Optional')
+                      Text('Optional'),
                     ],
                   ),
                   SizedBox(height: defaultMargin),
                   TextField(
-                    controller: widget._data.textEditingController,
+                    controller: _menu.notes,
                     maxLines: 3,
                     decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 5, horizontal: 7),
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 7,
+                      ),
                       hintText: 'Eg. Extra pedas pls',
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -123,61 +135,17 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (widget._data.isUpdate && widget._data.quantity > 0) ...[
-                    Container(
-                      width: 39,
-                      height: 39,
-                      child: ElevatedButton(
-                        onPressed: decrementMenuItem,
-                        child: Icon(
-                          Icons.remove_rounded,
-                          color: Colors.white,
-                          size: 39,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.all(0),
-                        ),
-                      ),
-                    )
-                  ] else if (!widget._data.isUpdate &&
-                      widget._data.quantity > 1) ...[
-                    Container(
-                      width: 39,
-                      height: 39,
-                      child: ElevatedButton(
-                        onPressed: decrementMenuItem,
-                        child: Icon(
-                          Icons.remove_rounded,
-                          color: Colors.white,
-                          size: 39,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.all(0),
-                        ),
-                      ),
-                    )
+                  if ((_menu.isUpdate && _menu.quantity > 0)) ...[
+                    decrementButton
+                  ] else if (!_menu.isUpdate && _menu.quantity > 1) ...[
+                    decrementButton
                   ] else ...[
-                    Container(
-                      width: 39,
-                      height: 39,
-                      child: ElevatedButton(
-                        onPressed: null,
-                        child: Icon(
-                          Icons.remove_rounded,
-                          color: Colors.white,
-                          size: 39,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.all(0),
-                          primary: lightGrayColor,
-                        ),
-                      ),
-                    )
+                    disableDecrementButton
                   ],
                   Container(
                     margin: EdgeInsets.only(left: 20, right: 20),
                     child: Text(
-                      widget._data.quantity.toString(),
+                      _menu.quantity.toString(),
                       style: quantityStyle,
                     ),
                   ),
@@ -203,56 +171,61 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
               width: MediaQuery.of(context).size.width,
               child: Consumer<CartProvider>(
                 builder: (context, cart, _) {
-                  return (widget._data.isUpdate && widget._data.quantity == 0)
+                  return (_menu.isUpdate && _menu.quantity == 0)
                       ? ElevatedButton(
                           onPressed: () {
-                            widget._data.isUpdate = false;
-                            cart.deleteItem(widget._data.id);
+                            _menu.isUpdate = false;
+                            cart.deleteItem(_menu.id);
                             Navigator.pop(context);
                           },
-                          child: Text('Hapus Pesanan', style: deleteStyle),
+                          child: Text(
+                            'Hapus Pesanan',
+                            style: deleteStyle,
+                          ),
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.all(12),
                             primary: redColor,
                           ),
                         )
-                      : (widget._data.isUpdate)
+                      : (_menu.isUpdate)
                           ? ElevatedButton(
                               onPressed: () {
                                 cart.updateItem(
-                                  widget._data.id,
+                                  _menu.id,
                                   new Cart(
-                                      menuId: widget._data.id,
-                                      quantity: widget._data.quantity,
-                                      notes: widget._data.textEditingController,
-                                      price: widget._data.price),
+                                    menuId: _menu.id,
+                                    quantity: _menu.quantity,
+                                    notes: _menu.notes,
+                                    price: _menu.price,
+                                  ),
                                 );
                                 Navigator.pop(context);
                               },
                               child: Text(
-                                  'Tambahkan ke Keranjang - ' +
-                                      convertToCurrency(widget._data.quantity *
-                                          widget._data.price),
-                                  style: cartStyle),
+                                'Tambahkan ke Keranjang - ' + currency(pricing),
+                                style: cartStyle,
+                              ),
                               style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.all(12),
                               ),
                             )
                           : ElevatedButton(
                               onPressed: () {
-                                widget._data.isUpdate = true;
-                                cart.addItem(new Cart(
-                                    menuId: widget._data.id,
-                                    price: widget._data.price,
-                                    quantity: widget._data.quantity,
-                                    notes: widget._data.textEditingController));
+                                _menu.isUpdate = true;
+                                cart.addItem(
+                                  new Cart(
+                                    menuId: _menu.id,
+                                    price: _menu.price,
+                                    quantity: _menu.quantity,
+                                    notes: _menu.notes,
+                                  ),
+                                );
                                 Navigator.pop(context);
                               },
                               child: Text(
-                                  'Tambahkan ke Keranjang - ' +
-                                      convertToCurrency(widget._data.quantity *
-                                          widget._data.price),
-                                  style: cartStyle),
+                                'Tambahkan ke Keranjang - ' + currency(pricing),
+                                style: cartStyle,
+                              ),
                               style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.all(12),
                               ),
@@ -266,9 +239,52 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
     );
   }
 
+  Widget get disableDecrementButton {
+    return Container(
+      width: 39,
+      height: 39,
+      child: ElevatedButton(
+        onPressed: null,
+        child: Icon(
+          Icons.remove_rounded,
+          color: Colors.white,
+          size: 39,
+        ),
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(0),
+          primary: lightGrayColor,
+        ),
+      ),
+    );
+  }
+
+  Widget get decrementButton {
+    return Container(
+      width: 39,
+      height: 39,
+      child: ElevatedButton(
+        onPressed: decrementMenuItem,
+        child: Icon(
+          Icons.remove_rounded,
+          color: Colors.white,
+          size: 39,
+        ),
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(0),
+        ),
+      ),
+    );
+  }
+
+  Menu get _menu => widget._data;
+
+  int get pricing => _menu.quantity * _menu.price;
+
   void incrementMenuItem() => setState(() => widget._data.quantity += 1);
 
-  void decrementMenuItem() => setState(() {
-        if (widget._data.quantity != 0) widget._data.quantity -= 1;
-      });
+  void decrementMenuItem() {
+    setState(() {
+      if (widget._data.quantity != 0) widget._data.quantity -= 1;
+    });
+  }
 }

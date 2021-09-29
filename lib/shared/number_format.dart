@@ -1,6 +1,6 @@
-part of 'providers.dart';
+part of 'shared.dart';
 
-String convertToCurrency(int number) {
+String currency(int number) {
   final formatCurrency =
   NumberFormat.currency(locale: 'id', decimalDigits: 0, name: '');
 

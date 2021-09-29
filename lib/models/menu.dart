@@ -6,7 +6,7 @@ class Menu {
   String description;
   int price;
   String image;
-  TextEditingController textEditingController = TextEditingController();
+  TextEditingController notes = TextEditingController();
   int quantity = 1;
   bool isUpdate = false;
 
