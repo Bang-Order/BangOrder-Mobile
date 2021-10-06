@@ -35,10 +35,32 @@ TextStyle menuPriceStyle = TextStyle(
   fontFamily: 'Manrope',
 );
 
+TextStyle editTextCheckoutStyle = TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.w300,
+  color: blueColor,
+  decoration: TextDecoration.underline,
+  fontFamily: 'Manrope',
+);
+
 TextStyle detailMenuStyle = TextStyle(
   fontSize: 18,
   color: blackColor,
   fontWeight: FontWeight.bold,
+  fontFamily: 'Manrope',
+);
+
+TextStyle totalPriceOrder = TextStyle(
+  fontSize: 18,
+  color: blackColor,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Manrope',
+);
+
+TextStyle metodePembayaran = TextStyle(
+  fontSize: 18,
+  color: blackColor,
+  fontWeight: FontWeight.w500,
   fontFamily: 'Manrope',
 );
 
@@ -53,6 +75,13 @@ TextStyle quantityStyle = TextStyle(
   fontSize: 24,
   color: blackColor,
   fontWeight: FontWeight.bold,
+  fontFamily: 'Manrope',
+);
+
+TextStyle reviewOrder = TextStyle(
+  fontSize: 24,
+  color: blackColor,
+  fontWeight: FontWeight.w500,
   fontFamily: 'Manrope',
 );
 
@@ -74,5 +103,12 @@ TextStyle fabTotalStyle = TextStyle(
   fontSize: 14,
   color: blackColor,
   fontWeight: FontWeight.bold,
+  fontFamily: 'Manrope',
+);
+
+TextStyle paymentOption = TextStyle(
+  fontSize: 14,
+  color: blackColor,
+  fontWeight: FontWeight.w300,
   fontFamily: 'Manrope',
 );

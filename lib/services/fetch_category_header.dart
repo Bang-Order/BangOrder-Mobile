@@ -1,7 +1,7 @@
 part of 'services.dart';
 
 Future<List<MenuCategory>> fetchCategoryHeader() async {
-  final url = APIURL + 'menu-category?restaurant_id=2';
+  final url = APIURL + 'restaurants/1/menu-categories';
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {

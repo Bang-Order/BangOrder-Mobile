@@ -2,13 +2,13 @@ part of 'services.dart';
 
 Future<List<Menu>> fetchMenuItem(int category) async {
   final url =
-      APIURL + 'menu?restaurant_id=2&category_id=' + category.toString();
+      APIURL + 'restaurants/1/menus?menu_category_id=' + category.toString();
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {
     return parseMenus(response.body);
   } else {
-    throw Exception('Failed to load data');
+    throw Exception('Failed to load data' + response.statusCode.toString());
   }
 }
 

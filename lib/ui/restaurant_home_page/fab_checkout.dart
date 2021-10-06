@@ -8,7 +8,14 @@ class FabCheckout extends StatelessWidget {
     return Consumer<CartProvider>(
       builder: (context, cart, _) => (cart.item.isNotEmpty)
           ? ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CheckoutPage(),
+                  ),
+                );
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

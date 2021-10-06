@@ -87,7 +87,7 @@ class _MenuListState extends State<MenuList> {
     return InkWell(
       onTap: () {
         Navigator.push(
-          context,
+          this.context,
           MaterialPageRoute(
             builder: (context) => DetailMenuPage(data),
           ),

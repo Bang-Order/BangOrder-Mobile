@@ -24,3 +24,5 @@ Color darkGrayColor = Color(0xFF989999);
 Color redColor = Color(0xFFFF4E00);
 
 Color blackColor = Color(0xFF191E24);
+
+Color blueColor = Color(0xFF0645AD);

@@ -197,6 +197,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                                     quantity: _menu.quantity,
                                     notes: _menu.notes,
                                     price: _menu.price,
+                                    menuName: _menu.name,
                                   ),
                                 );
                                 Navigator.pop(context);
@@ -218,6 +219,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                                     price: _menu.price,
                                     quantity: _menu.quantity,
                                     notes: _menu.notes,
+                                    menuName: _menu.name,
                                   ),
                                 );
                                 Navigator.pop(context);
@@ -227,7 +229,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                                 style: cartStyle,
                               ),
                               style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.all(12),
+                                padding: EdgeInsets.all(16),
                               ),
                             );
                 },
