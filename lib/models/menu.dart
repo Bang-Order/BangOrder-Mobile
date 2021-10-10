@@ -6,6 +6,7 @@ class Menu {
   String description;
   int price;
   String image;
+  int isAvailable;
   TextEditingController notes = TextEditingController();
   int quantity = 1;
   bool isUpdate = false;
@@ -16,6 +17,7 @@ class Menu {
     required this.description,
     required this.price,
     required this.image,
+    required this.isAvailable,
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class Menu {
       description: json['description'],
       price: json['price'],
       image: json['image'],
+      isAvailable: json['is_available']
     );
   }
 }
