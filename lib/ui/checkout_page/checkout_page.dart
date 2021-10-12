@@ -38,8 +38,8 @@ class CheckoutPage extends StatelessWidget {
                     return _customCard(cart.item[index], context);
                   },
                   separatorBuilder: (context, index) => Divider(
-                        height: 8,
-                        color: lightGrayColor,
+                        height: 15,
+                        color: Colors.black,
                       ),
                   itemCount: cart.item.length),
             )
@@ -59,13 +59,13 @@ class CheckoutPage extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(12.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Metode Pembayaran",
-                    style: metodePembayaran,
+                    style: metodePembayaranStyle,
                   ),
                   Row(children: [
                     Text(
@@ -73,7 +73,14 @@ class CheckoutPage extends StatelessWidget {
                       style: paymentOption,
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaymentMethod(),
+                            ),
+                          );
+                        },
                         icon: Icon(
                           Icons.arrow_forward_ios_outlined,
                           color: blackColor,
@@ -96,11 +103,13 @@ class CheckoutPage extends StatelessWidget {
                 children: [
                   Text(
                     "Total",
-                    style: metodePembayaran,
+                    style: metodePembayaranStyle,
                   ),
-                  Text(
-                    "181.000",
-                    style: totalPriceOrder,
+                  Consumer<CartProvider>(
+                    builder: (context, cart, _) => Text(
+                      currency(cart.getTotalPrice()),
+                      style: totalPriceOrder,
+                    ),
                   )
                 ],
               ),
@@ -131,28 +140,45 @@ class CheckoutPage extends StatelessWidget {
           Expanded(
             child: Container(
                 child: Text(
-                  data.quantity.toString() + "x",
-                  style: cartStyle,
-                )
-            ),
+              data.quantity.toString() + "x",
+              style: cartStyle,
+            )),
           ),
           Expanded(
-            flex: 3,
+            flex: 5,
             child: Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     data.menuName.toString(),
                     style: menuTitleStyle,
                   ),
-                  Text("notes"),
+                  (data.notes.toString().isNotEmpty)
+                      ? Visibility(child: Text(data.notes.text), visible: true,)
+                      : SizedBox(),
                   InkWell(
                       child: Text(
                         "Edit",
                         style: editTextCheckoutStyle,
                       ),
-                      onTap: () {}),
+                      onTap: () {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => DetailMenuPage(
+                        //       new Menu(
+                        //         id: data.menuId,
+                        //         name: data.menuName,
+                        //         description: data.description,
+                        //         price: data.price,
+                        //         image: data.image,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // );
+                      }),
                 ],
               ),
             ),
@@ -161,7 +187,7 @@ class CheckoutPage extends StatelessWidget {
             child: Container(
               alignment: Alignment.centerRight,
               child: Text(
-                data.price.toString(),
+                (data.price * data.quantity).toString(),
                 style: menuTitleStyle,
               ),
             ),

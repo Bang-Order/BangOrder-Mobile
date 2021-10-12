@@ -57,7 +57,7 @@ TextStyle totalPriceOrder = TextStyle(
   fontFamily: 'Manrope',
 );
 
-TextStyle metodePembayaran = TextStyle(
+TextStyle metodePembayaranStyle = TextStyle(
   fontSize: 18,
   color: blackColor,
   fontWeight: FontWeight.w500,

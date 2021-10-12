@@ -198,6 +198,8 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                                     notes: _menu.notes,
                                     price: _menu.price,
                                     menuName: _menu.name,
+                                    description: '',
+                                    image: '',
                                   ),
                                 );
                                 Navigator.pop(context);
@@ -220,6 +222,8 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                                     quantity: _menu.quantity,
                                     notes: _menu.notes,
                                     menuName: _menu.name,
+                                    image: '',
+                                    description: '',
                                   ),
                                 );
                                 Navigator.pop(context);
