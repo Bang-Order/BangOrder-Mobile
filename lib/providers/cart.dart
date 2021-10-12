@@ -33,4 +33,19 @@ class CartProvider with ChangeNotifier {
     });
     return total;
   }
+
+  bool isContainData(Menu data) {
+    bool isContain = false;
+    item.forEach((element) {
+      if (element.menuId == data.id) {
+        isContain = true;
+      }
+    });
+    return isContain;
+  }
+
+  int getQuantity(Menu data) {
+    int index = item.indexWhere((element) => element.menuId == data.id);
+    return item.elementAt(index).quantity;
+  }
 }

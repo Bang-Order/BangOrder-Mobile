@@ -21,10 +21,24 @@ TextStyle menuTitleStyle = TextStyle(
   fontFamily: 'Manrope',
 );
 
+TextStyle menuTitleTransparentStyle = TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.w500,
+  color: Colors.black.withOpacity(0.5),
+  fontFamily: 'Manrope',
+);
+
 TextStyle menudescriptionStyle = TextStyle(
   fontSize: 12,
   fontWeight: FontWeight.w300,
   color: blackColor,
+  fontFamily: 'Manrope',
+);
+
+TextStyle menudescriptionTransparentStyle = TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.w300,
+  color: Colors.black.withOpacity(0.5),
   fontFamily: 'Manrope',
 );
 
@@ -35,11 +49,25 @@ TextStyle menuPriceStyle = TextStyle(
   fontFamily: 'Manrope',
 );
 
+
 TextStyle editTextCheckoutStyle = TextStyle(
   fontSize: 12,
   fontWeight: FontWeight.w300,
   color: blueColor,
   decoration: TextDecoration.underline,
+);
+
+TextStyle menuPriceTransparentStyle = TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.bold,
+  color: Colors.black.withOpacity(0.5),
+  fontFamily: 'Manrope',
+);
+
+TextStyle menuQuantityStyle = TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.bold,
+  color: yellowColor,
   fontFamily: 'Manrope',
 );
 

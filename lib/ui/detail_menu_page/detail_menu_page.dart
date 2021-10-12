@@ -214,6 +214,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                             )
                           : ElevatedButton(
                               onPressed: () {
+                                widget._data.isUpdate = true;
                                 _menu.isUpdate = true;
                                 cart.addItem(
                                   new Cart(
