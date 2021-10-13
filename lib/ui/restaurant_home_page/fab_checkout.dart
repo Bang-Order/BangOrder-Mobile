@@ -6,7 +6,7 @@ class FabCheckout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(
-      builder: (context, cart, _) => (cart.item.isNotEmpty)
+      builder: (context, cart, _) => (cart.items.isNotEmpty)
           ? ElevatedButton(
               onPressed: () {
                 Navigator.push(

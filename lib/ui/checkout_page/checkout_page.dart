@@ -37,13 +37,13 @@ class CheckoutPage extends StatelessWidget {
                   shrinkWrap: true,
                   controller: ScrollController(),
                   itemBuilder: (context, index) {
-                    return _customCard(cart.item[index], context);
+                    return _customCard(cart.items[index], context);
                   },
                   separatorBuilder: (context, index) => Divider(
                         height: 16,
                         color: blackColor,
                       ),
-                  itemCount: cart.item.length),
+                  itemCount: cart.items.length),
             ),
           )
         ],
@@ -90,7 +90,7 @@ class CheckoutPage extends StatelessWidget {
     );
   }
 
-  Widget _customCard(Cart data, BuildContext context) {
+  Widget _customCard(Menu data, BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8),
       child: Row(
@@ -111,11 +111,11 @@ class CheckoutPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    data.menuName.toString(),
+                    data.name.toString(),
                     style: menuTitleStyle,
                   ),
                   Text(
-                    data.menuId.toString(),
+                    data.id.toString(),
                     style: menuTitleStyle,
                   ),
                   SizedBox(height: 6),
@@ -130,19 +130,10 @@ class CheckoutPage extends StatelessWidget {
                         style: editTextCheckoutStyle,
                       ),
                       onTap: () {
-                        Menu menu = new Menu(
-                          id: data.menuId,
-                          name: data.menuName,
-                          description: data.description,
-                          price: data.price,
-                          image: data.image,
-                          isAvailable: 1,
-                        );
-                        menu.isUpdate = true;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetailMenuPage(menu),
+                            builder: (context) => DetailMenuPage(data),
                           ),
                         );
                       }),
