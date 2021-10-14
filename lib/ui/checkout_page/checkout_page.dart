@@ -84,11 +84,12 @@ class CheckoutPage extends StatelessWidget {
                   fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
                 ),
                 onPressed: () async {
-                  await postOrder(
-                    restoId: 1,
+                  final order = Order(
+                    restaurantTableId: 1,
                     totalPrice: cart.getTotalPrice(),
-                    items: cart.items,
+                    orderItems: cart.items,
                   );
+                  await postOrder(order);
                 },
               ),
             ),

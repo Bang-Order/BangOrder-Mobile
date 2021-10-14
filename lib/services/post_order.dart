@@ -1,6 +1,6 @@
 part of 'services.dart';
 
-Future postOrder({restoId, totalPrice, items}) async {
+Future postOrder(Order order) async {
   final url = APIURL + 'restaurants/1/orders';
 
   final response = await http.post(
@@ -9,17 +9,16 @@ Future postOrder({restoId, totalPrice, items}) async {
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, dynamic>{
-      'restaurant_table_id': restoId,
-      'total_price': totalPrice,
-      'order_items': items
-          .map((Menu menu) => menu.toJson(id: menu.id, quantity: menu.quantity))
-          .toList()
+      'restaurant_table_id': order.restaurantTableId,
+      'total_price': order.totalPrice,
+      'order_items':
+          order.orderItems.map((Menu menu) => menu.toJson(menu)).toList()
     }),
   );
 
   if (response.statusCode == 201) {
-    print("success");
+    print("Success!");
   } else {
-    throw Exception('Failed to create album.');
+    throw Exception('Failed!');
   }
 }

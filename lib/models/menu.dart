@@ -31,10 +31,10 @@ class Menu {
     );
   }
 
-  Map<String, dynamic> toJson({id, quantity}) {
+  Map<String, dynamic> toJson(Menu menu) {
     return {
-      'menu_id': id,
-      'quantity': quantity,
+      'menu_id': menu.id,
+      'quantity': menu.quantity,
     };
   }
 }

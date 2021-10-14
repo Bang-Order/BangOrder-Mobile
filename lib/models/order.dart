@@ -3,7 +3,7 @@ part of 'models.dart';
 class Order {
   int restaurantTableId;
   int totalPrice;
-  List<Map<String, OrderItem>> orderItems;
+  List<Menu> orderItems;
 
   Order({
     required this.restaurantTableId,
