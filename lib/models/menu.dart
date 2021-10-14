@@ -27,7 +27,14 @@ class Menu {
       description: json['description'],
       price: json['price'],
       image: json['image'],
-      isAvailable: json['is_available']
+      isAvailable: json['is_available'],
     );
+  }
+
+  Map<String, dynamic> toJson({id, quantity}) {
+    return {
+      'menu_id': id,
+      'quantity': quantity,
+    };
   }
 }

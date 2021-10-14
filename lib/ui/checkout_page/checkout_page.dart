@@ -74,14 +74,22 @@ class CheckoutPage extends StatelessWidget {
               horizontal: 16,
               vertical: 12,
             ),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                "BAYAR",
-                style: cartStyle,
-              ),
-              style: ElevatedButton.styleFrom(
-                fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
+            child: Consumer<CartProvider>(
+              builder: (context, cart, _) => ElevatedButton(
+                child: Text(
+                  "BAYAR",
+                  style: cartStyle,
+                ),
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
+                ),
+                onPressed: () async {
+                  await postOrder(
+                    restoId: 1,
+                    totalPrice: cart.getTotalPrice(),
+                    items: cart.items,
+                  );
+                },
               ),
             ),
           ),
