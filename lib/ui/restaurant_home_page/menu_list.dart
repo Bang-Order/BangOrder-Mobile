@@ -99,7 +99,6 @@ class _MenuListState extends State<MenuList> {
       child: Consumer<CartProvider>(
         builder: (context, cart, _) => Container(
           decoration: BoxDecoration(
-            // color: (data.isAvailable == 0) ? darkGrayColor : Colors.white,
             border: Border(
               left: BorderSide(
                 color: (cart.isContainData(data)) ? yellowColor : Colors.white,
@@ -123,6 +122,9 @@ class _MenuListState extends State<MenuList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      Text(
+                        data.id.toString(),
+                      ),
                       Text(
                         data.name,
                         style: (data.isAvailable == 1)

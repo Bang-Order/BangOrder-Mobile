@@ -1,34 +1,34 @@
 part of 'providers.dart';
 
 class CartProvider with ChangeNotifier {
-  late List<Cart> _item = [];
+  late List<Menu> _items = [];
 
-  List<Cart> get item => _item;
+  List<Menu> get items => _items;
 
-  set item(List<Cart> value) {
-    _item = value;
+  set items(List<Menu> value) {
+    _items = value;
     notifyListeners();
   }
 
-  void addItem(Cart cart) {
-    item.add(cart);
+  void addItem(Menu cart) {
+    items.add(cart);
     notifyListeners();
   }
 
   void deleteItem(int id) {
-    item.removeWhere((element) => element.menuId == id);
+    items.removeWhere((element) => element.id == id);
     notifyListeners();
   }
 
-  void updateItem(int id, Cart cart) {
-    int index = item.indexWhere((element) => element.menuId == id);
-    item[index] = cart;
+  void updateItem(int id, Menu cart) {
+    int index = items.indexWhere((element) => element.id == id);
+    items[index] = cart;
     notifyListeners();
   }
 
   int getTotalPrice() {
     int total = 0;
-    item.forEach((element) {
+    items.forEach((element) {
       total += element.price * element.quantity;
     });
     return total;
@@ -36,8 +36,8 @@ class CartProvider with ChangeNotifier {
 
   bool isContainData(Menu data) {
     bool isContain = false;
-    item.forEach((element) {
-      if (element.menuId == data.id) {
+    items.forEach((element) {
+      if (element.id == data.id) {
         isContain = true;
       }
     });
@@ -45,7 +45,7 @@ class CartProvider with ChangeNotifier {
   }
 
   int getQuantity(Menu data) {
-    int index = item.indexWhere((element) => element.menuId == data.id);
-    return item.elementAt(index).quantity;
+    int index = items.indexWhere((element) => element.id == data.id);
+    return items.elementAt(index).quantity;
   }
 }

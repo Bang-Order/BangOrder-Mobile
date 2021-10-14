@@ -20,120 +20,88 @@ class CheckoutPage extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            padding: EdgeInsets.all(16),
+            child: Text(
               "Review Order",
               style: reviewOrder,
             ),
-            Consumer<CartProvider>(
-              builder: (context, cart, _) => ListView.separated(
-                  padding: EdgeInsets.only(top: 16.0),
+          ),
+          Consumer<CartProvider>(
+            builder: (context, cart, _) => Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: ListView.separated(
                   shrinkWrap: true,
                   controller: ScrollController(),
                   itemBuilder: (context, index) {
-                    return _customCard(cart.item[index], context);
+                    return _customCard(cart.items[index], context);
                   },
                   separatorBuilder: (context, index) => Divider(
-                        height: 15,
-                        color: Colors.black,
+                        height: 16,
+                        color: blackColor,
                       ),
-                  itemCount: cart.item.length),
-            )
-          ],
-        ),
+                  itemCount: cart.items.length),
+            ),
+          )
+        ],
       ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.only(bottom: 16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              child: Container(
-                height: 8,
-                width: MediaQuery.of(context).size.width,
-                color: lightGrayColor,
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(12.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Metode Pembayaran",
-                    style: metodePembayaranStyle,
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Total",
+                  style: metodePembayaranStyle,
+                ),
+                Consumer<CartProvider>(
+                  builder: (context, cart, _) => Text(
+                    currency(cart.getTotalPrice()),
+                    style: totalPriceOrder,
                   ),
-                  Row(children: [
-                    Text(
-                      "ShopeePay",
-                      style: paymentOption,
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PaymentMethod(),
-                            ),
-                          );
-                        },
-                        icon: Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: blackColor,
-                        ))
-                  ]),
-                ],
-              ),
+                )
+              ],
             ),
-            SizedBox(
-              child: Container(
-                height: 8,
-                width: MediaQuery.of(context).size.width,
-                color: lightGrayColor,
-              ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 12,
             ),
-            Container(
-              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Total",
-                    style: metodePembayaranStyle,
-                  ),
-                  Consumer<CartProvider>(
-                    builder: (context, cart, _) => Text(
-                      currency(cart.getTotalPrice()),
-                      style: totalPriceOrder,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(right: 16, left: 16),
-              height: 40,
-              width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(
-                onPressed: () {},
+            child: Consumer<CartProvider>(
+              builder: (context, cart, _) => ElevatedButton(
                 child: Text(
                   "BAYAR",
                   style: cartStyle,
                 ),
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
+                ),
+                onPressed: () async {
+                  final order = Order(
+                    restaurantTableId: 1,
+                    totalPrice: cart.getTotalPrice(),
+                    orderItems: cart.items,
+                  );
+                  await postOrder(order);
+                },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _customCard(Cart data, BuildContext context) {
+  Widget _customCard(Menu data, BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -152,32 +120,31 @@ class CheckoutPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    data.menuName.toString(),
+                    data.name.toString(),
                     style: menuTitleStyle,
                   ),
-                  (data.notes.toString().isNotEmpty)
-                      ? Visibility(child: Text(data.notes.text), visible: true,)
-                      : SizedBox(),
+                  Text(
+                    data.id.toString(),
+                    style: menuTitleStyle,
+                  ),
+                  SizedBox(height: 6),
+                  if (data.notes.text != '')
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 6),
+                      child: Text(data.notes.text),
+                    ),
                   InkWell(
                       child: Text(
                         "Edit",
                         style: editTextCheckoutStyle,
                       ),
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => DetailMenuPage(
-                        //       new Menu(
-                        //         id: data.menuId,
-                        //         name: data.menuName,
-                        //         description: data.description,
-                        //         price: data.price,
-                        //         image: data.image,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailMenuPage(data),
+                          ),
+                        );
                       }),
                 ],
               ),

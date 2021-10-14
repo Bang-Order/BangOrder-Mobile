@@ -190,18 +190,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                       : (_menu.isUpdate)
                           ? ElevatedButton(
                               onPressed: () {
-                                cart.updateItem(
-                                  _menu.id,
-                                  new Cart(
-                                    menuId: _menu.id,
-                                    quantity: _menu.quantity,
-                                    notes: _menu.notes,
-                                    price: _menu.price,
-                                    menuName: _menu.name,
-                                    description: '',
-                                    image: '',
-                                  ),
-                                );
+                                cart.updateItem(_menu.id, widget._data);
                                 Navigator.pop(context);
                               },
                               child: Text(
@@ -216,17 +205,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                               onPressed: () {
                                 widget._data.isUpdate = true;
                                 _menu.isUpdate = true;
-                                cart.addItem(
-                                  new Cart(
-                                    menuId: _menu.id,
-                                    price: _menu.price,
-                                    quantity: _menu.quantity,
-                                    notes: _menu.notes,
-                                    menuName: _menu.name,
-                                    image: '',
-                                    description: '',
-                                  ),
-                                );
+                                cart.addItem(widget._data);
                                 Navigator.pop(context);
                               },
                               child: Text(
