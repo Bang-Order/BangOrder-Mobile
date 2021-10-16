@@ -6,6 +6,7 @@ class Cart {
   String image;
   String description;
   int quantity = 0;
+  int isAvailable;
   int price = 0;
   TextEditingController notes;
 
@@ -17,5 +18,6 @@ class Cart {
     required this.quantity,
     required this.price,
     required this.notes,
+    required this.isAvailable
   });
 }

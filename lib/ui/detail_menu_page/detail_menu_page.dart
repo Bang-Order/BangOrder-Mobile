@@ -1,9 +1,11 @@
 part of '../pages.dart';
 
 class DetailMenuPage extends StatefulWidget {
-  Menu _data;
+  late Menu _data;
+  late int _menuId;
 
   DetailMenuPage(this._data);
+  DetailMenuPage.name(this._menuId);
 
   @override
   State<DetailMenuPage> createState() => _DetailMenuPageState();
@@ -198,8 +200,9 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                                     notes: _menu.notes,
                                     price: _menu.price,
                                     menuName: _menu.name,
-                                    description: '',
-                                    image: '',
+                                    description: _menu.description,
+                                    image: _menu.image,
+                                    isAvailable: _menu.isAvailable,
                                   ),
                                 );
                                 Navigator.pop(context);
@@ -215,7 +218,6 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                           : ElevatedButton(
                               onPressed: () {
                                 widget._data.isUpdate = true;
-                                _menu.isUpdate = true;
                                 cart.addItem(
                                   new Cart(
                                     menuId: _menu.id,
@@ -223,8 +225,9 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                                     quantity: _menu.quantity,
                                     notes: _menu.notes,
                                     menuName: _menu.name,
-                                    image: '',
-                                    description: '',
+                                    description: _menu.description,
+                                    image: _menu.image,
+                                    isAvailable: _menu.isAvailable,
                                   ),
                                 );
                                 Navigator.pop(context);

@@ -156,7 +156,10 @@ class CheckoutPage extends StatelessWidget {
                     style: menuTitleStyle,
                   ),
                   (data.notes.toString().isNotEmpty)
-                      ? Visibility(child: Text(data.notes.text), visible: true,)
+                      ? Visibility(
+                          child: Text(data.notes.text),
+                          visible: true,
+                        )
                       : SizedBox(),
                   InkWell(
                       child: Text(
@@ -164,20 +167,21 @@ class CheckoutPage extends StatelessWidget {
                         style: editTextCheckoutStyle,
                       ),
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => DetailMenuPage(
-                        //       new Menu(
-                        //         id: data.menuId,
-                        //         name: data.menuName,
-                        //         description: data.description,
-                        //         price: data.price,
-                        //         image: data.image,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailMenuPage(
+                              new Menu(
+                                id: data.menuId,
+                                name: data.menuName,
+                                description: data.description,
+                                price: data.price,
+                                image: data.image,
+                                isAvailable: data.isAvailable,
+                              ),
+                            ),
+                          ),
+                        );
                       }),
                 ],
               ),
