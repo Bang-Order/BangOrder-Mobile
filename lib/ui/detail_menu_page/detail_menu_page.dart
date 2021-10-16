@@ -1,11 +1,9 @@
 part of '../pages.dart';
 
 class DetailMenuPage extends StatefulWidget {
-  late Menu _data;
-  late int _menuId;
+  Menu _data;
 
   DetailMenuPage(this._data);
-  DetailMenuPage.name(this._menuId);
 
   @override
   State<DetailMenuPage> createState() => _DetailMenuPageState();
@@ -192,19 +190,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                       : (_menu.isUpdate)
                           ? ElevatedButton(
                               onPressed: () {
-                                cart.updateItem(
-                                  _menu.id,
-                                  new Cart(
-                                    menuId: _menu.id,
-                                    quantity: _menu.quantity,
-                                    notes: _menu.notes,
-                                    price: _menu.price,
-                                    menuName: _menu.name,
-                                    description: _menu.description,
-                                    image: _menu.image,
-                                    isAvailable: _menu.isAvailable,
-                                  ),
-                                );
+                                cart.updateItem(_menu.id, widget._data);
                                 Navigator.pop(context);
                               },
                               child: Text(
@@ -218,18 +204,8 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                           : ElevatedButton(
                               onPressed: () {
                                 widget._data.isUpdate = true;
-                                cart.addItem(
-                                  new Cart(
-                                    menuId: _menu.id,
-                                    price: _menu.price,
-                                    quantity: _menu.quantity,
-                                    notes: _menu.notes,
-                                    menuName: _menu.name,
-                                    description: _menu.description,
-                                    image: _menu.image,
-                                    isAvailable: _menu.isAvailable,
-                                  ),
-                                );
+                                _menu.isUpdate = true;
+                                cart.addItem(widget._data);
                                 Navigator.pop(context);
                               },
                               child: Text(
