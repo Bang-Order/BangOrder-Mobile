@@ -35,6 +35,13 @@ TextStyle menudescriptionStyle = TextStyle(
   fontFamily: 'Manrope',
 );
 
+TextStyle restaurantDescriptionStyle = TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
+  color: blackColor,
+  fontFamily: 'Manrope',
+);
+
 TextStyle menudescriptionTransparentStyle = TextStyle(
   fontSize: 12,
   fontWeight: FontWeight.w300,

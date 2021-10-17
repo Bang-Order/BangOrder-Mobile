@@ -9,4 +9,6 @@ part 'fetch_menu_item.dart';
 
 part 'post_order.dart';
 
+part 'fetch_restaurant_info.dart';
+
 const APIURL = 'http://127.0.0.1:8000/api/';

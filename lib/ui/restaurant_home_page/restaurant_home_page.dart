@@ -35,7 +35,9 @@ class RestaurantHomePage extends StatelessWidget {
         child: Column(
           children: [
             //restaurant
-            //RecomendationMenu
+            InfoRestaurant(),
+            SizedBox(height: 8),
+            //RecommendationMenu
             MenuList(),
             SizedBox(height: 100)
           ],
