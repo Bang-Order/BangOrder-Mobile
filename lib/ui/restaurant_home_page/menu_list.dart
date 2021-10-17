@@ -127,9 +127,6 @@ class _MenuListState extends State<MenuList> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        data.id.toString(),
-                      ),
-                      Text(
                         data.name,
                         style: (data.isAvailable == 1)
                             ? menuTitleStyle

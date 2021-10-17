@@ -10,6 +10,17 @@ class DetailMenuPage extends StatefulWidget {
 }
 
 class _DetailMenuPageState extends State<DetailMenuPage> {
+
+  late int _initQuantity;
+  late String _initNotes;
+
+  @override
+  void initState() {
+    _initQuantity = widget._data.quantity;
+    _initNotes = widget._data.notes.text;
+    super.initState();
+  }
+
   @override
   void dispose() {
     if (!_menu.isUpdate) {
@@ -36,7 +47,10 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
               color: blackColor,
             ),
             onPressed: () {
-              if (_menu.isUpdate) cart.updateItem(_menu.id, widget._data);
+              if (_menu.isUpdate) {
+                widget._data.quantity = _initQuantity;
+                widget._data.notes.text = _initNotes;
+              }
               Navigator.pop(context);
             },
           ),
