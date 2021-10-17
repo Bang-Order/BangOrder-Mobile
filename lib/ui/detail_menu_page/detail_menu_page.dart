@@ -29,12 +29,17 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
           _menu.name,
           style: appbarTextStyle,
         ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: blackColor,
+        leading: Consumer<CartProvider>(
+          builder: (context, cart, _) => IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: blackColor,
+            ),
+            onPressed: () {
+              if (_menu.isUpdate) cart.updateItem(_menu.id, widget._data);
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () => Navigator.pop(context),
         ),
       ),
       body: SingleChildScrollView(
