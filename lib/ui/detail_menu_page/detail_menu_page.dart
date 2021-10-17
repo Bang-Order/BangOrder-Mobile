@@ -10,6 +10,17 @@ class DetailMenuPage extends StatefulWidget {
 }
 
 class _DetailMenuPageState extends State<DetailMenuPage> {
+
+  late int _initQuantity;
+  late String _initNotes;
+
+  @override
+  void initState() {
+    _initQuantity = widget._data.quantity;
+    _initNotes = widget._data.notes.text;
+    super.initState();
+  }
+
   @override
   void dispose() {
     if (!_menu.isUpdate) {
@@ -29,12 +40,20 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
           _menu.name,
           style: appbarTextStyle,
         ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: blackColor,
+        leading: Consumer<CartProvider>(
+          builder: (context, cart, _) => IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: blackColor,
+            ),
+            onPressed: () {
+              if (_menu.isUpdate) {
+                widget._data.quantity = _initQuantity;
+                widget._data.notes.text = _initNotes;
+              }
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () => Navigator.pop(context),
         ),
       ),
       body: SingleChildScrollView(

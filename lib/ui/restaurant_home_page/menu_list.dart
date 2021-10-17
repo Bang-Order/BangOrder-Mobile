@@ -67,13 +67,17 @@ class _MenuListState extends State<MenuList> {
       future: fetchMenuItem(data.id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return ListView.builder(
+          return ListView.separated(
             controller: ScrollController(),
             shrinkWrap: true,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, i) {
               return _menuItem(snapshot.data![i]);
             },
+            separatorBuilder: (context, index) => Divider(
+              height: 8,
+              color: lightGrayColor,
+            ),
           );
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
@@ -87,13 +91,13 @@ class _MenuListState extends State<MenuList> {
     return InkWell(
       onTap: (data.isAvailable == 1)
           ? () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DetailMenuPage(data),
-          ),
-        );
-      }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailMenuPage(data),
+                ),
+              );
+            }
           : null,
       splashColor: Colors.grey[100],
       child: Consumer<CartProvider>(
@@ -122,9 +126,6 @@ class _MenuListState extends State<MenuList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(
-                        data.id.toString(),
-                      ),
                       Text(
                         data.name,
                         style: (data.isAvailable == 1)
@@ -179,17 +180,17 @@ class _MenuListState extends State<MenuList> {
                   borderRadius: BorderRadius.circular(5),
                   child: (data.isAvailable == 1)
                       ? Image.network(
-                    data.image,
-                  )
+                          data.image,
+                        )
                       : ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.5),
-                      BlendMode.dstATop,
-                    ),
-                    child: Image.network(
-                      data.image,
-                    ),
-                  ),
+                          colorFilter: ColorFilter.mode(
+                            Colors.black.withOpacity(0.5),
+                            BlendMode.dstATop,
+                          ),
+                          child: Image.network(
+                            data.image,
+                          ),
+                        ),
                 ),
               ),
             ],

@@ -123,10 +123,6 @@ class CheckoutPage extends StatelessWidget {
                     data.name.toString(),
                     style: menuTitleStyle,
                   ),
-                  Text(
-                    data.id.toString(),
-                    style: menuTitleStyle,
-                  ),
                   SizedBox(height: 6),
                   if (data.notes.text != '')
                     Container(
@@ -154,7 +150,7 @@ class CheckoutPage extends StatelessWidget {
             child: Container(
               alignment: Alignment.centerRight,
               child: Text(
-                (data.price * data.quantity).toString(),
+                currency(data.price * data.quantity).toString(),
                 style: menuTitleStyle,
               ),
             ),
