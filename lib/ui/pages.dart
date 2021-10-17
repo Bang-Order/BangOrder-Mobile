@@ -23,6 +23,8 @@ part 'restaurant_home_page/fab_checkout.dart';
 
 part 'restaurant_home_page/loading_screen.dart';
 
+part 'restaurant_home_page/info_restaurant.dart';
+
 part 'payment_method_page/payment_method_page.dart';
 
 part 'order_status_page/order_status_page.dart';
