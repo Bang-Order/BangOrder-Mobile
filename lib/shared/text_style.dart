@@ -140,3 +140,24 @@ TextStyle paymentOption = TextStyle(
   fontWeight: FontWeight.w300,
   fontFamily: 'Manrope',
 );
+
+TextStyle recommendationHeader = TextStyle(
+  fontSize: 20,
+  color: blackColor,
+  fontWeight: FontWeight.w500,
+  fontFamily: 'Manrope',
+);
+
+TextStyle recommendationTitle = TextStyle(
+  fontSize: 14,
+  color: blackColor,
+  fontWeight: FontWeight.w500,
+  fontFamily: 'Manrope',
+);
+
+TextStyle recommendationPrice = TextStyle(
+  fontSize: 12,
+  color: blackColor,
+  fontWeight: FontWeight.w300,
+  fontFamily: 'Manrope',
+);
