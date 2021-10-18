@@ -8,7 +8,7 @@ class RestaurantHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Consumer<RestaurantInfoProvider>(
           builder: (context, restaurant, _) => Text(
-            restaurant.restaurantName,
+            restaurant.restaurant.name,
             style: appbarTextStyle,
           ),
         ),
@@ -41,7 +41,7 @@ class RestaurantHomePage extends StatelessWidget {
             RecommendationMenu(),
             SizedBox(height: 8),
             MenuList(),
-            SizedBox(height: 100)
+            SizedBox(height: 100),
           ],
         ),
       ),

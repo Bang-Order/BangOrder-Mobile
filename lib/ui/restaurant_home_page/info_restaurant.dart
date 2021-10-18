@@ -1,8 +1,6 @@
 part of '../pages.dart';
 
 class InfoRestaurant extends StatelessWidget {
-  const InfoRestaurant({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Consumer<RestaurantInfoProvider>(
@@ -10,7 +8,7 @@ class InfoRestaurant extends StatelessWidget {
         future: fetchRestaurantInfo(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
-            restaurant.restaurantName = snapshot.data.name;
+            restaurant.restaurant.name = snapshot.data!.name;
             return _restaurantCard(snapshot.data, context);
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");

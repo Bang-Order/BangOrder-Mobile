@@ -13,4 +13,4 @@ part 'fetch_recommendation_menu.dart';
 
 part 'fetch_restaurant_info.dart';
 
-const APIURL = 'http://192.168.1.15/project/BangOrder-Backend/public/api/';
+const APIURL = 'http://192.168.0.5/project/BangOrder-Backend/public/api/';
