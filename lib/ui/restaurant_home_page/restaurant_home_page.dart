@@ -6,9 +6,11 @@ class RestaurantHomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: lightGrayColor,
       appBar: AppBar(
-        title: Text(
-          'CafeSejenak',
-          style: appbarTextStyle,
+        title: Consumer<RestaurantInfoProvider>(
+          builder: (context, restaurant, _) => Text(
+            restaurant.restaurantName,
+            style: appbarTextStyle,
+          ),
         ),
         leading: IconButton(
           icon: Icon(
@@ -34,8 +36,10 @@ class RestaurantHomePage extends StatelessWidget {
         controller: ScrollController(),
         child: Column(
           children: [
-            //restaurant
+            InfoRestaurant(),
+            SizedBox(height: 8),
             RecommendationMenu(),
+            SizedBox(height: 8),
             MenuList(),
             SizedBox(height: 100)
           ],

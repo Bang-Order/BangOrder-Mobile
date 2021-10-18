@@ -4,10 +4,7 @@ class RecommendationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        top: 8,
-        bottom: 12,
-      ),
+      color: Colors.white,
       padding: EdgeInsets.all(defaultMargin),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
