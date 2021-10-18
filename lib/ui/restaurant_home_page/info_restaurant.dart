@@ -1,11 +1,9 @@
 part of '../pages.dart';
 
 class InfoRestaurant extends StatelessWidget {
-  const InfoRestaurant({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<RestaurantInfoProvider>(
+    return Consumer<InfoRestaurantProvider>(
       builder: (context, restaurant, _) => FutureBuilder<RestaurantInfo>(
         future: fetchRestaurantInfo(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
