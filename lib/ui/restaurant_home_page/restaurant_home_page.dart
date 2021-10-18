@@ -37,10 +37,10 @@ class RestaurantHomePage extends StatelessWidget {
         controller: ScrollController(),
         child: Column(
           children: [
-            //restaurant
             InfoRestaurant(),
             SizedBox(height: 8),
-            //RecommendationMenu
+            RecommendationMenu(),
+            SizedBox(height: 8),
             MenuList(),
             SizedBox(height: 100)
           ],
