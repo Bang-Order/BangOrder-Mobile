@@ -1,7 +1,7 @@
 part of 'services.dart';
 
-Future<List<Menu>> fetchMenuItem(int category) async {
-  final url = APIURL + 'restaurants/1/menus?menu_category_id=' + category.toString();
+Future<List<Menu>> getMenu() async {
+  final url = APIURL + 'restaurants/1/menus';
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {
@@ -12,7 +12,6 @@ Future<List<Menu>> fetchMenuItem(int category) async {
 }
 
 List<Menu> parseMenus(String responseBody) {
-  final parsed = jsonDecode(responseBody)['data'].cast<Map<String, dynamic>>();
-
-  return parsed.map<Menu>((json) => Menu.fromJson(json)).toList();
+  return List<Menu>.from(
+      json.decode(responseBody)['data'].map((x) => Menu.fromJson(x)));
 }

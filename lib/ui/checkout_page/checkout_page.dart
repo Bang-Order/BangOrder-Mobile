@@ -85,10 +85,12 @@ class CheckoutPage extends StatelessWidget {
                 ),
                 onPressed: () async {
                   final order = Order(
-                    restaurantTableId: 1,
+                    restaurantTableId: 2,
                     totalPrice: cart.getTotalPrice(),
                     orderItems: cart.items,
                   );
+                  print(order.totalPrice);
+                  print(order.orderItems);
                   await postOrder(order);
                 },
               ),

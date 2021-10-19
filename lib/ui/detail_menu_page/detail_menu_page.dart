@@ -209,7 +209,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                       : (_menu.isUpdate)
                           ? ElevatedButton(
                               onPressed: () {
-                                cart.updateItem(_menu.id, widget._data);
+                                cart.updateItem(_menu, widget._data);
                                 Navigator.pop(context);
                               },
                               child: Text(

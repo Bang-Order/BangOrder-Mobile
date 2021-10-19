@@ -14,30 +14,50 @@ class RecommendationMenu extends StatelessWidget {
             style: recommendationHeader,
           ),
           SizedBox(height: defaultMargin),
-          FutureBuilder<List<Menu>>(
-            future: fetchRecommendationMenu(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return GridView.builder(
-                  controller: ScrollController(),
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  shrinkWrap: true,
-                  itemCount: 4,
-                  itemBuilder: (BuildContext context, int i) {
-                    return _customCard(snapshot.data![i], context);
-                  },
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 24,
-                    mainAxisSpacing: 20,
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              return HomepageLoadingScreen();
-            },
-          ),
+          Consumer<MenuServiceProvider>(builder: (context, menu, _) {
+            if (!menu.loading) {
+              final _menuList = menu.getRecommendationMenu;
+              return GridView.builder(
+                controller: ScrollController(),
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                shrinkWrap: true,
+                itemCount: _menuList.length,
+                itemBuilder: (BuildContext context, int i) {
+                  return _customCard(_menuList[i], context);
+                },
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 24,
+                  mainAxisSpacing: 20,
+                ),
+              );
+            }
+            return SizedBox();
+          }),
+          // FutureBuilder<List<Menu>>(
+          //   future: fetchRecommendationMenu(),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasData) {
+          //       return GridView.builder(
+          //         controller: ScrollController(),
+          //         padding: EdgeInsets.symmetric(horizontal: 12),
+          //         shrinkWrap: true,
+          //         itemCount: snapshot.data!.length,
+          //         itemBuilder: (BuildContext context, int i) {
+          //           return _customCard(snapshot.data![i], context);
+          //         },
+          //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //           crossAxisCount: 2,
+          //           crossAxisSpacing: 24,
+          //           mainAxisSpacing: 20,
+          //         ),
+          //       );
+          //     } else if (snapshot.hasError) {
+          //       return Text("${snapshot.error}");
+          //     }
+          //     return HomepageLoadingScreen();
+          //   },
+          // ),
           SizedBox(height: defaultMargin),
         ],
       ),

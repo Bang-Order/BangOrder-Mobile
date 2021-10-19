@@ -20,9 +20,9 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateItem(int id, Menu cart) {
-    int index = items.indexWhere((element) => element.id == id);
-    items[index] = cart;
+  void updateItem(Menu data, Menu updatedData) {
+    Menu menu = getItemById(data);
+    menu = updatedData;
     notifyListeners();
   }
 
@@ -44,8 +44,12 @@ class CartProvider with ChangeNotifier {
     return isContain;
   }
 
-  int getQuantity(Menu data) {
-    int index = items.indexWhere((element) => element.id == data.id);
-    return items.elementAt(index).quantity;
+  int getQuantity(Menu menu) {
+    return getItemById(menu).quantity;
+  }
+
+  Menu getItemById(Menu menu) {
+    int index = items.indexWhere((element) => element.id == menu.id);
+    return items.elementAt(index);
   }
 }
