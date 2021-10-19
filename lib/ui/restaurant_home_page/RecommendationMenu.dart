@@ -22,7 +22,7 @@ class RecommendationMenu extends StatelessWidget {
                   controller: ScrollController(),
                   padding: EdgeInsets.symmetric(horizontal: 12),
                   shrinkWrap: true,
-                  itemCount: 4,
+                  itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int i) {
                     return _customCard(snapshot.data![i], context);
                   },

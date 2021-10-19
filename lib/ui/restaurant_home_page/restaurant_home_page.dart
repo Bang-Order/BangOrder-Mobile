@@ -3,14 +3,18 @@ part of '../pages.dart';
 class RestaurantHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Provider.of<RestaurantServiceProvider>(context, listen: false).init();
+
     return Scaffold(
       backgroundColor: lightGrayColor,
       appBar: AppBar(
-        title: Consumer<RestaurantInfoProvider>(
-          builder: (context, restaurant, _) => Text(
-            restaurant.restaurant.name,
-            style: appbarTextStyle,
-          ),
+        title: Consumer<RestaurantServiceProvider>(
+          builder: (context, restaurant, _) => !restaurant.loading
+              ? Text(
+                  restaurant.data.name,
+                  style: appbarTextStyle,
+                )
+              : Text(''),
         ),
         leading: IconButton(
           icon: Icon(
