@@ -1,42 +1,27 @@
 part of '../pages.dart';
 
-class MenuList extends StatefulWidget {
-  const MenuList({Key? key}) : super(key: key);
-
-  @override
-  _MenuListState createState() => _MenuListState();
-}
-
-class _MenuListState extends State<MenuList> {
+class MenuList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _fetchCategoryHeader();
   }
 
   Widget _fetchCategoryHeader() {
-    return Container(
-      child: FutureBuilder<List<MenuCategory>>(
-        future: fetchCategoryHeader(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.separated(
-              controller: ScrollController(),
-              shrinkWrap: true,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (BuildContext context, int i) {
-                return _categoryHeader(snapshot.data![i]);
-              },
-              separatorBuilder: (context, index) => Divider(
-                height: 8,
-                color: lightGrayColor,
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return HomepageLoadingScreen();
-        },
-      ),
+    return Consumer<MenuCategoryServiceProvider>(
+      builder: (context, menuCategory, _) {
+        if (!menuCategory.loading) {
+          return ListView.builder(
+            shrinkWrap: true,
+            controller: ScrollController(),
+            itemCount: menuCategory.data.length,
+            itemBuilder: (context, index) {
+              MenuCategory data = menuCategory.getMenuCategoryByIndex(index);
+              return _categoryHeader(data);
+            },
+          );
+        }
+        return SizedBox();
+      },
     );
   }
 
@@ -55,39 +40,32 @@ class _MenuListState extends State<MenuList> {
           data.name,
           style: categoryHeaderStyle,
         ),
-        children: [
-          _fetchMenuItem(data),
-        ],
+        children: [_fetchMenuItem(data)],
       ),
     );
   }
 
   Widget _fetchMenuItem(MenuCategory data) {
-    return FutureBuilder<List<Menu>>(
-      future: fetchMenuItem(data.id),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return ListView.separated(
-            controller: ScrollController(),
+    return Consumer<MenuServiceProvider>(
+      builder: (context, menu, _) {
+        final menuList = menu.getMenuByCategoryId(data);
+
+        if (!menu.loading) {
+          return ListView.builder(
             shrinkWrap: true,
-            itemCount: snapshot.data!.length,
+            controller: ScrollController(),
+            itemCount: menuList.length,
             itemBuilder: (context, i) {
-              return _menuItem(snapshot.data![i]);
+              return _menuItem(menuList[i], context);
             },
-            separatorBuilder: (context, index) => Divider(
-              height: 8,
-              color: lightGrayColor,
-            ),
           );
-        } else if (snapshot.hasError) {
-          return Text("${snapshot.error}");
         }
         return SizedBox();
       },
     );
   }
 
-  Widget _menuItem(Menu data) {
+  Widget _menuItem(Menu data, context) {
     return InkWell(
       onTap: (data.isAvailable == 1)
           ? () {
@@ -126,6 +104,7 @@ class _MenuListState extends State<MenuList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      Text(data.categoryId.toString()),
                       Text(
                         data.name,
                         style: (data.isAvailable == 1)

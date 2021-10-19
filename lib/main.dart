@@ -15,6 +15,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => RestaurantServiceProvider()),
+        ChangeNotifierProvider(create: (_) => MenuCategoryServiceProvider()),
+        ChangeNotifierProvider(create: (_) => MenuServiceProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -3,13 +3,11 @@ import 'dart:convert';
 import 'package:bangorder_mobile/models/models.dart';
 import 'package:http/http.dart' as http;
 
-part 'fetch_category_header.dart';
+part 'get_menu_category.dart';
 
-part 'fetch_menu_item.dart';
+part 'get_menu.dart';
 
 part 'post_order.dart';
-
-part 'fetch_recommendation_menu.dart';
 
 part 'get_restaurant_info.dart';
 

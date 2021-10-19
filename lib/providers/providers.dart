@@ -4,4 +4,8 @@ import 'package:flutter/cupertino.dart';
 
 part 'cart.dart';
 
-part 'restaurant_service_provider.dart';
+part 'restaurant_service.dart';
+
+part 'menu_category_service.dart';
+
+part 'menu_service.dart';

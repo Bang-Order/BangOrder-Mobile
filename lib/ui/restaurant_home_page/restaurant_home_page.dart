@@ -1,10 +1,15 @@
 part of '../pages.dart';
 
 class RestaurantHomePage extends StatelessWidget {
+  void callWebService(context) {
+    Provider.of<RestaurantServiceProvider>(context, listen: false).init();
+    Provider.of<MenuCategoryServiceProvider>(context, listen: false).init();
+    Provider.of<MenuServiceProvider>(context, listen: false).init();
+  }
+
   @override
   Widget build(BuildContext context) {
-    Provider.of<RestaurantServiceProvider>(context, listen: false).init();
-
+    callWebService(context);
     return Scaffold(
       backgroundColor: lightGrayColor,
       appBar: AppBar(
