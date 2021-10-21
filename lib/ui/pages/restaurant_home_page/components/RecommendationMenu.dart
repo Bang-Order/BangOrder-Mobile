@@ -1,4 +1,4 @@
-part of '../pages.dart';
+part of '../../pages.dart';
 
 class RecommendationMenu extends StatelessWidget {
   @override
@@ -14,50 +14,25 @@ class RecommendationMenu extends StatelessWidget {
             style: recommendationHeader,
           ),
           SizedBox(height: defaultMargin),
-          Consumer<MenuServiceProvider>(builder: (context, menu, _) {
-            if (!menu.loading) {
-              final _menuList = menu.getRecommendationMenu;
-              return GridView.builder(
-                controller: ScrollController(),
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                shrinkWrap: true,
-                itemCount: _menuList.length,
-                itemBuilder: (BuildContext context, int i) {
-                  return _customCard(_menuList[i], context);
-                },
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 24,
-                  mainAxisSpacing: 20,
-                ),
-              );
-            }
-            return SizedBox();
-          }),
-          // FutureBuilder<List<Menu>>(
-          //   future: fetchRecommendationMenu(),
-          //   builder: (context, snapshot) {
-          //     if (snapshot.hasData) {
-          //       return GridView.builder(
-          //         controller: ScrollController(),
-          //         padding: EdgeInsets.symmetric(horizontal: 12),
-          //         shrinkWrap: true,
-          //         itemCount: snapshot.data!.length,
-          //         itemBuilder: (BuildContext context, int i) {
-          //           return _customCard(snapshot.data![i], context);
-          //         },
-          //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          //           crossAxisCount: 2,
-          //           crossAxisSpacing: 24,
-          //           mainAxisSpacing: 20,
-          //         ),
-          //       );
-          //     } else if (snapshot.hasError) {
-          //       return Text("${snapshot.error}");
-          //     }
-          //     return HomepageLoadingScreen();
-          //   },
-          // ),
+          Consumer<MenuServiceProvider>(
+            builder: (context, menu, _) => !menu.loading
+                ? GridView.builder(
+                    controller: ScrollController(),
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    shrinkWrap: true,
+                    itemCount: menu.getRecommendationMenu.length,
+                    itemBuilder: (BuildContext context, int i) => _customCard(
+                      menu.getRecommendationMenu[i],
+                      context,
+                    ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 24,
+                      mainAxisSpacing: 20,
+                    ),
+                  )
+                : SizedBox(),
+          ),
           SizedBox(height: defaultMargin),
         ],
       ),
@@ -66,13 +41,11 @@ class RecommendationMenu extends StatelessWidget {
 
   Widget _customCard(Menu data, context) {
     return InkWell(
-      onTap: (data.isAvailable == 1)
+      onTap: data.isAvailable == 1
           ? () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => DetailMenuPage(data),
-                ),
+                MaterialPageRoute(builder: (context) => DetailMenuPage(data)),
               );
             }
           : null,
@@ -85,7 +58,7 @@ class RecommendationMenu extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   image: DecorationImage(
-                    colorFilter: (data.isAvailable == 0)
+                    colorFilter: data.isAvailable == 0
                         ? ColorFilter.mode(
                             Colors.black.withOpacity(0.5),
                             BlendMode.dstATop,
@@ -100,7 +73,7 @@ class RecommendationMenu extends StatelessWidget {
             SizedBox(height: defaultMargin / 2),
             Text(
               data.name,
-              style: (data.isAvailable == 1)
+              style: data.isAvailable == 1
                   ? recommendationTitle
                   : menuTitleTransparentStyle,
             ),
@@ -111,26 +84,28 @@ class RecommendationMenu extends StatelessWidget {
                 children: [
                   Text(
                     currency(data.price),
-                    style: (data.isAvailable == 1)
+                    style: data.isAvailable == 1
                         ? recommendationPrice
                         : menuPriceTransparentStyle,
                   ),
-                  if (cart.isContainData(data)) ...[
+                  if (cart.isContainData(data))
                     Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: 6,
                         vertical: 1,
                       ),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          // color: yellowColor,
-                          border: Border.all(color: yellowColor)),
+                        borderRadius: BorderRadius.circular(10),
+                        // color: yellowColor,
+                        border: Border.all(
+                          color: yellowColor,
+                        ),
+                      ),
                       child: Text(
                         cart.getQuantity(data).toString() + "x",
                         style: menuQuantityStyle,
                       ),
                     ),
-                  ]
                 ],
               ),
             ),

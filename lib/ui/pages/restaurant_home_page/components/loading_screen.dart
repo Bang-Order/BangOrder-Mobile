@@ -1,4 +1,4 @@
-part of '../pages.dart';
+part of '../../pages.dart';
 
 class HomepageLoadingScreen extends StatelessWidget {
   const HomepageLoadingScreen({Key? key}) : super(key: key);

@@ -12,15 +12,17 @@ part 'detail_menu_page/detail_menu_page.dart';
 
 part 'restaurant_home_page/restaurant_home_page.dart';
 
-part 'restaurant_home_page/menu_list.dart';
+part 'restaurant_home_page/components/menu_item_list.dart';
 
-part 'restaurant_home_page/fab_checkout.dart';
+part 'restaurant_home_page/components/fab_checkout.dart';
 
-part 'restaurant_home_page/loading_screen.dart';
+part 'restaurant_home_page/components/loading_screen.dart';
 
-part 'restaurant_home_page/RecommendationMenu.dart';
+part 'restaurant_home_page/components/RecommendationMenu.dart';
 
-part 'restaurant_home_page/info_restaurant.dart';
+part 'restaurant_home_page/components/restaurant_info.dart';
+
+part 'restaurant_home_page/components/category_header_list.dart';
 
 part 'payment_method_page/payment_method_page.dart';
 

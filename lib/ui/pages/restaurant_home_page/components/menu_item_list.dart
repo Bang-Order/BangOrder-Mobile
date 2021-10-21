@@ -1,73 +1,32 @@
-part of '../pages.dart';
+part of '../../pages.dart';
 
-class MenuList extends StatelessWidget {
+class MenuItemList extends StatelessWidget {
+  MenuCategory menuCategory;
+
+  MenuItemList({Key? key, required this.menuCategory}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return _fetchCategoryHeader();
-  }
-
-  Widget _fetchCategoryHeader() {
-    return Consumer<MenuCategoryServiceProvider>(
-      builder: (context, menuCategory, _) {
-        if (!menuCategory.loading) {
-          return ListView.builder(
-            shrinkWrap: true,
-            controller: ScrollController(),
-            itemCount: menuCategory.data.length,
-            itemBuilder: (context, index) {
-              MenuCategory data = menuCategory.getMenuCategoryByIndex(index);
-              return _categoryHeader(data);
-            },
-          );
-        }
-        return SizedBox();
-      },
-    );
-  }
-
-  Widget _categoryHeader(MenuCategory data) {
-    return Container(
-      color: Colors.white,
-      child: ExpansionTile(
-        childrenPadding: EdgeInsets.only(
-          bottom: defaultMargin / 2,
-        ),
-        iconColor: Colors.black,
-        tilePadding: EdgeInsets.symmetric(
-          horizontal: defaultMargin,
-        ),
-        title: Text(
-          data.name,
-          style: categoryHeaderStyle,
-        ),
-        children: [_fetchMenuItem(data)],
-      ),
-    );
-  }
-
-  Widget _fetchMenuItem(MenuCategory data) {
     return Consumer<MenuServiceProvider>(
-      builder: (context, menu, _) {
-        final menuList = menu.getMenuByCategoryId(data);
-
-        if (!menu.loading) {
-          return ListView.builder(
-            shrinkWrap: true,
-            controller: ScrollController(),
-            itemCount: menuList.length,
-            itemBuilder: (context, i) {
-              return _menuItem(menuList[i], context);
-            },
-          );
-        }
-        return SizedBox();
-      },
+      builder: (context, menu, _) => !menu.loading
+          ? ListView.builder(
+              shrinkWrap: true,
+              controller: ScrollController(),
+              itemCount: menu.getMenuByCategoryId(menuCategory).length,
+              itemBuilder: (context, i) {
+                return _menuItem(
+                  menu.getMenuByCategoryId(menuCategory)[i],
+                  context,
+                );
+              },
+            )
+          : SizedBox(),
     );
   }
 
   Widget _menuItem(Menu data, context) {
     return InkWell(
-      onTap: (data.isAvailable == 1)
+      onTap: data.isAvailable == 1
           ? () {
               Navigator.push(
                 context,
@@ -83,7 +42,7 @@ class MenuList extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               left: BorderSide(
-                color: (cart.isContainData(data)) ? yellowColor : Colors.white,
+                color: cart.isContainData(data) ? yellowColor : Colors.white,
                 width: 3.0,
               ),
             ),
@@ -96,7 +55,7 @@ class MenuList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Container(
                   margin: EdgeInsets.only(
                     right: defaultMargin,
@@ -104,10 +63,9 @@ class MenuList extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(data.categoryId.toString()),
                       Text(
                         data.name,
-                        style: (data.isAvailable == 1)
+                        style: data.isAvailable == 1
                             ? menuTitleStyle
                             : menuTitleTransparentStyle,
                       ),
@@ -116,7 +74,7 @@ class MenuList extends StatelessWidget {
                       ),
                       Text(
                         data.description,
-                        style: (data.isAvailable == 1)
+                        style: data.isAvailable == 1
                             ? menudescriptionStyle
                             : menudescriptionTransparentStyle,
                       ),
@@ -128,11 +86,11 @@ class MenuList extends StatelessWidget {
                         children: [
                           Text(
                             currency(data.price),
-                            style: (data.isAvailable == 1)
+                            style: data.isAvailable == 1
                                 ? menuPriceStyle
                                 : menuPriceTransparentStyle,
                           ),
-                          if (cart.isContainData(data)) ...[
+                          if (cart.isContainData(data))
                             Container(
                               padding: EdgeInsets.symmetric(
                                 horizontal: 6,
@@ -147,7 +105,6 @@ class MenuList extends StatelessWidget {
                                 style: menuQuantityStyle,
                               ),
                             ),
-                          ]
                         ],
                       ),
                     ],
@@ -157,7 +114,7 @@ class MenuList extends StatelessWidget {
               Expanded(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
-                  child: (data.isAvailable == 1)
+                  child: data.isAvailable == 1
                       ? Image.network(
                           data.image,
                         )

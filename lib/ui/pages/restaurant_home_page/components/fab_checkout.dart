@@ -1,4 +1,4 @@
-part of '../pages.dart';
+part of '../../pages.dart';
 
 class FabCheckout extends StatelessWidget {
   const FabCheckout({Key? key}) : super(key: key);

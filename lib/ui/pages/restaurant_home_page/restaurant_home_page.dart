@@ -45,11 +45,11 @@ class RestaurantHomePage extends StatelessWidget {
         controller: ScrollController(),
         child: Column(
           children: [
-            InfoRestaurant(),
+            RestaurantInfo(),
             SizedBox(height: 8),
             RecommendationMenu(),
             SizedBox(height: 8),
-            MenuList(),
+            CategoryHeaderList(),
             SizedBox(height: 100),
           ],
         ),

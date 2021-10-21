@@ -1,7 +1,7 @@
 part of 'providers.dart';
 
 class RestaurantServiceProvider with ChangeNotifier {
-  late RestaurantInfo _data;
+  late Restaurant _data;
   bool _loading = true;
 
   void init() {
@@ -12,9 +12,9 @@ class RestaurantServiceProvider with ChangeNotifier {
     });
   }
 
-  RestaurantInfo get data => _data;
+  Restaurant get data => _data;
 
-  set data(RestaurantInfo value) {
+  set data(Restaurant value) {
     _data = value;
     notifyListeners();
   }
