@@ -11,4 +11,4 @@ part 'post_order.dart';
 
 part 'fetch_restaurant_info.dart';
 
-const APIURL = 'http://127.0.0.1:8000/api/';
+const APIURL = 'https://632f-110-138-233-52.ngrok.io/api/';

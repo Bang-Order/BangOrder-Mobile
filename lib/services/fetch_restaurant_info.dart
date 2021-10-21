@@ -1,7 +1,7 @@
 part of 'services.dart';
 
 Future <RestaurantInfo> fetchRestaurantInfo() async {
-  final url = APIURL + 'restaurants/2';
+  final url = APIURL + 'restaurants/1';
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {

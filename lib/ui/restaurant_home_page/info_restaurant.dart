@@ -8,9 +8,7 @@ class InfoRestaurant extends StatelessWidget {
         future: fetchRestaurantInfo(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
-            WidgetsBinding.instance!.addPostFrameCallback((_){
               restaurant.restaurantName = snapshot.data.name;
-            });
             return _restaurantCard(snapshot.data, context);
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
