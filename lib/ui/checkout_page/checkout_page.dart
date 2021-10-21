@@ -89,6 +89,8 @@ class CheckoutPage extends StatelessWidget {
                     totalPrice: cart.getTotalPrice(),
                     orderItems: cart.items,
                   );
+                  print(order.totalPrice);
+                  print(order.orderItems);
                   await postOrder(order);
                 },
               ),

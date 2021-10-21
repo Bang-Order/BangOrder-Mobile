@@ -3,19 +3,10 @@ part of '../pages.dart';
 class InfoRestaurant extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<InfoRestaurantProvider>(
-      builder: (context, restaurant, _) => FutureBuilder<RestaurantInfo>(
-        future: fetchRestaurantInfo(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.hasData) {
-              restaurant.restaurantName = snapshot.data.name;
-            return _restaurantCard(snapshot.data, context);
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return HomepageLoadingScreen();
-        },
-      ),
+    return Consumer<RestaurantServiceProvider>(
+      builder: (context, restaurant, _) => !restaurant.loading
+          ? _restaurantCard(restaurant.data, context)
+          : HomepageLoadingScreen(),
     );
   }
 

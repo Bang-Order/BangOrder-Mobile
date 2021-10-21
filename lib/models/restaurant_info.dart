@@ -14,16 +14,17 @@ class RestaurantInfo {
     required this.image,
     required this.email,
     required this.phoneNumber,
-    required this.address});
+    required this.address,
+  });
 
   factory RestaurantInfo.fromJson(Map<String, dynamic> json) {
     return RestaurantInfo(
       id: json['id'],
       name: json['name'],
       email: json['email'],
-      phoneNumber: json ['telephone_number'],
+      phoneNumber: json['telephone_number'],
       address: json['address'],
-      image: json['image']
+      image: json['image'],
     );
   }
 }
