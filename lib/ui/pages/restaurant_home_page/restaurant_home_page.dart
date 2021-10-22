@@ -1,15 +1,9 @@
 part of '../pages.dart';
 
 class RestaurantHomePage extends StatelessWidget {
-  void callWebService(context) {
-    Provider.of<RestaurantServiceProvider>(context, listen: false).init();
-    Provider.of<MenuCategoryServiceProvider>(context, listen: false).init();
-    Provider.of<MenuServiceProvider>(context, listen: false).init();
-  }
-
   @override
   Widget build(BuildContext context) {
-    callWebService(context);
+    CallServices(context);
     return Scaffold(
       backgroundColor: lightGrayColor,
       appBar: AppBar(
@@ -49,13 +43,13 @@ class RestaurantHomePage extends StatelessWidget {
             SizedBox(height: 8),
             RecommendationMenu(),
             SizedBox(height: 8),
-            CategoryHeaderList(),
+            SHPCategoryHeaderList(),
             SizedBox(height: 100),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FabCheckout(),
+      floatingActionButton: SHPFabCheckout(),
     );
   }
 }
