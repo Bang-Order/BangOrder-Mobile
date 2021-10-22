@@ -30,8 +30,14 @@ class MenuItemList extends StatelessWidget {
           ? () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => DetailMenuPage(data),
+                // MaterialPageRoute(
+                //   builder: (context) => DetailMenuPage(data),
+                // ),
+                PageRouteBuilder(
+                  pageBuilder: (c, a1, a2) => DetailMenuPage(data),
+                  transitionsBuilder: (c, anim, a2, child) =>
+                      FadeTransition(opacity: anim, child: child),
+                  transitionDuration: Duration(milliseconds: 2000),
                 ),
               );
             }

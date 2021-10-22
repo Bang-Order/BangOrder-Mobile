@@ -3,20 +3,20 @@ part of '../../pages.dart';
 class RecommendationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.all(defaultMargin),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Rekomendasi',
-            style: recommendationHeader,
-          ),
-          SizedBox(height: defaultMargin),
-          Consumer<MenuServiceProvider>(
-            builder: (context, menu, _) => !menu.loading
-                ? GridView.builder(
+    return Consumer<MenuServiceProvider>(
+      builder: (context, menu, _) => !menu.loading
+          ? Container(
+              color: Colors.white,
+              padding: EdgeInsets.all(defaultMargin),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Rekomendasi',
+                    style: recommendationHeader,
+                  ),
+                  SizedBox(height: defaultMargin),
+                  GridView.builder(
                     controller: ScrollController(),
                     padding: EdgeInsets.symmetric(horizontal: 12),
                     shrinkWrap: true,
@@ -30,12 +30,12 @@ class RecommendationMenu extends StatelessWidget {
                       crossAxisSpacing: 24,
                       mainAxisSpacing: 20,
                     ),
-                  )
-                : SizedBox(),
-          ),
-          SizedBox(height: defaultMargin),
-        ],
-      ),
+                  ),
+                  SizedBox(height: defaultMargin),
+                ],
+              ),
+            )
+          : HomepageLoadingScreen(),
     );
   }
 

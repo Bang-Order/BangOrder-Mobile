@@ -1,6 +1,8 @@
 part of '../pages.dart';
 
 class RestaurantHomePage extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     CallServices(context);
@@ -43,13 +45,13 @@ class RestaurantHomePage extends StatelessWidget {
             SizedBox(height: 8),
             RecommendationMenu(),
             SizedBox(height: 8),
-            SHPCategoryHeaderList(),
+            RHPCategoryHeaderList(),
             SizedBox(height: 100),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: SHPFabCheckout(),
+      floatingActionButton: RHPFabCheckout(),
     );
   }
 }
