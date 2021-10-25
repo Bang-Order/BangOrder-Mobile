@@ -8,6 +8,10 @@ import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:bangorder_mobile/ui/widgets/widgets.dart';
 import 'package:search_page/search_page.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'dart:developer';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 
 part 'checkout_page/checkout_page.dart';
 
@@ -34,3 +38,5 @@ part 'payment_method_page/payment_method_page.dart';
 part 'order_status_page/order_status_page.dart';
 
 part 'restaurant_home_page/components/search_item_card.dart';
+
+part 'scan_qr/scan_qr_page.dart';
