@@ -5,5 +5,3 @@ import 'package:intl/intl.dart';
 part 'theme.dart';
 
 part 'text_style.dart';
-
-part 'number_format.dart';

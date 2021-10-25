@@ -1,16 +1,16 @@
-part of '../pages.dart';
+part of '../../pages.dart';
 
-class InfoRestaurant extends StatelessWidget {
+class RestaurantInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<RestaurantServiceProvider>(
       builder: (context, restaurant, _) => !restaurant.loading
           ? _restaurantCard(restaurant.data, context)
-          : HomepageLoadingScreen(),
+          : SizedBox(),
     );
   }
 
-  Widget _restaurantCard(RestaurantInfo data, BuildContext context) {
+  Widget _restaurantCard(Restaurant data, BuildContext context) {
     return Container(
       color: Colors.white,
       child: Column(

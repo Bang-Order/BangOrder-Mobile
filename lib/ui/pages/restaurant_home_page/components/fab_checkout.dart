@@ -1,12 +1,12 @@
-part of '../pages.dart';
+part of '../../pages.dart';
 
-class FabCheckout extends StatelessWidget {
-  const FabCheckout({Key? key}) : super(key: key);
+class RHPFabCheckout extends StatelessWidget {
+  const RHPFabCheckout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(
-      builder: (context, cart, _) => (cart.items.isNotEmpty)
+      builder: (context, cart, _) => cart.items.isNotEmpty
           ? ElevatedButton(
               onPressed: () {
                 Navigator.push(

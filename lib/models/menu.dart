@@ -14,14 +14,14 @@ class Menu {
   bool isUpdate = false;
 
   Menu({
-    required this.id,
-    required this.categoryId,
-    required this.name,
-    required this.description,
-    required this.price,
-    required this.image,
-    required this.isAvailable,
-    required this.isRecommended,
+    this.id = 0,
+    this.categoryId = 0,
+    this.name = '',
+    this.description = '',
+    this.price = 0,
+    this.image = '',
+    this.isAvailable = 0,
+    this.isRecommended = 0,
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) {
