@@ -28,6 +28,13 @@ TextStyle menuTitleStyle = TextStyle(
   fontFamily: 'Manrope',
 );
 
+TextStyle scanTipsStyle = TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+  fontFamily: 'Manrope',
+);
+
 TextStyle menuTitleTransparentStyle = TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.w500,
