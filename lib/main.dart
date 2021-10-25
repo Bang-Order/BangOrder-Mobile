@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: yellowColor,
         ),
-        home: RestaurantHomePage(),
+        home: ScanQrPage(),
       ),
     );
   }
