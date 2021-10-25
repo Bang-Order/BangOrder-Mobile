@@ -13,6 +13,8 @@ part 'detail_menu_page/detail_menu_page.dart';
 
 part 'restaurant_home_page/restaurant_home_page.dart';
 
+part 'restaurant_home_page/components/appbar.dart';
+
 part 'restaurant_home_page/components/menu_item_list.dart';
 
 part 'restaurant_home_page/components/fab_checkout.dart';
