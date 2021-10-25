@@ -6,4 +6,4 @@ part 'menu.dart';
 
 part 'order.dart';
 
-part 'restaurant_info.dart';
+part 'restaurant.dart';

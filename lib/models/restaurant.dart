@@ -1,6 +1,6 @@
 part of 'models.dart';
 
-class RestaurantInfo {
+class Restaurant {
   int id;
   String name;
   String image;
@@ -8,7 +8,7 @@ class RestaurantInfo {
   String phoneNumber;
   String address;
 
-  RestaurantInfo({
+  Restaurant({
     required this.id,
     required this.name,
     required this.image,
@@ -17,8 +17,8 @@ class RestaurantInfo {
     required this.address,
   });
 
-  factory RestaurantInfo.fromJson(Map<String, dynamic> json) {
-    return RestaurantInfo(
+  factory Restaurant.fromJson(Map<String, dynamic> json) {
+    return Restaurant(
       id: json['id'],
       name: json['name'],
       email: json['email'],
