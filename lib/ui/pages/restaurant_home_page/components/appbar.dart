@@ -42,9 +42,17 @@ class RHPAppbar extends StatelessWidget {
                   Icons.search_rounded,
                   color: blackColor,
                 ),
-                onPressed: () {
-                  print('tes');
-                },
+                onPressed: () => showSearch(
+                  context: context,
+                  delegate: SearchPage<Menu>(
+                    items: Provider.of<MenuServiceProvider>(
+                      context,
+                      listen: false,
+                    ).data,
+                    builder: (t) => SPSearchItemCard(t),
+                    filter: (t) => [t.name],
+                  ),
+                ),
               ),
             ],
           ),
@@ -52,4 +60,6 @@ class RHPAppbar extends StatelessWidget {
       ],
     );
   }
+
+  searchBar() {}
 }

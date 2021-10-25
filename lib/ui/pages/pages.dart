@@ -6,6 +6,8 @@ import 'package:bangorder_mobile/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
+import 'package:bangorder_mobile/ui/widgets/widgets.dart';
+import 'package:search_page/search_page.dart';
 
 part 'checkout_page/checkout_page.dart';
 
@@ -30,3 +32,5 @@ part 'restaurant_home_page/components/category_header_list.dart';
 part 'payment_method_page/payment_method_page.dart';
 
 part 'order_status_page/order_status_page.dart';
+
+part 'restaurant_home_page/components/search_item_card.dart';
