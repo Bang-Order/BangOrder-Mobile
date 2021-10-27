@@ -2,15 +2,15 @@ part of '../pages.dart';
 
 class DetailMenuPage extends StatefulWidget {
   Menu _data;
+  PageEnum? previousPage;
 
-  DetailMenuPage(this._data);
+  DetailMenuPage(this._data, {this.previousPage = null});
 
   @override
   State<DetailMenuPage> createState() => _DetailMenuPageState();
 }
 
 class _DetailMenuPageState extends State<DetailMenuPage> {
-
   late int _initQuantity;
   late String _initNotes;
 
@@ -51,7 +51,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                 widget._data.quantity = _initQuantity;
                 widget._data.notes.text = _initNotes;
               }
-              Navigator.pop(context);
+              pop();
             },
           ),
         ),
@@ -195,7 +195,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                           onPressed: () {
                             _menu.isUpdate = false;
                             cart.deleteItem(_menu.id);
-                            Navigator.pop(context);
+                            pop();
                           },
                           child: Text(
                             'Hapus Pesanan',
@@ -210,7 +210,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                           ? ElevatedButton(
                               onPressed: () {
                                 cart.updateItem(_menu, widget._data);
-                                Navigator.pop(context);
+                                pop();
                               },
                               child: Text(
                                 'Tambahkan ke Keranjang - ' + currency(pricing),
@@ -225,7 +225,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                                 widget._data.isUpdate = true;
                                 _menu.isUpdate = true;
                                 cart.addItem(widget._data);
-                                Navigator.pop(context);
+                                pop();
                               },
                               child: Text(
                                 'Tambahkan ke Keranjang - ' + currency(pricing),
@@ -291,5 +291,25 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
     setState(() {
       if (widget._data.quantity != 0) widget._data.quantity -= 1;
     });
+  }
+
+  void pop() {
+    switch (widget.previousPage) {
+      case PageEnum.HomePage:
+        Navigator.pop(context);
+        break;
+      case PageEnum.SearchPage:
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => RestaurantHomePage(),
+          ),
+          (route) => false,
+        );
+        break;
+      case PageEnum.CheckoutPage:
+        Navigator.pop(context);
+        break;
+    }
+    print(Navigator.of(context));
   }
 }
