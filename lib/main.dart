@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: yellowColor,
       ),
-      home: ScanQrPage(),
+      home: RestaurantHomePage(),
     );
   }
 }

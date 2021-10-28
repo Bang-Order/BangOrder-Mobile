@@ -11,4 +11,4 @@ part 'post_order.dart';
 
 part 'get_restaurant_info.dart';
 
-const APIURL = 'http://192.168.0.5/project/BangOrder-Backend/public/api/';
+const APIURL = 'http://192.168.1.4/BangOrder-Backend/public/api/';

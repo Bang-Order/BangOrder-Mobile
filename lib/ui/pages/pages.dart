@@ -12,6 +12,8 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/link.dart';
 
 part 'checkout_page/checkout_page.dart';
 
@@ -40,3 +42,5 @@ part 'order_status_page/order_status_page.dart';
 part 'restaurant_home_page/components/search_item_card.dart';
 
 part 'scan_qr_page/scan_qr_code.dart';
+
+part 'landing_page/landing_page.dart';

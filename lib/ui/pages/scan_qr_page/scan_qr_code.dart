@@ -12,6 +12,7 @@ class _ScanQrPageState extends State<ScanQrPage> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   bool _flashOn = false;
+  Future<void>? _launched;
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -55,7 +56,10 @@ class _ScanQrPageState extends State<ScanQrPage> {
               top: 10,
               child: Container(
                   margin: EdgeInsets.only(right: 80, left: 80, bottom: 250),
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   child: Text(
                     "Arahkan kamera anda ke QR Code yang tersedia pada meja",
                     textAlign: TextAlign.center,
@@ -70,7 +74,8 @@ class _ScanQrPageState extends State<ScanQrPage> {
         margin: EdgeInsets.only(bottom: 32, right: 32),
         child: FloatingActionButton(
           backgroundColor: Colors.black45,
-          child: Icon( _flashOn? Icons.flash_on: Icons.flash_off, color: Colors.white,),
+          child: Icon(
+            _flashOn ? Icons.flash_on : Icons.flash_off, color: Colors.white,),
           onPressed: () {
             setState(() {
               _flashOn = !_flashOn;
@@ -84,8 +89,14 @@ class _ScanQrPageState extends State<ScanQrPage> {
 
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea = (MediaQuery.of(context).size.width < 400 ||
-            MediaQuery.of(context).size.height < 400)
+    var scanArea = (MediaQuery
+        .of(context)
+        .size
+        .width < 400 ||
+        MediaQuery
+            .of(context)
+            .size
+            .height < 400)
         ? 280.0
         : 300.0;
     // To ensure the Scanner view is properly sizes after rotation
@@ -111,6 +122,8 @@ class _ScanQrPageState extends State<ScanQrPage> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        print("halo2 " + result!.code);
+        _checkingUrl(result!);
       });
     });
   }
@@ -129,4 +142,24 @@ class _ScanQrPageState extends State<ScanQrPage> {
     controller?.dispose();
     super.dispose();
   }
+
+  _checkingUrl(Barcode result) {
+    if (result.code.isNotEmpty || result.code != "") {
+      if (result.code.contains("http") || result.code.contains("https")) {
+        return _launchUrl(result.code);
+      }
+    } else {
+      return ScanQrPage();
+    }
+  }
+
+  _launchUrl(String validUrl) async {
+    String url = validUrl;
+    if (await canLaunch (url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
 }
