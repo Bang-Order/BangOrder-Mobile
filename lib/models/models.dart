@@ -7,3 +7,5 @@ part 'menu.dart';
 part 'order.dart';
 
 part 'restaurant.dart';
+
+part 'page_enum.dart';

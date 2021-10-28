@@ -140,7 +140,10 @@ class CheckoutPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetailMenuPage(data),
+                            builder: (context) => DetailMenuPage(
+                              data,
+                              previousPage: PageEnum.CheckoutPage,
+                            ),
                           ),
                         );
                       }),

@@ -9,9 +9,9 @@ class RestaurantHomePage extends StatelessWidget {
         title: Consumer<RestaurantServiceProvider>(
           builder: (context, restaurant, _) => !restaurant.loading
               ? Text(
-            restaurant.data.name,
-            style: appbarTextStyle,
-          )
+                  restaurant.data.name,
+                  style: appbarTextStyle,
+                )
               : Text(''),
         ),
         leading: IconButton(
@@ -31,26 +31,17 @@ class RestaurantHomePage extends StatelessWidget {
               ),
               onPressed: () => showSearch(
                 context: context,
-                delegate: DataSearch(
-                  // onQueryUpdate: (s) => print(s),
-                  // items: people,
-                  // searchLabel: 'Search people',
-                  // suggestion: Center(
-                  //   child: Text('Filter people by name, surname or age'),
-                  // ),
-                  // failure: Center(
-                  //   child: Text('No person found :('),
-                  // ),
-                  // filter: (person) => [
-                  //   person.name,
-                  //   person.surname,
-                  //   person.age.toString(),
-                  // ],
-                  // builder: (person) => ListTile(
-                  //   title: Text(person.name),
-                  //   subtitle: Text(person.surname),
-                  //   trailing: Text('${person.age} yo'),
-                  // ),
+                delegate: SearchPage<Menu>(
+                  items: Provider.of<MenuServiceProvider>(
+                    context,
+                    listen: false,
+                  ).data,
+                  builder: (t) => MenuCard(
+                    data: t,
+                    context: context,
+                    prevPage: PageEnum.SearchPage,
+                  ),
+                  filter: (t) => [t.name],
                 ),
               ),
             ),
@@ -60,8 +51,6 @@ class RestaurantHomePage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-
-          // RHPAppbar(),
           Expanded(
             child: SingleChildScrollView(
               controller: ScrollController(),
