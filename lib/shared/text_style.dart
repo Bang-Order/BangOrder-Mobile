@@ -172,6 +172,6 @@ TextStyle recommendationTitle = TextStyle(
 TextStyle recommendationPrice = TextStyle(
   fontSize: 12,
   color: blackColor,
-  fontWeight: FontWeight.w300,
+  fontWeight: FontWeight.bold,
   fontFamily: 'Manrope',
 );

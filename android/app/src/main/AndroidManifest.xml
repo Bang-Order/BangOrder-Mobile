@@ -22,8 +22,8 @@
     </queries>
 
    <application
-        android:label="bangorder_mobile"
-        android:icon="@mipmap/ic_launcher">
+        android:label="BangOrder"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

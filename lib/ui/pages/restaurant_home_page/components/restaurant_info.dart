@@ -38,7 +38,10 @@ class RestaurantInfo extends StatelessWidget {
                       style: restaurantDescriptionStyle,
                       maxLines: 2,
                     )),
-                Text("Meja Nomor: 3", style: menuTitleStyle)
+                Consumer<BarcodeProvider>(
+                    builder: (context, barcode, _) => Text(
+                        "Nomor Meja: " + barcode.data.restaurantTableId,
+                        style: menuTitleStyle))
               ],
             ),
           ),

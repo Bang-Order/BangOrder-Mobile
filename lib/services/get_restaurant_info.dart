@@ -1,7 +1,8 @@
 part of 'services.dart';
 
-Future<Restaurant> getRestaurantInfo() async {
-  final url = APIURL + 'restaurants/1';
+Future<Restaurant> getRestaurantInfo(context) async {
+  final provider = Provider.of<BarcodeProvider>(context, listen: false);
+  final url = APIURL + 'restaurants/' + provider.data.restaurantId;
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {

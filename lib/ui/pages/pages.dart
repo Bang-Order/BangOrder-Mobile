@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:bangorder_mobile/models/models.dart';
 import 'package:bangorder_mobile/providers/providers.dart';
 import 'package:bangorder_mobile/services/services.dart';
@@ -5,6 +7,7 @@ import 'package:bangorder_mobile/shared/shared.dart';
 import 'package:bangorder_mobile/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:bangorder_mobile/ui/widgets/widgets.dart';
 import 'package:search_page/search_page.dart';
@@ -14,6 +17,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/link.dart';
+import 'dart:convert';
+import 'package:lottie/lottie.dart';
 
 part 'checkout_page/checkout_page.dart';
 

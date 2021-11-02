@@ -20,7 +20,7 @@ class RecommendationMenu extends StatelessWidget {
                     controller: ScrollController(),
                     padding: EdgeInsets.symmetric(horizontal: 12),
                     shrinkWrap: true,
-                    itemCount: menu.getRecommendationMenu.length,
+                    itemCount: 4,
                     itemBuilder: (context, i) => RecommendationCard(
                       data: menu.getRecommendationMenu[i],
                       context: context,

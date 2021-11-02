@@ -9,10 +9,11 @@ class ScanQrPage extends StatefulWidget {
 
 class _ScanQrPageState extends State<ScanQrPage> {
   Barcode? result;
+  late BarcodeModel barcodeModel;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   bool _flashOn = false;
-  Future<void>? _launched;
+  // late final BarcodeProvider provider;
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -40,33 +41,24 @@ class _ScanQrPageState extends State<ScanQrPage> {
             color: blackColor,
           ),
           onPressed: () {
-            // Navigator.pop(context);
+            Navigator.pop(context);
           },
         ),
       ),
       body: Stack(
         children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: _buildQrView(context),
-          ),
+          Container(child: _buildQrView(context)),
           Align(
             alignment: FractionalOffset.bottomCenter,
-            child: Positioned(
-              top: 10,
-              child: Container(
-                  margin: EdgeInsets.only(right: 80, left: 80, bottom: 250),
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
-                  child: Text(
-                    "Arahkan kamera anda ke QR Code yang tersedia pada meja",
-                    textAlign: TextAlign.center,
-                    style: scanTipsStyle,
-                  ),
-                  color: Colors.transparent),
-            ),
+            child: Container(
+                margin: EdgeInsets.only(right: 80, left: 80, bottom: 250),
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                  "Arahkan kamera anda ke QR Code yang tersedia pada meja",
+                  textAlign: TextAlign.center,
+                  style: scanTipsStyle,
+                ),
+                color: Colors.transparent),
           )
         ],
       ),
@@ -75,7 +67,9 @@ class _ScanQrPageState extends State<ScanQrPage> {
         child: FloatingActionButton(
           backgroundColor: Colors.black45,
           child: Icon(
-            _flashOn ? Icons.flash_on : Icons.flash_off, color: Colors.white,),
+            _flashOn ? Icons.flash_on : Icons.flash_off,
+            color: Colors.white,
+          ),
           onPressed: () {
             setState(() {
               _flashOn = !_flashOn;
@@ -89,14 +83,8 @@ class _ScanQrPageState extends State<ScanQrPage> {
 
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea = (MediaQuery
-        .of(context)
-        .size
-        .width < 400 ||
-        MediaQuery
-            .of(context)
-            .size
-            .height < 400)
+    var scanArea = (MediaQuery.of(context).size.width < 400 ||
+            MediaQuery.of(context).size.height < 400)
         ? 280.0
         : 300.0;
     // To ensure the Scanner view is properly sizes after rotation
@@ -116,13 +104,20 @@ class _ScanQrPageState extends State<ScanQrPage> {
   }
 
   void _onQRViewCreated(QRViewController controller) {
+
     setState(() {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
       setState(() {
+        final provider = Provider.of<BarcodeProvider>(context, listen: false);
         result = scanData;
-        print("halo2 " + result!.code);
+        print("result.code: " + result!.code);
+        barcodeModel = _decodeToString(result!.code);
+        provider.data = barcodeModel;
+        print("isi restaurant_id: " + provider.data.restaurantId);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => RestaurantHomePage()));
         _checkingUrl(result!);
       });
     });
@@ -143,6 +138,18 @@ class _ScanQrPageState extends State<ScanQrPage> {
     super.dispose();
   }
 
+  _decodeToString(String result) {
+    String resultDecoded = utf8.decode(base64.decode(result));
+    barcodeModel = _stringToJson(resultDecoded);
+    return barcodeModel;
+  }
+
+  _stringToJson(String result) {
+    Map<String, dynamic> valueBarcode = jsonDecode(result);
+    var value = BarcodeModel.fromJson(valueBarcode);
+    return value;
+  }
+
   _checkingUrl(Barcode result) {
     if (result.code.isNotEmpty || result.code != "") {
       if (result.code.contains("http") || result.code.contains("https")) {
@@ -155,11 +162,10 @@ class _ScanQrPageState extends State<ScanQrPage> {
 
   _launchUrl(String validUrl) async {
     String url = validUrl;
-    if (await canLaunch (url)) {
+    if (await canLaunch(url)) {
       await launch(url);
     } else {
       throw 'Could not launch $url';
     }
   }
-
 }
