@@ -23,6 +23,10 @@ part 'detail_menu_page/components/menu.dart';
 
 part 'detail_menu_page/components/note.dart';
 
+part 'detail_menu_page/components/quantity_button.dart';
+
+part 'detail_menu_page/components/add_to_basket_button.dart';
+
 part 'restaurant_home_page/restaurant_home_page.dart';
 
 part 'restaurant_home_page/components/appbar.dart';

@@ -151,17 +151,17 @@ class CheckoutPage extends StatelessWidget with WidgetsBindingObserver {
                       "Edit",
                       style: editTextCheckoutStyle,
                     ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailMenuPage(
-                            data,
-                            previousPage: PageEnum.CheckoutPage,
-                          ),
-                        ),
-                      );
-                    },
+                    // onTap: () {
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => DetailMenuPage(
+                    //         data,
+                    //         previousPage: PageEnum.CheckoutPage,
+                    //       ),
+                    //     ),
+                    //   );
+                    // },
                   ),
                 ],
               ),

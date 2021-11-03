@@ -1,19 +1,5 @@
 part of 'providers.dart';
 
-// class DetailPageHelper {
-//   BuildContext context;
-//
-//   DetailPageHelper(this.context);
-//
-//   Menu getMenu(Menu data) {
-//     final cart = Provider.of<CartProvider>(context, listen: false);
-//     if (cart.isContainData(data)) {
-//       return cart.getItemById(data);
-//     }
-//     return data;
-//   }
-// }
-
 class DetailPageProvider extends ChangeNotifier {
   late Menu _menu;
   late PageEnum _previousPage;
@@ -21,13 +7,13 @@ class DetailPageProvider extends ChangeNotifier {
   late int _initQuantity;
   late String _initNotes;
 
-  DetailPageProvider({
+  void init({
     required Menu menu,
     required PageEnum previousPage,
     required context,
   }) {
     final cart = Provider.of<CartProvider>(context, listen: false);
-    if (cart.items.isNotEmpty && cart.isContainData(menu)) {
+    if (cart.isContainData(menu)) {
       this.menu = cart.getItemById(menu);
       isUpdate = true;
       initQuantity = this.menu.quantity;
@@ -45,13 +31,6 @@ class DetailPageProvider extends ChangeNotifier {
 
   void decrementQuantity() {
     menu.quantity -= 1;
-    notifyListeners();
-  }
-
-  Menu get menu => _menu;
-
-  set menu(Menu value) {
-    _menu = value;
     notifyListeners();
   }
 
@@ -85,6 +64,8 @@ class DetailPageProvider extends ChangeNotifier {
     print('exit');
   }
 
+////////////////////////////////////////////////////////////////////////////////
+
   PageEnum get previousPage => _previousPage;
 
   set previousPage(PageEnum value) {
@@ -110,6 +91,13 @@ class DetailPageProvider extends ChangeNotifier {
 
   set initQuantity(int value) {
     _initQuantity = value;
+    notifyListeners();
+  }
+
+  Menu get menu => _menu;
+
+  set menu(Menu value) {
+    _menu = value;
     notifyListeners();
   }
 }

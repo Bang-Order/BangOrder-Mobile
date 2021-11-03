@@ -12,3 +12,4 @@ import 'package:provider/provider.dart';
 
 part 'order_helper.dart';
 part 'payment_helper.dart';
+part 'detail_page.dart';

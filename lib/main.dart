@@ -12,6 +12,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => MenuCategoryServiceProvider()),
       ChangeNotifierProvider(create: (_) => MenuServiceProvider()),
       ChangeNotifierProvider(create: (_) => OrderProvider()),
+      ChangeNotifierProvider(create: (_) => DetailPageProvider()),
     ],
     child: MyApp(),
   ));
