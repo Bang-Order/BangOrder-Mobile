@@ -5,7 +5,7 @@ class Menu {
   int categoryId;
   String name;
   String description;
-  int price;
+  double price;
   String image;
   int isAvailable;
   int isRecommended;
@@ -22,6 +22,7 @@ class Menu {
     this.image = '',
     this.isAvailable = 0,
     this.isRecommended = 0,
+    this.quantity = 1,
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) {
@@ -30,10 +31,18 @@ class Menu {
       id: json['id'],
       name: json['name'],
       description: json['description'],
-      price: json['price'],
+      price: double.parse(json['price'].toString()),
       image: json['image'],
       isAvailable: json['is_available'],
       isRecommended: json['is_recommended'],
+    );
+  }
+
+  factory Menu.orderResponse(Map<String, dynamic> json) {
+    return Menu(
+      name: json['name'],
+      quantity: json['quantity'],
+      price: double.parse(json['price']),
     );
   }
 

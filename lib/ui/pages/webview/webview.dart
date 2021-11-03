@@ -1,13 +1,19 @@
 part of '../pages.dart';
 
-class OrderStatusPage extends StatelessWidget {
-  const OrderStatusPage({Key? key}) : super(key: key);
+class WebViewPage extends StatelessWidget {
+  final String title;
+  final String selectedUrl;
+
+  WebViewPage({
+    required this.title,
+    required this.selectedUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order Status'),
+        title: Text(title),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
@@ -17,15 +23,16 @@ class OrderStatusPage extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                builder: (context) => RestaurantHomePage(),
+                builder: (context) => OrderStatusPage(),
               ),
-              (route) => false,
+                  (route) => route.isFirst,
             );
           },
         ),
       ),
-      body: Center(
-        child: Text('ORDER STATUS PAGE'),
+      body: WebView(
+        initialUrl: selectedUrl,
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }

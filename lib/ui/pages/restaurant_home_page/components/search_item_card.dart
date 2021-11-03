@@ -10,10 +10,10 @@ class SPSearchItemCard extends StatelessWidget {
     return InkWell(
       onTap: _menu.isAvailable == 1
           ? () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DetailMenuPage(_menu)),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => DetailMenuPage(_menu)),
+              // );
             }
           : null,
       child: ListTile(
