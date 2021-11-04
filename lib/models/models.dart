@@ -9,3 +9,5 @@ part 'order.dart';
 part 'restaurant.dart';
 
 part 'page_enum.dart';
+
+part 'order_response.dart';

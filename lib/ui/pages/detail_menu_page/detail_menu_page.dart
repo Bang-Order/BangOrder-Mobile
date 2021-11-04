@@ -1,5 +1,6 @@
 part of '../pages.dart';
 
+
 class DetailMenuPage extends StatefulWidget {
   Menu _data;
   PageEnum? previousPage;
@@ -26,6 +27,12 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
     if (!_menu.isUpdate) {
       _menu.quantity = 0;
       _menu.notes = TextEditingController();
+    } else if (_menu.isUpdate) {
+      widget._data.quantity = _initQuantity;
+      widget._data.notes.text = _initNotes;
+      // final item = Provider.of(context,listen: false).getItemById(widget._data);
+      // item.quantity = _initQuantity;
+      // item.notes.text = _initNotes;
     }
     if (_menu.quantity == 0) _menu.quantity = 1;
     super.dispose();
@@ -47,10 +54,6 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
               color: blackColor,
             ),
             onPressed: () {
-              if (_menu.isUpdate) {
-                widget._data.quantity = _initQuantity;
-                widget._data.notes.text = _initNotes;
-              }
               pop();
             },
           ),
@@ -213,14 +216,16 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                                 pop();
                               },
                               child: Text(
-                                'Tambahkan ke Keranjang - ' + currency(pricing),
+                                'Tambahkan ke Keranjang - ' +
+                                    currency(pricing.toDouble()),
                                 style: cartStyle,
                               ),
                               style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.all(12),
                               ),
                             )
-                          : ElevatedButton(
+                          :
+                          ElevatedButton(
                               onPressed: () {
                                 widget._data.isUpdate = true;
                                 _menu.isUpdate = true;
@@ -228,7 +233,8 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
                                 pop();
                               },
                               child: Text(
-                                'Tambahkan ke Keranjang - ' + currency(pricing),
+                                'Tambahkan ke Keranjang - ' +
+                                    currency(pricing.toDouble()),
                                 style: cartStyle,
                               ),
                               style: ElevatedButton.styleFrom(
@@ -245,7 +251,8 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
   }
 
   Widget get disableDecrementButton {
-    return Container(
+    return
+    Container(
       width: 39,
       height: 39,
       child: ElevatedButton(
@@ -283,7 +290,7 @@ class _DetailMenuPageState extends State<DetailMenuPage> {
 
   Menu get _menu => widget._data;
 
-  int get pricing => _menu.quantity * _menu.price;
+  double get pricing => _menu.quantity * _menu.price;
 
   void incrementMenuItem() => setState(() => widget._data.quantity += 1);
 

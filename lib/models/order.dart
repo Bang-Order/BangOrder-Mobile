@@ -2,7 +2,7 @@ part of 'models.dart';
 
 class Order {
   int restaurantTableId;
-  int totalPrice;
+  double totalPrice;
   List<Menu> orderItems;
 
   Order({
@@ -10,4 +10,11 @@ class Order {
     required this.totalPrice,
     required this.orderItems,
   });
+
+  Map<String, dynamic> toJson(Order order) => {
+        "restaurant_table_id": restaurantTableId,
+        "total_price": totalPrice,
+        "order_items":
+            order.orderItems.map((Menu menu) => menu.toJson(menu)).toList(),
+      };
 }

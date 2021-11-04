@@ -15,8 +15,8 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: data.isAvailable == 1
-          ? () {
-              Navigator.push(
+          ? () =>
+          Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => DetailMenuPage(
@@ -24,10 +24,9 @@ class MenuCard extends StatelessWidget {
                     previousPage: prevPage,
                   ),
                 ),
-              );
-            }
+              )
           : null,
-      splashColor: Colors.grey[100],
+      // splashColor: Colors.grey[100],
       child: Consumer<CartProvider>(
         builder: (context, cart, _) => Container(
           decoration: BoxDecoration(

@@ -1,24 +1,17 @@
 part of 'services.dart';
 
-Future postOrder(Order order) async {
-  final url = APIURL + 'restaurants/1/orders';
-
+Future postOrder(Order order, context) async {
   final response = await http.post(
-    Uri.parse(url),
+    Uri.parse(APIURL + 'restaurants/1/orders'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: jsonEncode(<String, dynamic>{
-      'restaurant_table_id': order.restaurantTableId,
-      'total_price': order.totalPrice,
-      'order_items':
-          order.orderItems.map((Menu menu) => menu.toJson(menu)).toList()
-    }),
+    body: jsonEncode(order.toJson(order)),
   );
-
   if (response.statusCode == 201) {
-    print("Success!");
+    OrderHelper(context).orderSuccess(response.body);
+    return true;
   } else {
-    throw Exception('Failed!');
+    return false;
   }
 }
