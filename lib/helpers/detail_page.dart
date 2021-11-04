@@ -9,9 +9,9 @@ class DetailPageHelper {
     final provider = Provider.of<DetailPageProvider>(_context, listen: false);
     provider.init(menu: menu, previousPage: previousPage, context: _context);
 
-    Navigator.push(
-      _context,
-      MaterialPageRoute(builder: (context) => DetailMenuPage()),
-    );
+    // Navigator.push(
+    //   _context,
+    //   MaterialPageRoute(builder: (context) => DetailMenuPage()),
+    // );
   }
 }

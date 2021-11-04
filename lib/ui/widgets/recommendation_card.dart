@@ -13,19 +13,15 @@ class RecommendationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: data.isAvailable == 1
-          ? () => DetailPageHelper(context).navigate(
-                menu: data,
-                previousPage: PageEnum.HomePage,
+          ? () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailMenuPage(
+                    data,
+                    previousPage: PageEnum.HomePage,
+                  ),
+                ),
               )
-          // Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => DetailMenuPage(
-          //           data,
-          //           previousPage: PageEnum.HomePage,
-          //         ),
-          //       ),
-          //     )
           : null,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

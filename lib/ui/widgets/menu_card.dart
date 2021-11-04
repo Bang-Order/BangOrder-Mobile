@@ -14,18 +14,18 @@ class MenuCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // onTap: data.isAvailable == 1
-      //     ? () =>
-      //     Navigator.push(
-      //           context,
-      //           MaterialPageRoute(
-      //             builder: (context) => DetailMenuPage(
-      //               data,
-      //               previousPage: prevPage,
-      //             ),
-      //           ),
-      //         )
-      //     : null,
+      onTap: data.isAvailable == 1
+          ? () =>
+          Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailMenuPage(
+                    data,
+                    previousPage: prevPage,
+                  ),
+                ),
+              )
+          : null,
       // splashColor: Colors.grey[100],
       child: Consumer<CartProvider>(
         builder: (context, cart, _) => Container(
