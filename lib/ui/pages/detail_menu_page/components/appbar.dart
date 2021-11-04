@@ -15,12 +15,7 @@ AppBar detailMenuPageAppbar(context) {
           color: blackColor,
         ),
         onPressed: () {
-          // if (_menu.isUpdate) {
-          //   widget._data.quantity = _initQuantity;
-          //   widget._data.notes.text = _initNotes;
-          // }
-          // provider.pop(context);
-          Navigator.pop(context);
+          provider.exit(context);
         },
       ),
     ),

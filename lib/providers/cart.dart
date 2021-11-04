@@ -44,10 +44,6 @@ class CartProvider with ChangeNotifier {
     return isContain;
   }
 
-  // void clearBack(Menu menu){
-  //   menu.
-  // }
-
   int getQuantity(Menu menu) {
     return getItemById(menu).quantity;
   }
