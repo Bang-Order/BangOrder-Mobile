@@ -19,7 +19,9 @@ class DetailPageProvider extends ChangeNotifier {
       initQuantity = this.menu.quantity;
       initNotes = this.menu.notes.text;
     } else {
+      isUpdate = false;
       this.menu = menu;
+      this.menu.quantity = 1;
     }
     this.previousPage = previousPage;
   }
@@ -34,6 +36,31 @@ class DetailPageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  double pricing() {
+    return menu.price * menu.quantity;
+  }
+
+  void removeMenuInCart(context) {
+    final cart = Provider.of<CartProvider>(context, listen: false);
+    cart.deleteItem(menu.id);
+    notifyListeners();
+    pop(context);
+  }
+
+  void updateMenuInCart(context) {
+    final cart = Provider.of<CartProvider>(context, listen: false);
+    cart.updateItem(menu, menu);
+    notifyListeners();
+    pop(context);
+  }
+
+  void addMenuToCart(context) {
+    final cart = Provider.of<CartProvider>(context, listen: false);
+    cart.addItem(menu);
+    notifyListeners();
+    pop(context);
+  }
+
   void pop(context) {
     switch (previousPage) {
       case PageEnum.HomePage:
@@ -41,8 +68,9 @@ class DetailPageProvider extends ChangeNotifier {
         break;
       case PageEnum.SearchPage:
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => RestaurantHomePage()),
-            (route) => false);
+          MaterialPageRoute(builder: (context) => RestaurantHomePage()),
+          (route) => false,
+        );
         break;
       case PageEnum.CheckoutPage:
         Navigator.pop(context);
@@ -50,18 +78,28 @@ class DetailPageProvider extends ChangeNotifier {
       case PageEnum.DetailPage:
         break;
     }
+    print("STACK POP: " + Navigator.of(context).toString());
   }
 
-  void exit() {
+  Future<bool> exit(context) {
     if (isUpdate) {
+      final cart = Provider.of<CartProvider>(context, listen: false);
       menu.quantity = initQuantity;
       menu.notes.text = initNotes;
-    } else {
-      menu.quantity = 0;
+      cart.updateItem(menu, menu);
+      print("NOTE: " + menu.notes.text);
+      print('initnote: ' + initNotes);
+    } else if (!isUpdate) {
+      menu.quantity = 1;
       menu.notes = TextEditingController();
     }
     if (_menu.quantity == 0) _menu.quantity = 1;
+
+    notifyListeners();
+
+    pop(context);
     print('exit');
+    return Future.value(true);
   }
 
 ////////////////////////////////////////////////////////////////////////////////

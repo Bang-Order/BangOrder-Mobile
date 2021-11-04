@@ -13,14 +13,9 @@ class RecommendationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: data.isAvailable == 1
-          ? () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetailMenuPage(
-                    data,
-                    previousPage: PageEnum.HomePage,
-                  ),
-                ),
+          ? () => DetailPageHelper(context).navigate(
+                menu: data,
+                previousPage: PageEnum.HomePage,
               )
           : null,
       child: Column(
