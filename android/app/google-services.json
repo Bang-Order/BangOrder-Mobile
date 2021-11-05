@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "652535089659",
+    "project_id": "bangorder-db7d2",
+    "storage_bucket": "bangorder-db7d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652535089659:android:6b23fdc46ad4b92866e35e",
+        "android_client_info": {
+          "package_name": "com.example.bangorder_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652535089659-dq8cigculnhqbu1jicv994jt0dqomv1l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bangorder_mobile",
+            "certificate_hash": "cd2995d001da01d5053c672dd7ba9c8d71f14160"
+          }
+        },
+        {
+          "client_id": "652535089659-9ceafamlahtbk285ipf4fb7f4lruokhc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUaOSicsU7l7z2Sqp2h1pgHmC-pEkqRSY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652535089659-9ceafamlahtbk285ipf4fb7f4lruokhc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,6 +13,7 @@ class _ScanQrPageState extends State<ScanQrPage> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   bool _flashOn = false;
+
   // late final BarcodeProvider provider;
 
   // In order to get hot reload to work we need to pause the camera if the platform
@@ -104,23 +105,37 @@ class _ScanQrPageState extends State<ScanQrPage> {
   }
 
   void _onQRViewCreated(QRViewController controller) {
-
     setState(() {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        final provider = Provider.of<BarcodeProvider>(context, listen: false);
         result = scanData;
         print("result.code: " + result!.code);
-        barcodeModel = _decodeToString(result!.code);
-        provider.data = barcodeModel;
-        print("isi restaurant_id: " + provider.data.restaurantId);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => RestaurantHomePage()));
         _checkingUrl(result!);
       });
     });
+  }
+
+  _checkingUrl(Barcode result) {
+    if (result.code.contains("http") || result.code.contains("https")) {
+      bool _validURL = Uri.tryParse(result.code)?.hasAbsolutePath ?? false;
+      if (_validURL) {
+        return _launchUrl(result.code);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('invalid barcode')),
+        );
+      }
+    } else {
+      final provider = Provider.of<BarcodeProvider>(context, listen: false);
+      barcodeModel = _decodeToString(result.code);
+      provider.data = barcodeModel;
+      print("isi restaurant_id: " + provider.data.restaurantId);
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => RestaurantHomePage()));
+    }
+
   }
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
@@ -148,16 +163,6 @@ class _ScanQrPageState extends State<ScanQrPage> {
     Map<String, dynamic> valueBarcode = jsonDecode(result);
     var value = BarcodeModel.fromJson(valueBarcode);
     return value;
-  }
-
-  _checkingUrl(Barcode result) {
-    if (result.code.isNotEmpty || result.code != "") {
-      if (result.code.contains("http") || result.code.contains("https")) {
-        return _launchUrl(result.code);
-      }
-    } else {
-      return ScanQrPage();
-    }
   }
 
   _launchUrl(String validUrl) async {
