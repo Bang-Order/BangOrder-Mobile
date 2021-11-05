@@ -1,6 +1,6 @@
 part of 'utils.dart';
 
-String currency(int number) => NumberFormat.currency(
+String currency(double number) => NumberFormat.currency(
       locale: 'id',
       decimalDigits: 0,
       name: '',

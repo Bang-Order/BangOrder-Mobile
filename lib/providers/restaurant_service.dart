@@ -1,6 +1,6 @@
 part of 'providers.dart';
 
-class RestaurantServiceProvider with ChangeNotifier {
+class RestaurantServiceProvider extends ChangeNotifier {
   late Restaurant _data;
   bool _loading = true;
 

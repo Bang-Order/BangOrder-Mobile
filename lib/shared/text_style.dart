@@ -63,7 +63,6 @@ TextStyle menuPriceStyle = TextStyle(
   fontFamily: 'Manrope',
 );
 
-
 TextStyle editTextCheckoutStyle = TextStyle(
   fontSize: 12,
   fontWeight: FontWeight.w300,
@@ -174,4 +173,22 @@ TextStyle recommendationPrice = TextStyle(
   color: blackColor,
   fontWeight: FontWeight.bold,
   fontFamily: 'Manrope',
+);
+
+TextStyle successPopupTitle = GoogleFonts.manrope(
+  color: blackColor,
+  fontWeight: FontWeight.w500,
+  fontSize: 14,
+);
+
+TextStyle successPopupMessage = GoogleFonts.manrope(
+  color: blackColor,
+  fontWeight: FontWeight.w300,
+  fontSize: 12,
+);
+
+TextStyle successPopupButton = GoogleFonts.manrope(
+  color: blackColor,
+  fontWeight: FontWeight.w500,
+  fontSize: 18,
 );

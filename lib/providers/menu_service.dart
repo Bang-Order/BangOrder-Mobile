@@ -1,6 +1,6 @@
 part of 'providers.dart';
 
-class MenuServiceProvider with ChangeNotifier {
+class MenuServiceProvider extends ChangeNotifier {
   late List<Menu> _data;
   bool _loading = true;
 

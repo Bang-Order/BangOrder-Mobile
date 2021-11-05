@@ -26,8 +26,8 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  int getTotalPrice() {
-    int total = 0;
+  double getTotalPrice() {
+    double total = 0;
     items.forEach((element) {
       total += element.price * element.quantity;
     });
