@@ -4,10 +4,10 @@ class RestaurantServiceProvider extends ChangeNotifier {
   late Restaurant _data;
   bool _loading = true;
 
-  void init() {
+  void init(context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       loading = true;
-      _data = await getRestaurantInfo();
+      _data = await getRestaurantInfo(context);
       loading = false;
     });
   }

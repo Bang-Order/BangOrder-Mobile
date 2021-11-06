@@ -4,10 +4,10 @@ class MenuCategoryServiceProvider extends ChangeNotifier {
   late List<MenuCategory> _data;
   bool _loading = true;
 
-  void init() {
+  void init(context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       loading = true;
-      _data = await getMenuCategory();
+      _data = await getMenuCategory(context);
       loading = false;
     });
   }

@@ -1,8 +1,25 @@
 part of '../pages.dart';
 
-class RestaurantHomePage extends StatelessWidget {
+class RestaurantHomePage extends StatefulWidget {
+
+  @override
+  State<RestaurantHomePage> createState() => _RestaurantHomePageState();
+}
+
+class _RestaurantHomePageState extends State<RestaurantHomePage> {
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<RestaurantServiceProvider>(context, listen: false).init(context);
+    Provider.of<MenuCategoryServiceProvider>(context, listen: false).init(context);
+    Provider.of<MenuServiceProvider>(context, listen: false).init(context);
+    Provider.of<OrderProvider>(context, listen: false);
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: lightGrayColor,
       appBar: AppBar(
@@ -16,10 +33,12 @@ class RestaurantHomePage extends StatelessWidget {
         ),
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
+            Icons.arrow_back_outlined,
             color: blackColor,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         actions: [
           Container(

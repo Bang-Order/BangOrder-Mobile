@@ -17,6 +17,8 @@ part 'menu_category_service.dart';
 
 part 'menu_service.dart';
 
+part 'barcode_service.dart';
+
 part 'order.dart';
 
 part 'detail_page.dart';

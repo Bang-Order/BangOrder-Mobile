@@ -11,6 +11,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => RestaurantServiceProvider()),
       ChangeNotifierProvider(create: (_) => MenuCategoryServiceProvider()),
       ChangeNotifierProvider(create: (_) => MenuServiceProvider()),
+      ChangeNotifierProvider(create: (_) => BarcodeProvider()),
       ChangeNotifierProvider(create: (_) => OrderProvider()),
       ChangeNotifierProvider(create: (_) => DetailPageProvider()),
     ],
@@ -19,17 +20,17 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
+
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    Provider.of<RestaurantServiceProvider>(context, listen: false).init();
-    Provider.of<MenuCategoryServiceProvider>(context, listen: false).init();
-    Provider.of<MenuServiceProvider>(context, listen: false).init();
   }
 
   @override
@@ -40,7 +41,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: yellowColor,
       ),
-      home: RestaurantHomePage(),
+      home: LandingPage(),
     );
   }
 }

@@ -14,6 +14,13 @@ TextStyle categoryHeaderStyle = TextStyle(
   fontFamily: 'Manrope',
 );
 
+TextStyle scanTipsStyle = TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+  fontFamily: 'Manrope',
+);
+
 TextStyle menuTitleStyle = TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.w500,
@@ -164,7 +171,7 @@ TextStyle recommendationTitle = TextStyle(
 TextStyle recommendationPrice = TextStyle(
   fontSize: 12,
   color: blackColor,
-  fontWeight: FontWeight.w300,
+  fontWeight: FontWeight.bold,
   fontFamily: 'Manrope',
 );
 
