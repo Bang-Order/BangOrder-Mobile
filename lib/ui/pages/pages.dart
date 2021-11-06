@@ -16,7 +16,6 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/link.dart';
 import 'dart:convert';
 import 'package:lottie/lottie.dart';
 

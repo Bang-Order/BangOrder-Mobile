@@ -14,6 +14,7 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
     Provider.of<RestaurantServiceProvider>(context, listen: false).init(context);
     Provider.of<MenuCategoryServiceProvider>(context, listen: false).init(context);
     Provider.of<MenuServiceProvider>(context, listen: false).init(context);
+    Provider.of<OrderProvider>(context, listen: false);
   }
 
   @override
@@ -32,7 +33,7 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
         ),
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
+            Icons.arrow_back_outlined,
             color: blackColor,
           ),
           onPressed: () {

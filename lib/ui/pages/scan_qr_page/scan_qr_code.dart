@@ -13,8 +13,7 @@ class _ScanQrPageState extends State<ScanQrPage> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   bool _flashOn = false;
-
-  // late final BarcodeProvider provider;
+  int scanOnce = 0;
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -110,8 +109,11 @@ class _ScanQrPageState extends State<ScanQrPage> {
     });
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        result = scanData;
-        print("result.code: " + result!.code);
+        if (scanOnce != 1) {
+          result = scanData;
+          print("result.code: " + result!.code);
+        }
+        scanOnce++;
         _checkingUrl(result!);
       });
     });
@@ -131,7 +133,8 @@ class _ScanQrPageState extends State<ScanQrPage> {
       final provider = Provider.of<BarcodeProvider>(context, listen: false);
       barcodeModel = _decodeToString(result.code);
       provider.data = barcodeModel;
-      print("isi restaurant_id: " + provider.data.restaurantId);
+      // print("isi restaurant_id: " + provider.data.restaurantId);
+      // print("isi restaurant_table_id: " + provider.data.restaurantTableId);
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => RestaurantHomePage()));
     }
