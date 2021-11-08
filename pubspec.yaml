@@ -41,6 +41,8 @@ dependencies:
   google_fonts: ^2.1.0
   webview_flutter: ^2.1.2
   firebase_dynamic_links: ^3.0.1
+  sqflite: ^2.0.0+4
+  path: ^1.8.0
 
 dev_dependencies:
   flutter_test:

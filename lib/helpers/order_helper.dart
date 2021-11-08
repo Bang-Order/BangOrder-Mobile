@@ -14,10 +14,11 @@ class OrderHelper {
       orderItems: provider.items,
     );
 
-    if (isOrderNull() && !await postOrder(order, _context)) {
+    if (isOrderNull() && !await OrderServices(_context).postOrder(order)) {
       Popup(_context).showFailedPopup();
+    } else {
+      Popup(_context).showSuccessPopup();
     }
-    Popup(_context).showSuccessPopup();
   }
 
   bool isOrderNull() {

@@ -1,25 +1,24 @@
 part of '../pages.dart';
 
 class RestaurantHomePage extends StatefulWidget {
-
   @override
   State<RestaurantHomePage> createState() => _RestaurantHomePageState();
 }
 
 class _RestaurantHomePageState extends State<RestaurantHomePage> {
-
   @override
   void initState() {
     super.initState();
-    Provider.of<RestaurantServiceProvider>(context, listen: false).init(context);
-    Provider.of<MenuCategoryServiceProvider>(context, listen: false).init(context);
+    Provider.of<RestaurantServiceProvider>(context, listen: false)
+        .init(context);
+    Provider.of<MenuCategoryServiceProvider>(context, listen: false)
+        .init(context);
     Provider.of<MenuServiceProvider>(context, listen: false).init(context);
     Provider.of<OrderProvider>(context, listen: false);
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: lightGrayColor,
       appBar: AppBar(
@@ -37,7 +36,13 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
             color: blackColor,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (context) => LandingPage(
+                        key: Key('LandingPage'),
+                      )),
+              (route) => false,
+            );
           },
         ),
         actions: [

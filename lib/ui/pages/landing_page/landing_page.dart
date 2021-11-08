@@ -32,14 +32,10 @@ class LandingPage extends StatelessWidget {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                height: 100,
-                color: Colors.transparent,
-                child: Lottie.asset(
-                  'assets/images/homepage_animation.json',
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.35,
-                ),
+              child: Lottie.asset(
+                'assets/images/homepage_animation.json',
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.35,
               ),
             ),
             Container(
@@ -53,9 +49,11 @@ class LandingPage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ScanQrPage()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ScanQrPage(),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.only(top: 16, bottom: 16),
