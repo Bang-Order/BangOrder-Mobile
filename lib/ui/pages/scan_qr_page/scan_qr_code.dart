@@ -27,6 +27,13 @@ class _ScanQrPageState extends State<ScanQrPage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initDynamicLinks();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // return Container();
     return Scaffold(
@@ -109,36 +116,149 @@ class _ScanQrPageState extends State<ScanQrPage> {
     });
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        if (scanOnce != 1) {
+        while (scanOnce == 0) {
           result = scanData;
           print("result.code: " + result!.code);
+          _checkingUrl(result!);
+          controller.pauseCamera();
+          break;
         }
         scanOnce++;
-        _checkingUrl(result!);
+        controller.resumeCamera();
       });
     });
   }
 
-  _checkingUrl(Barcode result) {
-    if (result.code.contains("http") || result.code.contains("https")) {
-      bool _validURL = Uri.tryParse(result.code)?.hasAbsolutePath ?? false;
-      if (_validURL) {
-        return _launchUrl(result.code);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('invalid barcode')),
-        );
-      }
+  void initDynamicLinks() async {
+    print("masuk initDynamicLink");
+
+    final PendingDynamicLinkData? data =
+        await FirebaseDynamicLinks.instance.getInitialLink();
+    final Uri? deepLink = data?.link;
+
+    if (deepLink != null) {
+      final provider = Provider.of<BarcodeProvider>(context, listen: false);
+      print("deeplink data if dua : " + deepLink.toString());
+      print(
+          "query param satu : " + deepLink.queryParameters.values.elementAt(0));
+      print("query param dua : " + deepLink.queryParameters.values.last);
     } else {
+      print("deeplink null");
+    }
+  }
+
+  _checkingUrl(Barcode result) async {
+    if (result.code.contains("https")) {
+      print("masuk ke if satu");
+      // _launchUrl(result.code);
+
+      final PendingDynamicLinkData? data = await FirebaseDynamicLinks.instance.getInitialLink();
+      final Uri? deepLink = data?.link;
+
+      if (deepLink != null) {
+        final provider = Provider.of<BarcodeProvider>(context, listen: false);
+        print("deeplink data if dua : " + deepLink.toString());
+        print(
+            "query param satu : " + deepLink.queryParameters.values.elementAt(0));
+        print("query param dua : " + deepLink.queryParameters.values.last);
+      } else {
+        print("deeplink null");
+      }
+
+      // initDynamicLinks();
+      // final provider = Provider.of<BarcodeProvider>(context, listen: false);
+      // barcodeModel = _decodeToString(result.code);
+      // provider.data = barcodeModel;
+
+      // FirebaseDynamicLinks.instance.onLink(
+      //     onSuccess: (PendingDynamicLinkData? dynamicLink) async {
+      //   final Uri? deeplink = dynamicLink!.link;
+      //
+      //   if (deeplink != null) {
+      //     print("deeplink data if satu : " + deeplink.toString());
+      //   } else {
+      //     print("deeplink data : null");
+      //   }
+      // }, onError: (OnLinkErrorException e) async {
+      //   print('onLinkError');
+      //   print(e.message);
+      // });
+      //
+      // final PendingDynamicLinkData? data =
+      //     await FirebaseDynamicLinks.instance.getInitialLink();
+      // final Uri? deepLink = data?.link;
+      //
+      // if (deepLink != null) {
+      //   final provider = Provider.of<BarcodeProvider>(context, listen: false);
+      //   print("deeplink data if dua : " + deepLink.toString());
+      //   print("query param satu : " +
+      //       deepLink.queryParameters.values.elementAt(0));
+      //   print("query param dua : " + deepLink.queryParameters.values.last);
+      //   print("deeplink path : " + deepLink.path);
+      //   // barcodeModel = _stringToJson(deepLink.queryParameters.values.toString());
+      //   // print("barcode Model : " + barcodeModel.toString());
+      //   // barcodeModel = deepLink.queryParameters.values as BarcodeModel;
+      //   // provider.data = barcodeModel;
+      //   // print("provider data: " + provider.data.toString());
+      //   // Get.toNamed(deepLink.queryParameters.values.toString());
+      //   // Navigator.pushNamed(context, deepLink.path);
+      //   // Navigator.of(context).pushNamed('/home');
+      //   // Navigator.pushNamed(context, '/home', arguments: deepLink.queryParameters.values.last);
+      // }
+    }
+
+    // if (result.code.contains("http") || result.code.contains("https")) {
+    //   bool _validURL = Uri.tryParse(result.code)?.hasAbsolutePath ?? false;
+    //   if (_validURL) {
+    //     return _launchUrl(result.code);
+    //   } else {
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(content: Text('invalid barcode')),
+    //     );
+    //   }
+    // }
+
+    else {
+      print("masuk ke else");
       final provider = Provider.of<BarcodeProvider>(context, listen: false);
       barcodeModel = _decodeToString(result.code);
       provider.data = barcodeModel;
       // print("isi restaurant_id: " + provider.data.restaurantId);
       // print("isi restaurant_table_id: " + provider.data.restaurantTableId);
+      // Navigator.of(context).pushNamed('/home');
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => RestaurantHomePage()));
-    }
 
+      // FirebaseDynamicLinks.instance.onLink(
+      //     onSuccess: (PendingDynamicLinkData? dynamicLink) async {
+      //   final Uri? deeplink = dynamicLink!.link;
+      //
+      //   if (deeplink != null) {
+      //     print("deeplink data if satu : " + deeplink.toString());
+      //   } else {
+      //     print("deeplink data : null");
+      //   }
+      // }, onError: (OnLinkErrorException e) async {
+      //   print('onLinkError');
+      //   print(e.message);
+      // });
+      //
+      // final PendingDynamicLinkData? data =
+      //     await FirebaseDynamicLinks.instance.getInitialLink();
+      // final Uri? deepLink = data?.link;
+      //
+      // if (deepLink != null) {
+      //   print("deeplink data if dua : " + deepLink.toString());
+      //   print("query param satu : " +
+      //       deepLink.queryParameters.values.elementAt(0));
+      //   print("query param dua : " + deepLink.queryParameters.values.last);
+      //   print("deeplink path : " + deepLink.path);
+      //   // Get.toNamed(deepLink.queryParameters.values.toString());
+      //   // Navigator.pushNamed(context, deepLink.path);
+      //   Navigator.of(context).pushNamed('/home');
+      //   // Navigator.pushNamed(context, '/home', arguments: deepLink.queryParameters.values.last);
+      // }
+    }
   }
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
@@ -158,19 +278,20 @@ class _ScanQrPageState extends State<ScanQrPage> {
 
   _decodeToString(String result) {
     String resultDecoded = utf8.decode(base64.decode(result));
-    barcodeModel = _stringToJson(resultDecoded);
+    // barcodeModel = _stringToJson(resultDecoded);
     return barcodeModel;
   }
 
-  _stringToJson(String result) {
-    Map<String, dynamic> valueBarcode = jsonDecode(result);
-    var value = BarcodeModel.fromJson(valueBarcode);
-    return value;
-  }
+  // _stringToJson(String result) {
+  //   Map<String, dynamic> valueBarcode = jsonDecode(result);
+  //   var value = BarcodeModel.fromJson(valueBarcode);
+  //   return value;
+  // }
 
   _launchUrl(String validUrl) async {
     String url = validUrl;
     if (await canLaunch(url)) {
+      initDynamicLinks();
       await launch(url);
     } else {
       throw 'Could not launch $url';

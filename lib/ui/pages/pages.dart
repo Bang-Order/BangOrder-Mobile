@@ -18,6 +18,7 @@ import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
 import 'package:lottie/lottie.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 part 'checkout_page/checkout_page.dart';
 

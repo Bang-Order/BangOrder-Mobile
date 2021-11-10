@@ -8,9 +8,12 @@ class RestaurantHomePage extends StatefulWidget {
 
 class _RestaurantHomePageState extends State<RestaurantHomePage> {
 
+  late BarcodeModel barcodeModel;
+
   @override
   void initState() {
     super.initState();
+    initDynamicsLink();
     Provider.of<RestaurantServiceProvider>(context, listen: false).init(context);
     Provider.of<MenuCategoryServiceProvider>(context, listen: false).init(context);
     Provider.of<MenuServiceProvider>(context, listen: false).init(context);
@@ -19,7 +22,6 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: lightGrayColor,
       appBar: AppBar(
@@ -90,5 +92,34 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: RHPFabCheckout(),
     );
+  }
+
+  void initDynamicsLink() async {
+    print("masuk initDynamicLink");
+
+    final PendingDynamicLinkData? data =
+    await FirebaseDynamicLinks.instance.getInitialLink();
+    final Uri? deepLink = data?.link;
+
+    if (deepLink != null) {
+      final provider = Provider.of<BarcodeProvider>(context, listen: false);
+      print("deeplink data if dua : " + deepLink.toString());
+      print(
+          "query param satu : " + deepLink.queryParameters.values.first);
+      print("query param dua : " + deepLink.queryParameters.values.last);
+      print("list deeplink : " + jsonEncode(deepLink.queryParameters.values.toList()));
+      barcodeModel = _stringToJson(jsonEncode(deepLink.queryParameters.values.toList()));
+      // print("barcode Model : " + barcodeModel.toString());
+      // provider.data = barcodeModel;
+    } else {
+      print("deeplink null");
+    }
+  }
+
+  _stringToJson(String result) {
+    Map<String, dynamic> valueBarcode = result as Map<String, dynamic>;
+    var value = BarcodeModel.fromJson(jsonDecode(result));
+    print(value);
+    return value;
   }
 }
