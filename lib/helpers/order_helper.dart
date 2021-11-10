@@ -26,11 +26,13 @@ class OrderHelper {
     return provider.getCurrentOrder == null;
   }
 
-  void orderSuccess(response) {
-    final data = jsonDecode(response)['data'];
-    final finalResponse = OrderResponse.fromJson(data);
-    final provider = Provider.of<OrderProvider>(_context, listen: false);
-    provider.setCurrentOrder = finalResponse;
+  void orderSuccess(OrderResponse response) {
+    final orderProvider = Provider.of<OrderProvider>(_context, listen: false);
+    orderProvider.setCurrentOrder = response;
+    HistoryHelper.insertOrder(
+      response,
+      Provider.of<RestaurantServiceProvider>(_context, listen: false).data,
+    );
     print('ORDER SUCCESSFULLY CREATED');
 
     // final cart = Provider.of<CartProvider>(_context, listen: false);

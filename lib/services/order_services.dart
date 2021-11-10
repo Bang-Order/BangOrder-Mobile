@@ -14,7 +14,9 @@ class OrderServices {
       body: jsonEncode(order.toJson(order)),
     );
     if (response.statusCode == 201) {
-      OrderHelper(_context).orderSuccess(response.body);
+      final data = jsonDecode(response.body)['data'];
+      final finalResponse = OrderResponse.fromJson(data);
+      OrderHelper(_context).orderSuccess(finalResponse);
       return true;
     } else {
       return false;

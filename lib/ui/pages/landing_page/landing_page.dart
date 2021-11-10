@@ -67,7 +67,14 @@ class LandingPage extends StatelessWidget {
                     height: 16,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => OrderHistoryPage(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       side: BorderSide(color: yellowColor, width: 1.0),
                       padding: EdgeInsets.only(top: 16, bottom: 16),

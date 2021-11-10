@@ -6,9 +6,16 @@ class RestaurantHomePage extends StatefulWidget {
 }
 
 class _RestaurantHomePageState extends State<RestaurantHomePage> {
+  RefreshController _refreshController =
+  RefreshController(initialRefresh: false);
+
   @override
   void initState() {
     super.initState();
+    _callApi();
+  }
+
+  _callApi() {
     Provider.of<RestaurantServiceProvider>(context, listen: false)
         .init(context);
     Provider.of<MenuCategoryServiceProvider>(context, listen: false)
@@ -23,11 +30,12 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
       backgroundColor: lightGrayColor,
       appBar: AppBar(
         title: Consumer<RestaurantServiceProvider>(
-          builder: (context, restaurant, _) => !restaurant.loading
+          builder: (context, restaurant, _) =>
+          !restaurant.loading
               ? Text(
-                  restaurant.data.name,
-                  style: appbarTextStyle,
-                )
+            restaurant.data.name,
+            style: appbarTextStyle,
+          )
               : Text(''),
         ),
         leading: IconButton(
@@ -38,10 +46,12 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
           onPressed: () {
             Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (context) => LandingPage(
-                        key: Key('LandingPage'),
-                      )),
-              (route) => false,
+                builder: (context) =>
+                    LandingPage(
+                      key: Key('LandingPage'),
+                    ),
+              ),
+                  (route) => false,
             );
           },
         ),
@@ -53,21 +63,25 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
                 Icons.search_rounded,
                 color: blackColor,
               ),
-              onPressed: () => showSearch(
-                context: context,
-                delegate: SearchPage<Menu>(
-                  items: Provider.of<MenuServiceProvider>(
-                    context,
-                    listen: false,
-                  ).data,
-                  builder: (t) => MenuCard(
-                    data: t,
+              onPressed: () =>
+                  showSearch(
                     context: context,
-                    prevPage: PageEnum.SearchPage,
+                    delegate: SearchPage<Menu>(
+                      items: Provider
+                          .of<MenuServiceProvider>(
+                        context,
+                        listen: false,
+                      )
+                          .data,
+                      builder: (t) =>
+                          MenuCard(
+                            data: t,
+                            context: context,
+                            prevPage: PageEnum.SearchPage,
+                          ),
+                      filter: (t) => [t.name],
+                    ),
                   ),
-                  filter: (t) => [t.name],
-                ),
-              ),
             ),
           ),
         ],
