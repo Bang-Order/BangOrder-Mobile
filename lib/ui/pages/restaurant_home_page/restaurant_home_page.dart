@@ -1,21 +1,25 @@
 part of '../pages.dart';
 
 class RestaurantHomePage extends StatefulWidget {
-
   @override
   State<RestaurantHomePage> createState() => _RestaurantHomePageState();
 }
 
 class _RestaurantHomePageState extends State<RestaurantHomePage> {
-
   late BarcodeModel barcodeModel;
 
   @override
   void initState() {
     super.initState();
-    initDynamicsLink();
-    Provider.of<RestaurantServiceProvider>(context, listen: false).init(context);
-    Provider.of<MenuCategoryServiceProvider>(context, listen: false).init(context);
+    x();
+  }
+
+  void x() async {
+    await initDynamicsLink();
+    Provider.of<RestaurantServiceProvider>(context, listen: false)
+        .init(context);
+    Provider.of<MenuCategoryServiceProvider>(context, listen: false)
+        .init(context);
     Provider.of<MenuServiceProvider>(context, listen: false).init(context);
     Provider.of<OrderProvider>(context, listen: false);
   }
@@ -94,32 +98,27 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
     );
   }
 
-  void initDynamicsLink() async {
+  Future<void> initDynamicsLink() async {
     print("masuk initDynamicLink");
 
     final PendingDynamicLinkData? data =
-    await FirebaseDynamicLinks.instance.getInitialLink();
+        await FirebaseDynamicLinks.instance.getInitialLink();
     final Uri? deepLink = data?.link;
 
     if (deepLink != null) {
       final provider = Provider.of<BarcodeProvider>(context, listen: false);
       print("deeplink data if dua : " + deepLink.toString());
-      print(
-          "query param satu : " + deepLink.queryParameters.values.first);
+      print("query param satu : " + deepLink.queryParameters.values.first);
       print("query param dua : " + deepLink.queryParameters.values.last);
-      print("list deeplink : " + jsonEncode(deepLink.queryParameters.values.toList()));
-      barcodeModel = _stringToJson(jsonEncode(deepLink.queryParameters.values.toList()));
-      // print("barcode Model : " + barcodeModel.toString());
-      // provider.data = barcodeModel;
+      print("list deeplink : " +
+          jsonEncode(deepLink.queryParameters.values.toList()));
+      barcodeModel = new BarcodeModel(
+          restaurantId: deepLink.queryParameters.values.first,
+          restaurantTableId: deepLink.queryParameters.values.last);
+      provider.data = barcodeModel;
     } else {
       print("deeplink null");
     }
   }
 
-  _stringToJson(String result) {
-    Map<String, dynamic> valueBarcode = result as Map<String, dynamic>;
-    var value = BarcodeModel.fromJson(jsonDecode(result));
-    print(value);
-    return value;
-  }
 }
