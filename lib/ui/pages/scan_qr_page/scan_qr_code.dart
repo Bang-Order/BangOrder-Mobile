@@ -109,36 +109,31 @@ class _ScanQrPageState extends State<ScanQrPage> {
     });
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        if (scanOnce != 1) {
+        while (scanOnce == 0) {
           result = scanData;
           print("result.code: " + result!.code);
+          _checkingUrl(result!);
+          controller.pauseCamera();
+          break;
         }
         scanOnce++;
-        _checkingUrl(result!);
+        controller.resumeCamera();
       });
     });
   }
 
-  _checkingUrl(Barcode result) {
-    if (result.code.contains("http") || result.code.contains("https")) {
-      bool _validURL = Uri.tryParse(result.code)?.hasAbsolutePath ?? false;
-      if (_validURL) {
-        return _launchUrl(result.code);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('invalid barcode')),
-        );
-      }
+  _checkingUrl(Barcode result) async {
+    if (result.code.contains("https")) {
+      print("masuk ke if satu");
+      _launchUrl(result.code);
     } else {
+      print("masuk ke else");
       final provider = Provider.of<BarcodeProvider>(context, listen: false);
       barcodeModel = _decodeToString(result.code);
       provider.data = barcodeModel;
-      // print("isi restaurant_id: " + provider.data.restaurantId);
-      // print("isi restaurant_table_id: " + provider.data.restaurantTableId);
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => RestaurantHomePage()));
     }
-
   }
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {

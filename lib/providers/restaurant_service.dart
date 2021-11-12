@@ -7,7 +7,7 @@ class RestaurantServiceProvider extends ChangeNotifier {
   void init(context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       loading = true;
-      _data = await getRestaurantInfo(context);
+      _data = await RestaurantServices(context).getRestaurantInfo();
       loading = false;
     });
   }
