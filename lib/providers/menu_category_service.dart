@@ -7,7 +7,7 @@ class MenuCategoryServiceProvider extends ChangeNotifier {
   void init(context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       loading = true;
-      _data = await getMenuCategory(context);
+      _data = await MenuCategoryServices(context).getMenuCategory();
       loading = false;
     });
   }

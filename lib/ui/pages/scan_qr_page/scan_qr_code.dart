@@ -125,8 +125,6 @@ class _ScanQrPageState extends State<ScanQrPage> {
   _checkingUrl(Barcode result) async {
     if (result.code.contains("https")) {
       print("masuk ke if satu");
-      print('SCAN QR CODE A Navigator.of(context): ' +
-          Navigator.of(context).toString());
       _launchUrl(result.code);
     } else {
       print("masuk ke else");

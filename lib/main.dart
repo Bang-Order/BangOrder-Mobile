@@ -1,12 +1,11 @@
 import 'package:bangorder_mobile/providers/providers.dart';
 import 'package:bangorder_mobile/shared/shared.dart';
 import 'package:bangorder_mobile/ui/pages/pages.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

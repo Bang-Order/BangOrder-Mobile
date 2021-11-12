@@ -15,12 +15,13 @@ class OrderStatusPage extends StatelessWidget {
             color: blackColor,
           ),
           onPressed: () {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => RestaurantHomePage(),
-              ),
-              (route) => false,
-            );
+            // Navigator.of(context).pushAndRemoveUntil(
+            //   MaterialPageRoute(
+            //     builder: (context) => RestaurantHomePage(),
+            //   ),
+            //   (route) => false,
+            // );
+            Navigator.pop(context);
           },
         ),
       ),

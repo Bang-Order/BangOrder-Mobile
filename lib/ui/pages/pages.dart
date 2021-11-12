@@ -1,5 +1,4 @@
 import 'package:bangorder_mobile/helpers/helpers.dart';
-import 'package:bangorder_mobile/main.dart';
 import 'package:bangorder_mobile/models/models.dart';
 import 'package:bangorder_mobile/providers/providers.dart';
 import 'package:bangorder_mobile/shared/shared.dart';
@@ -7,11 +6,10 @@ import 'package:bangorder_mobile/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:provider/provider.dart';
 import 'package:bangorder_mobile/ui/widgets/widgets.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:search_page/search_page.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -66,3 +64,5 @@ part 'scan_qr_page/scan_qr_code.dart';
 part 'landing_page/landing_page.dart';
 
 part 'webview/webview.dart';
+
+part 'order_history_page/order_history_page.dart';

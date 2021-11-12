@@ -22,3 +22,4 @@ part 'barcode_service.dart';
 part 'order.dart';
 
 part 'detail_page.dart';
+part 'order_history.dart';

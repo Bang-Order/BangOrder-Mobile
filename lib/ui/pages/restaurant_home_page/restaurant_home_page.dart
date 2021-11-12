@@ -6,7 +6,8 @@ class RestaurantHomePage extends StatefulWidget {
 }
 
 class _RestaurantHomePageState extends State<RestaurantHomePage> {
-  late BarcodeModel barcodeModel;
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -19,6 +20,10 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
   void x() async {
     await getInitialLink();
     await getOnLink();
+    _callApi();
+  }
+
+  _callApi() {
     Provider.of<RestaurantServiceProvider>(context, listen: false)
         .init(context);
     Provider.of<MenuCategoryServiceProvider>(context, listen: false)
@@ -46,7 +51,14 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
             color: blackColor,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => LandingPage(
+                  key: Key('LandingPage'),
+                ),
+              ),
+              (route) => false,
+            );
           },
         ),
         actions: [
@@ -113,9 +125,10 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
           print("query param satu : " + deepLink.queryParameters.values.first);
           print("query param dua : " + deepLink.queryParameters.values.last);
           print('FINALY THE DEEPLINK VARIABLE IS NOT NULL :D');
-          barcodeModel = new BarcodeModel(
-              restaurantId: deepLink.queryParameters.values.first,
-              restaurantTableId: deepLink.queryParameters.values.last);
+          BarcodeModel barcodeModel = new BarcodeModel(
+            restaurantId: deepLink.queryParameters.values.first,
+            restaurantTableId: deepLink.queryParameters.values.last,
+          );
           provider.data = barcodeModel;
         }
       },
@@ -148,7 +161,7 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
       print("query param dua : " + deepLink.queryParameters.values.last);
       print("list deeplink : " +
           jsonEncode(deepLink.queryParameters.values.toList()));
-      barcodeModel = new BarcodeModel(
+      BarcodeModel barcodeModel = new BarcodeModel(
           restaurantId: deepLink.queryParameters.values.first,
           restaurantTableId: deepLink.queryParameters.values.last);
       provider.data = barcodeModel;

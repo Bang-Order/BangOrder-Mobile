@@ -1,24 +1,28 @@
 part of 'models.dart';
 
 class OrderResponse {
+  String? restaurantName;
+  String? image;
   int id;
   int tableId;
   String transactionId;
   String invoiceUrl;
   String orderStatus;
-  List<Menu> orderItems;
+  List<Menu>? orderItems;
   String totalPrice;
-  DateTime createdAt;
+  String? createdAt;
 
   OrderResponse({
+    this.restaurantName,
+    this.image,
     required this.id,
     required this.tableId,
     required this.transactionId,
     required this.invoiceUrl,
     required this.orderStatus,
-    required this.orderItems,
+    this.orderItems,
     required this.totalPrice,
-    required this.createdAt,
+    this.createdAt,
   });
 
   factory OrderResponse.fromJson(Map<String, dynamic> json) => OrderResponse(
@@ -31,6 +35,29 @@ class OrderResponse {
           json["order_items"].map((x) => Menu.orderResponse(x)),
         ),
         totalPrice: json["total_price"],
-        createdAt: DateTime.parse(json["created_at"]),
+        createdAt: DateTime.parse(json["created_at"]).toString(),
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "table_id": tableId,
+        "transaction_id": transactionId,
+        "invoice_url": invoiceUrl,
+        "order_status": orderStatus,
+        "order_items": List<Menu>.from(orderItems!.map((x) => x.toJson(x))),
+        "total_price": totalPrice,
+        "created_at": createdAt!,
+      };
+
+  Map<String, dynamic> fromHistory(Restaurant restaurant) => {
+        "id": id,
+        "restaurant_name": restaurant.name,
+        "image": restaurant.image,
+        "table_id": tableId,
+        "transaction_id": transactionId,
+        "invoice_url": invoiceUrl,
+        "order_status": orderStatus,
+        "total_price": totalPrice,
+        "created_at": createdAt!,
+      };
 }
