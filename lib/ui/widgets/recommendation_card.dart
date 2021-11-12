@@ -54,7 +54,7 @@ class RecommendationCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    currency(data.price),
+                    currency(double.parse(data.price)),
                     style: data.isAvailable == 1
                         ? recommendationPrice
                         : menuPriceTransparentStyle,

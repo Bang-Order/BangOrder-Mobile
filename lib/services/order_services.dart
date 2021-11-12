@@ -6,8 +6,9 @@ class OrderServices {
   OrderServices(this._context);
 
   Future postOrder(Order order) async {
+    final provider = Provider.of<BarcodeProvider>(_context, listen: false);
     final response = await http.post(
-      Uri.parse(BaseURL + '1/orders'),
+      Uri.parse(BaseURL + 'restaurants/${provider.data.restaurantId}/orders'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

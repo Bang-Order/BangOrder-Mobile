@@ -8,13 +8,16 @@ class RestaurantServices {
   Future<Restaurant> getRestaurantInfo() async {
     final provider = Provider.of<BarcodeProvider>(_context, listen: false);
     final url = BaseURL +
+        'restaurants/' +
         provider.data.restaurantId +
         '/tables/' +
         provider.data.restaurantTableId;
-    print('restaurantId: '+provider.data.restaurantId.toString());
-    print('restaurantTableId: '+provider.data.restaurantTableId.toString());
+    print('restaurantId: ' + provider.data.restaurantId.toString());
+    print('restaurantTableId: ' + provider.data.restaurantTableId.toString());
 
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(url), headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },);
 
     if (response.statusCode == 200) {
       print(response.body);

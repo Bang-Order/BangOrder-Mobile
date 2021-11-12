@@ -7,8 +7,16 @@ class MenuCategoryServices {
 
   Future<List<MenuCategory>> getMenuCategory() async {
     final provider = Provider.of<BarcodeProvider>(_context, listen: false);
-    final url = BaseURL + provider.data.restaurantId + '/menu-categories';
-    final response = await http.get(Uri.parse(url));
+    final url = BaseURL +
+        'restaurants/' +
+        provider.data.restaurantId +
+        '/menu-categories';
+    final response = await http.get(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
 
     if (response.statusCode == 200) {
       return _parseMenuCategories(response.body);
