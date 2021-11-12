@@ -132,7 +132,7 @@ class _ScanQrPageState extends State<ScanQrPage> {
       barcodeModel = _decodeToString(result.code);
       provider.data = barcodeModel;
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => RestaurantHomePage()));
+          MaterialPageRoute(builder: (context) => HomePage()));
     }
   }
 

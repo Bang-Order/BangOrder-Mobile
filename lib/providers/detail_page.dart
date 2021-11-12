@@ -7,7 +7,7 @@ class DetailPageProvider extends ChangeNotifier {
   late int _initQuantity;
   late String _initNotes;
 
-  void init({
+  DetailPageProvider({
     required Menu menu,
     required PageEnum previousPage,
     required context,
@@ -68,7 +68,7 @@ class DetailPageProvider extends ChangeNotifier {
         break;
       case PageEnum.SearchPage:
         Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => RestaurantHomePage()),
+          MaterialPageRoute(builder: (context) => HomePage()),
           (route) => false,
         );
         break;

@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MenuServiceProvider()),
         ChangeNotifierProvider(create: (_) => BarcodeProvider()),
         ChangeNotifierProvider(create: (_) => OrderProvider()),
-        ChangeNotifierProvider(create: (_) => DetailPageProvider()),
+        ChangeNotifierProvider(create: (_) => HomePageProvider(context)),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (_) => LandingPage(),
-          '/home': (_) => RestaurantHomePage(),
+          '/home': (_) => HomePage(),
         },
       ),
     );
