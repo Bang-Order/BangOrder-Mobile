@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
         if (deepLink != null) {
           _insertDataToBarcodeProvider(deepLink);
         } else {
-          print("deeplink null");
+          print("deeplink null from _getOnLink()");
         }
       },
       onError: (OnLinkErrorException e) async {
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
     if (deepLink != null) {
       _insertDataToBarcodeProvider(deepLink);
     } else {
-      print("deeplink null");
+      print("deeplink null from _getInitialLink()");
     }
   }
 

@@ -42,7 +42,7 @@ class SPSearchItemCard extends StatelessWidget {
             ),
             SizedBox(height: 5),
             Text(
-              currency(_menu.price),
+              currency(double.parse(_menu.price)),
               style: _menu.isAvailable == 1
                   ? recommendationPrice
                   : menuPriceTransparentStyle,

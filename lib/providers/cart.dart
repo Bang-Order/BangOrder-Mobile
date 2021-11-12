@@ -29,7 +29,7 @@ class CartProvider with ChangeNotifier {
   double getTotalPrice() {
     double total = 0;
     items.forEach((element) {
-      total += element.price * element.quantity;
+      total += double.parse(element.price) * element.quantity;
     });
     return total;
   }

@@ -37,7 +37,7 @@ class DetailPageProvider extends ChangeNotifier {
   }
 
   double pricing() {
-    return menu.price * menu.quantity;
+    return double.parse(menu.price) * menu.quantity;
   }
 
   void removeMenuInCart(context) {

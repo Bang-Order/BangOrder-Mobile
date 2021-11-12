@@ -211,7 +211,7 @@ class CheckoutPage extends StatelessWidget with WidgetsBindingObserver {
         ),
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
+            Icons.arrow_back_outlined,
             color: blackColor,
           ),
           onPressed: () {
@@ -264,7 +264,7 @@ class CheckoutPage extends StatelessWidget with WidgetsBindingObserver {
                 ),
                 Consumer<CartProvider>(
                   builder: (context, cart, _) => Text(
-                    currency(cart.getTotalPrice().toDouble()),
+                    currency(cart.getTotalPrice()),
                     style: totalPriceOrder,
                   ),
                 )
@@ -330,7 +330,7 @@ class CheckoutPage extends StatelessWidget with WidgetsBindingObserver {
                       "Edit",
                       style: editTextCheckoutStyle,
                     ),
-                    onTap: () =>DetailPageHelper(context).navigate(
+                    onTap: () => DetailPageHelper(context).navigate(
                       menu: data,
                       previousPage: PageEnum.CheckoutPage,
                     ),
@@ -340,10 +340,11 @@ class CheckoutPage extends StatelessWidget with WidgetsBindingObserver {
             ),
           ),
           Expanded(
+            flex: 2,
             child: Container(
               alignment: Alignment.centerRight,
               child: Text(
-                currency(data.price * data.quantity).toString(),
+                currency(double.parse(data.price) * data.quantity).toString(),
                 style: menuTitleStyle,
               ),
             ),

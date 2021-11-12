@@ -7,14 +7,16 @@ class MenuServices {
 
   Future<List<Menu>> getMenu() async {
     final provider = Provider.of<BarcodeProvider>(_context, listen: false);
-    final url = BaseURL + provider.data.restaurantId + '/menus';
-    final response = await http.get(Uri.parse(url));
+    final url = BaseURL + 'restaurants/' + provider.data.restaurantId + '/menus';
+    final response = await http.get(Uri.parse(url), headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },);
 
     if (response.statusCode == 200) {
       print("MENUUU: "+ response.body);
       return _parseMenus(response.body);
     } else {
-      throw Exception('Failed to load data' + response.statusCode.toString());
+      throw Exception('Failed to load data ' + response.statusCode.toString());
     }
   }
 

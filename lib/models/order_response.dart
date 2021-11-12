@@ -35,7 +35,7 @@ class OrderResponse {
           json["order_items"].map((x) => Menu.orderResponse(x)),
         ),
         totalPrice: json["total_price"],
-        createdAt: DateTime.parse(json["created_at"]).toString(),
+        createdAt: json["created_at"],
       );
 
   Map<String, dynamic> toJson() => {
