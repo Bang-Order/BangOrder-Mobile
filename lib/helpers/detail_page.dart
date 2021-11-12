@@ -6,12 +6,18 @@ class DetailPageHelper {
   DetailPageHelper(this._context);
 
   void navigate({required Menu menu, required PageEnum previousPage}) {
-    final provider = Provider.of<DetailPageProvider>(_context, listen: false);
-    provider.init(menu: menu, previousPage: previousPage, context: _context);
-
     Navigator.push(
       _context,
-      MaterialPageRoute(builder: (context) => DetailMenuPage()),
+      MaterialPageRoute(
+        builder: (context) => ChangeNotifierProvider(
+          create: (_) => DetailPageProvider(
+            menu: menu,
+            previousPage: previousPage,
+            context: _context,
+          ),
+          child: DetailMenuPage(),
+        ),
+      ),
     );
   }
 }

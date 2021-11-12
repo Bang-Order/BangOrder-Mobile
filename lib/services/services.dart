@@ -3,17 +3,17 @@ import 'dart:convert';
 import 'package:bangorder_mobile/helpers/helpers.dart';
 import 'package:bangorder_mobile/models/models.dart';
 import 'package:bangorder_mobile/providers/providers.dart';
-import 'package:bangorder_mobile/providers/providers.dart';
-import 'package:bangorder_mobile/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-part 'get_menu_category.dart';
+part 'menu_services.dart';
 
-part 'get_menu.dart';
+part 'menu_category_services.dart';
 
-part 'post_order.dart';
+part 'restaurant_services.dart';
 
-part 'get_restaurant_info.dart';
+part 'order_services.dart';
 
-const APIURL = 'http://192.168.1.4/BangOrder-Backend/public/api/';
+const BaseURL =
+    'http://192.168.0.5/project/BangOrder-Backend/public/api/restaurants/';

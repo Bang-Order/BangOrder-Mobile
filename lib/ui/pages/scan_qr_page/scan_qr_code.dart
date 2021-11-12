@@ -123,19 +123,16 @@ class _ScanQrPageState extends State<ScanQrPage> {
   }
 
   _checkingUrl(Barcode result) async {
-    if (result.code.contains("https://bangorder.page.link/")) {
+    if (result.code.contains("https")) {
       print("masuk ke if satu");
       _launchUrl(result.code);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('invalid url')),
-      );
-      // print("masuk ke else");
-      // final provider = Provider.of<BarcodeProvider>(context, listen: false);
-      // barcodeModel = _decodeToString(result.code);
-      // provider.data = barcodeModel;
-      // Navigator.push(context,
-      //     MaterialPageRoute(builder: (context) => RestaurantHomePage()));
+      print("masuk ke else");
+      final provider = Provider.of<BarcodeProvider>(context, listen: false);
+      barcodeModel = _decodeToString(result.code);
+      provider.data = barcodeModel;
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => HomePage()));
     }
   }
 
@@ -170,7 +167,6 @@ class _ScanQrPageState extends State<ScanQrPage> {
     String url = validUrl;
     if (await canLaunch(url)) {
       await launch(url);
-      SystemNavigator.pop();
     } else {
       throw 'Could not launch $url';
     }

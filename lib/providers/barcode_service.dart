@@ -9,5 +9,4 @@ class BarcodeProvider with ChangeNotifier {
     _data = value;
     notifyListeners();
   }
-
 }

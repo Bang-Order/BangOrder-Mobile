@@ -1,27 +1,29 @@
 part of '../pages.dart';
 
-class RestaurantHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  State<RestaurantHomePage> createState() => _RestaurantHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _RestaurantHomePageState extends State<RestaurantHomePage> {
-  late BarcodeModel barcodeModel;
-
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    print('Navigator.of(context): ' + Navigator.of(context).toString());
     super.initState();
-    x();
+    _init();
   }
 
-  void x() async {
-    await initDynamicsLink();
-    Provider.of<RestaurantServiceProvider>(context, listen: false)
-        .init(context);
-    Provider.of<MenuCategoryServiceProvider>(context, listen: false)
-        .init(context);
-    Provider.of<MenuServiceProvider>(context, listen: false).init(context);
-    Provider.of<OrderProvider>(context, listen: false);
+  void _init() async {
+    await _getInitialLink();
+    await _getOnLink();
+    final barcode = Provider.of<BarcodeProvider>(context, listen: false);
+    final restaurant = Provider.of<RestaurantServiceProvider>(
+      context,
+      listen: false,
+    );
+    if (barcode.data.restaurantId != restaurant.data.id.toString()) {
+      _callApi();
+    }
   }
 
   @override
@@ -43,7 +45,15 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
             color: blackColor,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => LandingPage(
+                  key: Key('LandingPage'),
+                ),
+              ),
+              (route) => false,
+            );
+            // Navigator.popUntil(context, ModalRoute.withName('/'));
           },
         ),
         actions: [
@@ -98,27 +108,60 @@ class _RestaurantHomePageState extends State<RestaurantHomePage> {
     );
   }
 
-  Future<void> initDynamicsLink() async {
-    print("masuk initDynamicLink");
+  _callApi() {
+    Provider.of<RestaurantServiceProvider>(
+      context,
+      listen: false,
+    ).init(context);
+    Provider.of<MenuCategoryServiceProvider>(
+      context,
+      listen: false,
+    ).init(context);
+    Provider.of<MenuServiceProvider>(
+      context,
+      listen: false,
+    ).init(context);
+    Provider.of<OrderProvider>(
+      context,
+      listen: false,
+    );
+  }
 
+  Future<void> _getOnLink() async {
+    FirebaseDynamicLinks.instance.onLink(
+      onSuccess: (PendingDynamicLinkData? dynamicLink) async {
+        final Uri? deepLink = dynamicLink?.link;
+
+        if (deepLink != null) {
+          _insertDataToBarcodeProvider(deepLink);
+        } else {
+          print("deeplink null");
+        }
+      },
+      onError: (OnLinkErrorException e) async {
+        print(e.message);
+      },
+    );
+  }
+
+  Future<void> _getInitialLink() async {
     final PendingDynamicLinkData? data =
         await FirebaseDynamicLinks.instance.getInitialLink();
     final Uri? deepLink = data?.link;
 
     if (deepLink != null) {
-      final provider = Provider.of<BarcodeProvider>(context, listen: false);
-      print("deeplink data if dua : " + deepLink.toString());
-      print("query param satu : " + deepLink.queryParameters.values.first);
-      print("query param dua : " + deepLink.queryParameters.values.last);
-      print("list deeplink : " +
-          jsonEncode(deepLink.queryParameters.values.toList()));
-      barcodeModel = new BarcodeModel(
-          restaurantId: deepLink.queryParameters.values.first,
-          restaurantTableId: deepLink.queryParameters.values.last);
-      provider.data = barcodeModel;
+      _insertDataToBarcodeProvider(deepLink);
     } else {
       print("deeplink null");
     }
   }
 
+  void _insertDataToBarcodeProvider(deepLink) {
+    final provider = Provider.of<BarcodeProvider>(context, listen: false);
+    BarcodeModel barcodeModel = new BarcodeModel(
+      restaurantId: deepLink.queryParameters.values.first,
+      restaurantTableId: deepLink.queryParameters.values.last,
+    );
+    provider.data = barcodeModel;
+  }
 }

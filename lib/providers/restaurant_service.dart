@@ -1,13 +1,13 @@
 part of 'providers.dart';
 
 class RestaurantServiceProvider extends ChangeNotifier {
-  late Restaurant _data;
+  Restaurant _data = Restaurant();
   bool _loading = true;
 
   void init(context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       loading = true;
-      _data = await getRestaurantInfo(context);
+      _data = await RestaurantServices(context).getRestaurantInfo();
       loading = false;
     });
   }
