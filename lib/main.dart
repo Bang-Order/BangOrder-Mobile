@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MenuServiceProvider()),
         ChangeNotifierProvider(create: (_) => BarcodeProvider()),
         ChangeNotifierProvider(create: (_) => OrderProvider()),
-        ChangeNotifierProvider(create: (_) => DetailPageProvider()),
+        // ChangeNotifierProvider(create: (_) => DetailPageProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

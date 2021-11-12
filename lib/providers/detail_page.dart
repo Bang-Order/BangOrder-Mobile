@@ -7,6 +7,14 @@ class DetailPageProvider extends ChangeNotifier {
   late int _initQuantity;
   late String _initNotes;
 
+  DetailPageProvider({
+    required Menu menu,
+    required PageEnum previousPage,
+    required context,
+  }) {
+    init(menu: menu, previousPage: previousPage, context: context);
+  }
+
   void init({
     required Menu menu,
     required PageEnum previousPage,

@@ -1,13 +1,5 @@
 part of 'models.dart';
 
-// To parse this JSON data, do
-// final barcode = barcodeFromJson(jsonString);
-
-BarcodeModel barcodeModelFromJson(String str) =>
-    BarcodeModel.fromJson(json.decode(str));
-
-String barcodeModelToJson(BarcodeModel data) => json.encode(data.toJson());
-
 class BarcodeModel {
   BarcodeModel({
     required this.restaurantId,
@@ -27,3 +19,8 @@ class BarcodeModel {
         "table_id": restaurantTableId,
       };
 }
+
+BarcodeModel barcodeModelFromJson(String str) =>
+    BarcodeModel.fromJson(json.decode(str));
+
+String barcodeModelToJson(BarcodeModel data) => json.encode(data.toJson());
