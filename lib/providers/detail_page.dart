@@ -12,14 +12,6 @@ class DetailPageProvider extends ChangeNotifier {
     required PageEnum previousPage,
     required context,
   }) {
-    init(menu: menu, previousPage: previousPage, context: context);
-  }
-
-  void init({
-    required Menu menu,
-    required PageEnum previousPage,
-    required context,
-  }) {
     final cart = Provider.of<CartProvider>(context, listen: false);
     if (cart.isContainData(menu)) {
       this.menu = cart.getItemById(menu);
@@ -76,7 +68,7 @@ class DetailPageProvider extends ChangeNotifier {
         break;
       case PageEnum.SearchPage:
         Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => RestaurantHomePage()),
+          MaterialPageRoute(builder: (context) => HomePage()),
           (route) => false,
         );
         break;
