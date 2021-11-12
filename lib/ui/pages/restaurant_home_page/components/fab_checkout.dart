@@ -52,7 +52,7 @@ class RHPFabCheckout extends StatelessWidget {
                           style: fabCheckoutStyle,
                         ),
                         Text(
-                          currency(cart.getTotalPrice().toDouble()),
+                          currency(cart.getTotalPrice()),
                           style: fabTotalStyle,
                         ),
                       ],

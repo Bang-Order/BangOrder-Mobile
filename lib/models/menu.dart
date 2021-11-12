@@ -5,7 +5,7 @@ class Menu {
   int categoryId;
   String name;
   String description;
-  double price;
+  String price;
   String image;
   int isAvailable;
   int isRecommended;
@@ -18,7 +18,7 @@ class Menu {
     this.categoryId = 0,
     this.name = '',
     this.description = '',
-    this.price = 0,
+    this.price = '',
     this.image = '',
     this.isAvailable = 0,
     this.isRecommended = 0,
@@ -31,7 +31,7 @@ class Menu {
       id: json['id'],
       name: json['name'],
       description: json['description'],
-      price: double.parse(json['price'].toString()),
+      price: json['price'].toString(),
       image: json['image'],
       isAvailable: json['is_available'],
       isRecommended: json['is_recommended'],
@@ -42,7 +42,7 @@ class Menu {
     return Menu(
       name: json['name'],
       quantity: json['quantity'],
-      price: double.parse(json['price']),
+      price: json['price'],
     );
   }
 

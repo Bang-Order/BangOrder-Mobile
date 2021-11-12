@@ -123,16 +123,19 @@ class _ScanQrPageState extends State<ScanQrPage> {
   }
 
   _checkingUrl(Barcode result) async {
-    if (result.code.contains("https")) {
+    if (result.code.contains("https://bangorder.page.link/")) {
       print("masuk ke if satu");
       _launchUrl(result.code);
     } else {
-      print("masuk ke else");
-      final provider = Provider.of<BarcodeProvider>(context, listen: false);
-      barcodeModel = _decodeToString(result.code);
-      provider.data = barcodeModel;
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => RestaurantHomePage()));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('invalid url')),
+      );
+      // print("masuk ke else");
+      // final provider = Provider.of<BarcodeProvider>(context, listen: false);
+      // barcodeModel = _decodeToString(result.code);
+      // provider.data = barcodeModel;
+      // Navigator.push(context,
+      //     MaterialPageRoute(builder: (context) => RestaurantHomePage()));
     }
   }
 

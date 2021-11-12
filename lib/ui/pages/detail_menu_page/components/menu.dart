@@ -36,7 +36,7 @@ class DetailMenuPageMenuInfo extends StatelessWidget {
             ),
             SizedBox(width: 18),
             Text(
-              currency(provider.menu.price),
+              currency(double.parse(provider.menu.price)),
               style: detailMenuStyle,
             ),
           ],
