@@ -125,6 +125,8 @@ class _ScanQrPageState extends State<ScanQrPage> {
   _checkingUrl(Barcode result) async {
     if (result.code.contains("https")) {
       print("masuk ke if satu");
+      print('SCAN QR CODE A Navigator.of(context): ' +
+          Navigator.of(context).toString());
       _launchUrl(result.code);
     } else {
       print("masuk ke else");
@@ -167,7 +169,6 @@ class _ScanQrPageState extends State<ScanQrPage> {
     String url = validUrl;
     if (await canLaunch(url)) {
       await launch(url);
-      SystemNavigator.pop();
     } else {
       throw 'Could not launch $url';
     }
