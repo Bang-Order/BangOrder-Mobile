@@ -1,6 +1,6 @@
 part of '../../pages.dart';
 
-class RecommendationMenu extends StatelessWidget {
+class HomepageRecommendationMenuComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<MenuServiceProvider>(

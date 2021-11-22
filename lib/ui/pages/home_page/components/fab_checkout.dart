@@ -1,7 +1,7 @@
 part of '../../pages.dart';
 
-class RHPFabCheckout extends StatelessWidget {
-  const RHPFabCheckout({Key? key}) : super(key: key);
+class HomepageFABComponent extends StatelessWidget {
+  const HomepageFABComponent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
