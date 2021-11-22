@@ -7,6 +7,13 @@ TextStyle appbarTextStyle = TextStyle(
   fontFamily: 'Manrope',
 );
 
+TextStyle appbarScrolledTextStyle = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+  fontFamily: 'Manrope',
+);
+
 TextStyle categoryHeaderStyle = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w500,

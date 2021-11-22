@@ -1,7 +1,7 @@
 part of '../../pages.dart';
 
-class RHPCategoryHeaderList extends StatelessWidget {
-  const RHPCategoryHeaderList({Key? key}) : super(key: key);
+class HomepageMenuCategoryComponent extends StatelessWidget {
+  const HomepageMenuCategoryComponent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
