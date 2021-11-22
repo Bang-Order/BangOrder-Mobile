@@ -21,13 +21,13 @@ class WebViewPage extends StatelessWidget {
             color: blackColor,
           ),
           onPressed: () {
-            Navigator.popUntil(context, ModalRoute.withName('/home'));
-            // Navigator.of(context).pushAndRemoveUntil(
-            //   MaterialPageRoute(
-            //     builder: (context) => HomePage(),
-            //   ),
-            //       (route) => route.isFirst,
-            // );
+            // Navigator.popUntil(context, ModalRoute.withName('/home'));
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => HomePage(),
+              ),
+                  (route) => route.isFirst,
+            );
             // Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
           },
         ),

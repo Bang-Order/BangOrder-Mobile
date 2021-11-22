@@ -35,7 +35,7 @@ class OrderHelper {
     );
     print('ORDER SUCCESSFULLY CREATED');
 
-    // final cart = Provider.of<CartProvider>(_context, listen: false);
-    // cart.items=[];
+    final cart = Provider.of<CartProvider>(_context, listen: false);
+    cart.items=[];
   }
 }

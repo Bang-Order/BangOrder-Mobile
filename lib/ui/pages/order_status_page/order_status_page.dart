@@ -11,7 +11,7 @@ class OrderStatusPage extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
+            Icons.arrow_back_outlined,
             color: blackColor,
           ),
           onPressed: () {

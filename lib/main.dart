@@ -32,6 +32,8 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (_) => LandingPage(),
           '/home': (_) => HomePage(),
+          '/kZwrvR1p5eeVtcWU6': (_) => HomePage(),
+          '/6hEqt7pc5DeTRbVGA': (_) => HomePage(),
         },
       ),
     );
