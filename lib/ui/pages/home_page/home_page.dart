@@ -7,6 +7,38 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          HomepageAppbarComponent(
+            innerBoxIsScrolled: innerBoxIsScrolled,
+            key: Key(
+              'HomepageAppbarComponent',
+            ),
+          ),
+        ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              RestaurantInfo(),
+              SizedBox(height: 8),
+              HomepageRecommendationMenuComponent(),
+              SizedBox(height: 8),
+              HomepageMenuCategoryComponent(),
+              SizedBox(height: 100),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: HomepageFABComponent(
+        key: Key('HomepageFABComponent'),
+      ),
+    );
+  }
+
+  @override
   void initState() {
     print('Navigator.of(context): ' + Navigator.of(context).toString());
     super.initState();
@@ -24,88 +56,6 @@ class _HomePageState extends State<HomePage> {
     if (barcode.data.restaurantId != restaurant.data.id.toString()) {
       _callApi();
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: lightGrayColor,
-      appBar: AppBar(
-        title: Consumer<RestaurantServiceProvider>(
-          builder: (context, restaurant, _) => !restaurant.loading
-              ? Text(
-                  restaurant.data.name,
-                  style: appbarTextStyle,
-                )
-              : Text(''),
-        ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_outlined,
-            color: blackColor,
-          ),
-          onPressed: () {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => LandingPage(
-                  key: Key('LandingPage'),
-                ),
-              ),
-              (route) => false,
-            );
-            // Navigator.popUntil(context, ModalRoute.withName('/'));
-          },
-        ),
-        actions: [
-          Container(
-            margin: EdgeInsets.only(right: 4),
-            child: IconButton(
-              icon: Icon(
-                Icons.search_rounded,
-                color: blackColor,
-              ),
-              onPressed: () => showSearch(
-                context: context,
-                delegate: SearchPage<Menu>(
-                  items: Provider.of<MenuServiceProvider>(
-                    context,
-                    listen: false,
-                  ).data,
-                  builder: (t) => MenuCard(
-                    data: t,
-                    context: context,
-                    prevPage: PageEnum.SearchPage,
-                  ),
-                  filter: (t) => [t.name],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              controller: ScrollController(),
-              child: Column(
-                children: [
-                  RestaurantInfo(),
-                  SizedBox(height: 8),
-                  RecommendationMenu(),
-                  SizedBox(height: 8),
-                  RHPCategoryHeaderList(),
-                  SizedBox(height: 100),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: RHPFabCheckout(),
-    );
   }
 
   _callApi() {
