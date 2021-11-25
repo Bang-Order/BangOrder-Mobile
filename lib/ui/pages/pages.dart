@@ -1,13 +1,18 @@
+import 'package:bangorder_mobile/controller/_controller.dart';
 import 'package:bangorder_mobile/helpers/helpers.dart';
 import 'package:bangorder_mobile/models/models.dart';
 import 'package:bangorder_mobile/providers/providers.dart';
 import 'package:bangorder_mobile/shared/shared.dart';
 import 'package:bangorder_mobile/utils/utils.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:provider/provider.dart';
 import 'package:bangorder_mobile/ui/widgets/widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -67,3 +72,5 @@ part 'landing_page/landing_page.dart';
 part 'webview/webview.dart';
 
 part 'order_history_page/order_history_page.dart';
+
+part 'order_status_page/components/card.dart';

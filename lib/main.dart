@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/home',
         routes: {
           '/': (_) => LandingPage(),
-          '/home': (_) => HomePage(),
+          // '/home': (_) => HomePage(),
+          '/home': (_) => OrderStatusPage(),
         },
       ),
     );

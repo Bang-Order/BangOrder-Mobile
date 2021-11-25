@@ -199,3 +199,15 @@ TextStyle successPopupButton = GoogleFonts.manrope(
   fontWeight: FontWeight.w500,
   fontSize: 18,
 );
+
+TextStyle orderStatusTitleStyle = GoogleFonts.manrope(
+  color: blackColor,
+  fontWeight: FontWeight.bold,
+  fontSize: 24,
+);
+
+TextStyle orderStatusSubTitleStyle = GoogleFonts.manrope(
+  color: blackColor,
+  fontWeight: FontWeight.w300,
+  fontSize: 18,
+);
