@@ -5,6 +5,7 @@ class OrderStatusPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double statusBarHeight = MediaQuery.of(context).padding.top;
     final controller = Get.put(OrderStatusPageController());
 
     return Scaffold(
@@ -29,13 +30,14 @@ class OrderStatusPage extends StatelessWidget {
                   title: 'Belum Bayar',
                   lottieURL:
                       'https://assets1.lottiefiles.com/packages/lf20_yZpLO2.json',
+                  statusBarHeight: statusBarHeight,
                 );
               case 'antri':
                 return OrderStatusPageCardComponent(
                   title: 'Sedang Antri',
-                  lottieURL:
-                      'https://assets7.lottiefiles.com/packages/lf20_lcmpz7.json',
+                  lottieLocal: 'assets/images/antrian.json',
                   subTitle: 'Pesanan Anda masih berada dalam antrian masak.',
+                  statusBarHeight: statusBarHeight,
                 );
               case 'dimasak':
                 return OrderStatusPageCardComponent(
@@ -43,6 +45,7 @@ class OrderStatusPage extends StatelessWidget {
                   lottieURL:
                       'https://assets7.lottiefiles.com/packages/lf20_jbt4j3ea.json',
                   subTitle: 'Pesanan Anda masih dimasak. Mohon tunggu sebentar',
+                  statusBarHeight: statusBarHeight,
                 );
               case 'selesai':
                 return OrderStatusPageCardComponent(
@@ -50,6 +53,7 @@ class OrderStatusPage extends StatelessWidget {
                   lottieURL:
                       'https://assets1.lottiefiles.com/private_files/lf30_fqBsFC.json',
                   subTitle: 'Pesanan Anda sudah diantar. Selamat menikmati!',
+                  statusBarHeight: statusBarHeight,
                 );
               default:
                 return SizedBox();
@@ -62,5 +66,3 @@ class OrderStatusPage extends StatelessWidget {
     );
   }
 }
-
-// return controller.showPage(snapshot.data.snapshot.value);

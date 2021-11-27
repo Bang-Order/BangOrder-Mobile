@@ -30,7 +30,21 @@ TextStyle scanTipsStyle = TextStyle(
 
 TextStyle menuTitleStyle = TextStyle(
   fontSize: 14,
+  fontWeight: FontWeight.w400,
+  color: blackColor,
+  fontFamily: 'Manrope',
+);
+
+TextStyle orderedMenuPriceStyle = TextStyle(
+  fontSize: 14,
   fontWeight: FontWeight.w500,
+  color: blackColor,
+  fontFamily: 'Manrope',
+);
+
+TextStyle menuSubTitleStyle = TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.w300,
   color: blackColor,
   fontFamily: 'Manrope',
 );
@@ -210,4 +224,16 @@ TextStyle orderStatusSubTitleStyle = GoogleFonts.manrope(
   color: blackColor,
   fontWeight: FontWeight.w300,
   fontSize: 18,
+);
+
+TextStyle orderListStyle = GoogleFonts.manrope(
+  color: blackColor,
+  fontWeight: FontWeight.w800,
+  fontSize: 18,
+);
+
+TextStyle orderListHeaderStyle = GoogleFonts.manrope(
+  color: blackColor,
+  fontWeight: FontWeight.w500,
+  fontSize: 12,
 );

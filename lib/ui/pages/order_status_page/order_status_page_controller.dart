@@ -1,6 +1,8 @@
-part of '_controller.dart';
+part of '../../../controller/_controller.dart';
 
 class OrderStatusPageController extends GetxController {
+  final orderController = Get.put(OrderController());
+
   void backOnClick() {
     // Navigator.of(context).pushAndRemoveUntil(
     //   MaterialPageRoute(
@@ -11,12 +13,25 @@ class OrderStatusPageController extends GetxController {
     Get.back();
   }
 
+  String getTotalPrice() {
+    return orderController.getOrderResponse!.totalPrice;
+  }
+
+  List<Menu>? getOrderedMenu() {
+    return orderController.getOrderResponse!.orderItems;
+  }
+
   DatabaseReference get getReference {
+    final barcode = Get.put(BarcodeController());
+    print('barcode.data.restaurantId: ' + barcode.data.restaurantId);
+    print('order.getOrderResponse!.id: ' +
+        orderController.getOrderResponse!.id.toString());
+
     return FirebaseDatabase(databaseURL: getURL)
         .reference()
         .child("orders")
-        .child('1')
-        .child('6')
+        .child(barcode.data.restaurantId)
+        .child(orderController.getOrderResponse!.id.toString())
         .child('order_status');
   }
 

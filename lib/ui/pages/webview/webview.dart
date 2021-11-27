@@ -21,7 +21,9 @@ class WebViewPage extends StatelessWidget {
             color: blackColor,
           ),
           onPressed: () {
-            Navigator.popUntil(context, ModalRoute.withName('/home'));
+            // Navigator.popUntil(context, ModalRoute.withName('/home'));
+            Get.to(OrderStatusPage());
+
             // Navigator.of(context).pushAndRemoveUntil(
             //   MaterialPageRoute(
             //     builder: (context) => HomePage(),

@@ -13,4 +13,9 @@ part 'menu_card.dart';
 part 'recommendation_card.dart';
 
 part 'popup.dart';
+
 part 'history_card.dart';
+
+part 'total_price.dart';
+
+part 'ordered_menu_card.dart';
