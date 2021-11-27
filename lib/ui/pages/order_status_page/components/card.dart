@@ -18,6 +18,8 @@ class OrderStatusPageCardComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OrderStatusPageController());
+
     return Stack(
       children: [
         Container(
@@ -26,11 +28,13 @@ class OrderStatusPageCardComponent extends StatelessWidget {
               AppBar().preferredSize.height -
               statusBarHeight,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 title,
                 style: orderStatusTitleStyle,
+                textAlign: TextAlign.center,
               ),
               SizedBox(height: 32),
               if (lottieURL != null)
@@ -44,12 +48,25 @@ class OrderStatusPageCardComponent extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.3,
                 ),
               if (subTitle != null) ...[
-                SizedBox(height: 32),
                 Text(
                   subTitle!,
                   style: orderStatusSubTitleStyle,
                   textAlign: TextAlign.center,
                 ),
+              ],
+              if (title == 'Belum Bayar') ...[
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Get.to(WebViewPage(
+                        title: "Payment",
+                        selectedUrl: controller.getInvoiceURL(),
+                      ));
+                    },
+                    child: Text('Bayar Sekarang'),
+                  ),
+                )
               ],
             ],
           ),

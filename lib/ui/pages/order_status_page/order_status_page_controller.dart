@@ -10,7 +10,7 @@ class OrderStatusPageController extends GetxController {
     //   ),
     //   (route) => false,
     // );
-    Get.back();
+    Get.offAll(HomePage());
   }
 
   String getTotalPrice() {
@@ -19,6 +19,10 @@ class OrderStatusPageController extends GetxController {
 
   List<Menu>? getOrderedMenu() {
     return orderController.getOrderResponse!.orderItems;
+  }
+
+  String getInvoiceURL(){
+    return orderController.getOrderResponse!.invoiceUrl;
   }
 
   DatabaseReference get getReference {

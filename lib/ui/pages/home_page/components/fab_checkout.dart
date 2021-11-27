@@ -5,35 +5,23 @@ class HomepageFABComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orderController = Get.put(OrderController());
+
     return Consumer<CartProvider>(
-      builder: (context, cart, _) => cart.items.isNotEmpty
+      builder: (context, cart, _) => orderController.getOrderResponse != null
           ? ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CheckoutPage(),
-                  ),
-                );
+                Get.to(OrderStatusPage());
               },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Checkout',
-                    style: fabCheckoutStyle,
-                  ),
-                  Text(
-                    currency(cart.getTotalPrice().toDouble()),
-                    style: fabTotalStyle,
-                  ),
-                ],
+              child: Text(
+                'Status Pesanan',
+                style: fabCheckoutStyle,
               ),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                maximumSize: Size.fromWidth(
+                fixedSize: Size.fromWidth(
                   MediaQuery.of(context).size.width * 0.9,
                 ),
                 padding: EdgeInsets.symmetric(
@@ -42,7 +30,43 @@ class HomepageFABComponent extends StatelessWidget {
                 ),
               ),
             )
-          : SizedBox(),
+          : cart.items.isNotEmpty
+              ? ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CheckoutPage(),
+                      ),
+                    );
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Checkout',
+                        style: fabCheckoutStyle,
+                      ),
+                      Text(
+                        currency(cart.getTotalPrice().toDouble()),
+                        style: fabTotalStyle,
+                      ),
+                    ],
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    maximumSize: Size.fromWidth(
+                      MediaQuery.of(context).size.width * 0.9,
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 16,
+                    ),
+                  ),
+                )
+              : SizedBox(),
     );
   }
 }

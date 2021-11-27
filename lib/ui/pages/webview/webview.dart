@@ -17,12 +17,12 @@ class WebViewPage extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_outlined,
+            Icons.close_rounded,
             color: blackColor,
           ),
           onPressed: () {
             // Navigator.popUntil(context, ModalRoute.withName('/home'));
-            Get.to(OrderStatusPage());
+            Get.offAll(OrderStatusPage());
 
             // Navigator.of(context).pushAndRemoveUntil(
             //   MaterialPageRoute(
