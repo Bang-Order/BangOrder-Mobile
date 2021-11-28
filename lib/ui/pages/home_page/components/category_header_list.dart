@@ -1,8 +1,13 @@
 part of '../../pages.dart';
 
-class HomepageMenuCategoryComponent extends StatelessWidget {
+class HomepageMenuCategoryComponent extends StatefulWidget {
   const HomepageMenuCategoryComponent({Key? key}) : super(key: key);
 
+  @override
+  State<HomepageMenuCategoryComponent> createState() => _HomepageMenuCategoryComponentState();
+}
+
+class _HomepageMenuCategoryComponentState extends State<HomepageMenuCategoryComponent> {
   @override
   Widget build(BuildContext context) {
     return Consumer<MenuCategoryServiceProvider>(

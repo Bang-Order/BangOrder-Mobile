@@ -6,6 +6,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,16 +21,32 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              RestaurantInfo(),
-              SizedBox(height: 8),
-              HomepageRecommendationMenuComponent(),
-              SizedBox(height: 8),
-              HomepageMenuCategoryComponent(),
-              SizedBox(height: 100),
-            ],
+        body: SmartRefresher(
+          controller: _refreshController,
+          enablePullUp: true,
+          header: WaterDropHeader(
+            waterDropColor: yellowColor,
+          ),
+          onRefresh: () async {
+            //monitor fetch data from network
+            await Future.delayed(Duration(milliseconds: 1000));
+
+            _callApi();
+            if (mounted) setState(() {});
+            _refreshController.refreshCompleted();
+
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                RestaurantInfo(),
+                SizedBox(height: 8),
+                HomepageRecommendationMenuComponent(),
+                SizedBox(height: 8),
+                HomepageMenuCategoryComponent(),
+                SizedBox(height: 100),
+              ],
+            ),
           ),
         ),
       ),

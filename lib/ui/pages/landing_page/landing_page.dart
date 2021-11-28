@@ -32,14 +32,18 @@ class LandingPage extends StatelessWidget {
             ),
             Expanded(
               flex: 1,
-              child: Lottie.asset(
-                'assets/images/homepage_animation.json',
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.35,
+              child: Container(
+                color: Colors.transparent,
+                child: Lottie.asset(
+                  'assets/images/scan_to_order.json',
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.35,
+
+                ),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 20),
+              margin: EdgeInsets.only(bottom: 20, top: 80),
               width: MediaQuery.of(context).size.width,
               color: Colors.transparent,
               child: Column(
