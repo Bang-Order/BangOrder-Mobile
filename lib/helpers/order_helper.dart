@@ -22,20 +22,24 @@ class OrderHelper {
   }
 
   bool isOrderNull() {
-    final provider = Provider.of<OrderProvider>(_context, listen: false);
-    return provider.getCurrentOrder == null;
+    final order = Get.put(OrderController());
+    // final provider = Provider.of<OrderProvider>(_context, listen: false);
+    // return provider.getCurrentOrder == null;
+    return order.getOrderResponse == null;
   }
 
   void orderSuccess(OrderResponse response) {
-    final orderProvider = Provider.of<OrderProvider>(_context, listen: false);
-    orderProvider.setCurrentOrder = response;
+    // final orderProvider = Provider.of<OrderProvider>(_context, listen: false);
+    // orderProvider.setCurrentOrder = response;
+    final order = Get.put(OrderController());
+    order.setOrderResponse = response;
     HistoryHelper.insertOrder(
       response,
       Provider.of<RestaurantServiceProvider>(_context, listen: false).data,
     );
     print('ORDER SUCCESSFULLY CREATED');
 
-    // final cart = Provider.of<CartProvider>(_context, listen: false);
-    // cart.items=[];
+    final cart = Provider.of<CartProvider>(_context, listen: false);
+    cart.items=[];
   }
 }

@@ -11,17 +11,23 @@ class WebViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      // return WebView(
+      //   initialUrl: selectedUrl,
+      //   javascriptMode: JavascriptMode.unrestricted,
+      // );
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_outlined,
+            Icons.close_rounded,
             color: blackColor,
           ),
           onPressed: () {
-            Navigator.popUntil(context, ModalRoute.withName('/home'));
+            // Navigator.popUntil(context, ModalRoute.withName('/home'));
+            Get.offAll(HomePage());
+
             // Navigator.of(context).pushAndRemoveUntil(
             //   MaterialPageRoute(
             //     builder: (context) => HomePage(),
