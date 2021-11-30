@@ -35,7 +35,7 @@ class HomepageRecommendationMenuComponent extends StatelessWidget {
           ],
         ),
       )
-          : HomepageLoadingScreen(),
+          : SizedBox(),
     );
   }
 }

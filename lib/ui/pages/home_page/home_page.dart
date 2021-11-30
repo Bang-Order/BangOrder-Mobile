@@ -8,6 +8,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+  bool _enabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +31,9 @@ class _HomePageState extends State<HomePage> {
           onRefresh: () async {
             //monitor fetch data from network
             await Future.delayed(Duration(milliseconds: 1000));
-
-            _callApi();
+            CallApi().callApi(context);
             if (mounted) setState(() {});
             _refreshController.refreshCompleted();
-
           },
           child: SingleChildScrollView(
             child: Column(

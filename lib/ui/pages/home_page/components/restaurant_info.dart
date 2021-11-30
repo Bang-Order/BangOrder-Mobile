@@ -5,6 +5,7 @@ class RestaurantInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final restaurant = context.watch<RestaurantServiceProvider>();
     final barcode = context.watch<BarcodeProvider>();
+    bool _enabled = true;
 
     return !restaurant.loading
         ? Container(
@@ -28,6 +29,40 @@ class RestaurantInfo extends StatelessWidget {
               ],
             ),
           )
-        : SizedBox();
+        : Container(
+          color: Colors.white,
+          padding: EdgeInsets.all(defaultMargin),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Shimmer.fromColors(
+                baseColor: Colors.yellow,
+                highlightColor: Colors.grey.shade100,
+                child: Container(
+                  color: Colors.white,
+                  height: 20,
+                ),
+              ),
+              SizedBox(height: defaultMargin),
+              Shimmer.fromColors(
+                baseColor: Colors.red,
+                highlightColor: Colors.green,
+                child: Container(
+                  color: Colors.white,
+                  height: 20,
+                ),
+              ),
+              SizedBox(height: defaultMargin),
+              Shimmer.fromColors(
+                baseColor: Colors.purple,
+                highlightColor: Colors.blue,
+                child: Container(
+                  color: Colors.white,
+                  height: 20,
+                ),
+              ),
+            ],
+          ),
+        );
   }
 }

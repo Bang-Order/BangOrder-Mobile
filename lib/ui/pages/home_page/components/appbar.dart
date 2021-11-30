@@ -11,8 +11,15 @@ class HomepageAppbarComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final value = context.watch<RestaurantServiceProvider>();
+    RefreshController _refreshController =
+        RefreshController(initialRefresh: false);
 
     return SliverAppBar(
+      stretch: true,
+      onStretchTrigger: () async {
+        CallApi().callApi(context);
+      },
+      stretchTriggerOffset: 300,
       title: innerBoxIsScrolled
           ? Text(
               value.data.name,
@@ -69,13 +76,19 @@ class HomepageAppbarComponent extends StatelessWidget {
       floating: true,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
+        stretchModes: [
+          StretchMode.zoomBackground,
+        ],
         background: value.data.image.isNotEmpty
             ? Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
-                    value.data.image,
-                    fit: BoxFit.cover,
+                  Consumer<RestaurantServiceProvider>(
+                    builder: (BuildContext context, value, Widget? child) =>
+                        Image.network(
+                      value.data.image,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -88,9 +101,14 @@ class HomepageAppbarComponent extends StatelessWidget {
                   )
                 ],
               )
-            : Container(
-                //shimmer effect
-                color: Colors.red,
+            : Shimmer.fromColors(
+                baseColor: Colors.grey.shade300,
+                highlightColor: Colors.grey.shade100,
+                child: Container(
+                  color: Colors.white,
+                  height: MediaQuery.of(context).size.width -
+                      AppBar().preferredSize.height,
+                ),
               ),
       ),
       expandedHeight:
