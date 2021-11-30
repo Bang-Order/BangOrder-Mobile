@@ -9,11 +9,13 @@ class PaymentHelper {
     // final provider = Provider.of<OrderProvider>(_context, listen: false);
     final order = Get.put(OrderController());
     // print(provider.getCurrentOrder!.invoiceUrl);
-    Navigator.of(_context).push(MaterialPageRoute(
-      builder: (BuildContext context) => WebViewPage(
-        title: "Payment",
-        selectedUrl: order.getOrderResponse!.invoiceUrl,
-      ),
-    ));
+
+    Get.to(AfterOrderPage());
+    // Navigator.of(_context).push(MaterialPageRoute(
+    //   builder: (BuildContext context) => WebViewPage(
+    //     title: "Payment",
+    //     selectedUrl: order.getOrderResponse!.invoiceUrl,
+    //   ),
+    // ));
   }
 }

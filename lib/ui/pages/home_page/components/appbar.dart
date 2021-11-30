@@ -13,6 +13,7 @@ class HomepageAppbarComponent extends StatelessWidget {
     final value = context.watch<RestaurantServiceProvider>();
 
     return SliverAppBar(
+      onStretchTrigger: ()async{},
       title: innerBoxIsScrolled
           ? Text(
               value.data.name,

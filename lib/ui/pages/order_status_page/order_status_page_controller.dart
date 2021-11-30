@@ -1,41 +1,41 @@
 part of '../../../controller/_controller.dart';
 
 class OrderStatusPageController extends GetxController {
-  final orderController = Get.put(OrderController());
+  late final OrderResponse orderResponse;
+
+  @override
+  void onInit() {
+    final orderController = Get.put(OrderController());
+    orderResponse = orderController.getOrderResponse!;
+    super.onInit();
+  }
 
   void backOnClick() {
-    // Navigator.of(context).pushAndRemoveUntil(
-    //   MaterialPageRoute(
-    //     builder: (context) => RestaurantHomePage(),
-    //   ),
-    //   (route) => false,
-    // );
     Get.offAll(HomePage());
   }
 
   String getTotalPrice() {
-    return orderController.getOrderResponse!.totalPrice;
+    return orderResponse.totalPrice;
   }
 
   List<Menu>? getOrderedMenu() {
-    return orderController.getOrderResponse!.orderItems;
+    return orderResponse.orderItems;
   }
 
-  String getInvoiceURL(){
-    return orderController.getOrderResponse!.invoiceUrl;
+  String getInvoiceURL() {
+    return orderResponse.invoiceUrl;
   }
 
   DatabaseReference get getReference {
     final barcode = Get.put(BarcodeController());
     print('barcode.data.restaurantId: ' + barcode.data.restaurantId);
-    print('order.getOrderResponse!.id: ' +
-        orderController.getOrderResponse!.id.toString());
+    print('order.getOrderResponse!.id: ' + orderResponse.id.toString());
 
     return FirebaseDatabase(databaseURL: getURL)
         .reference()
         .child("orders")
         .child(barcode.data.restaurantId)
-        .child(orderController.getOrderResponse!.id.toString())
+        .child(orderResponse.id.toString())
         .child('order_status');
   }
 

@@ -11,7 +11,7 @@ class HomepageFABComponent extends StatelessWidget {
       builder: (context, cart, _) => orderController.getOrderResponse != null
           ? ElevatedButton(
               onPressed: () {
-                Get.to(OrderStatusPage());
+                Get.to(AfterOrderPage());
               },
               child: Text(
                 'Status Pesanan',

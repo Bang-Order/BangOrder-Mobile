@@ -7,7 +7,6 @@ import 'package:bangorder_mobile/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -60,7 +59,7 @@ part 'home_page/components/category_header_list.dart';
 
 part 'payment_method_page/payment_method_page.dart';
 
-part 'order_status_page/order_status_page.dart';
+part 'order_status_page/after_order_page.dart';
 
 part 'home_page/components/search_item_card.dart';
 
@@ -72,4 +71,4 @@ part 'webview/webview.dart';
 
 part 'order_history_page/order_history_page.dart';
 
-part 'order_status_page/components/card.dart';
+part 'order_status_page/components/order_status_page.dart';

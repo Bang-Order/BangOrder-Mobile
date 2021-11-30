@@ -11,6 +11,10 @@ class WebViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      // return WebView(
+      //   initialUrl: selectedUrl,
+      //   javascriptMode: JavascriptMode.unrestricted,
+      // );
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -22,7 +26,7 @@ class WebViewPage extends StatelessWidget {
           ),
           onPressed: () {
             // Navigator.popUntil(context, ModalRoute.withName('/home'));
-            Get.offAll(OrderStatusPage());
+            Get.offAll(HomePage());
 
             // Navigator.of(context).pushAndRemoveUntil(
             //   MaterialPageRoute(
