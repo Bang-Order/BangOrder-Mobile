@@ -1,7 +1,6 @@
 part of '_controller.dart';
 
 class OrderController extends GetxController {
-  bool isOrdered = false;
   OrderResponse? _orderResponse;
 
   OrderResponse? get getOrderResponse => _orderResponse;

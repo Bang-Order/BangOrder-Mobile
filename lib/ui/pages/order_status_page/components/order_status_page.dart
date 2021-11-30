@@ -30,6 +30,10 @@ class OrderStatusPage extends StatelessWidget {
             color: blackColor,
           ),
           onPressed: () {
+            if(title =='Sudah Diantar'){
+              Get.put(OrderController()).setOrderResponse = null;
+              controller.dispose();
+            }
             Get.to(HomePage());
           },
         ),
