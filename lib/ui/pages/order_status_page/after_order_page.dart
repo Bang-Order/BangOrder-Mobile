@@ -35,7 +35,6 @@ class AfterOrderPage extends StatelessWidget {
                 statusBarHeight: statusBarHeight,
               );
             case 'selesai':
-              Get.put(OrderController()).setOrderResponse = null;
               return OrderStatusPage(
                 title: 'Sudah Diantar',
                 lottieURL:

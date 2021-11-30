@@ -10,6 +10,12 @@ class OrderStatusPageController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void dispose() {
+    Get.delete<OrderStatusPageController>();
+    super.dispose();
+  }
+
   void backOnClick() {
     Get.offAll(HomePage());
   }
