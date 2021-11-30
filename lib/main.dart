@@ -2,6 +2,7 @@ import 'package:bangorder_mobile/providers/providers.dart';
 import 'package:bangorder_mobile/shared/shared.dart';
 import 'package:bangorder_mobile/ui/pages/pages.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => OrderProvider()),
         ChangeNotifierProvider(create: (_) => HomePageProvider(context)),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Bangorder',
         theme: ThemeData(

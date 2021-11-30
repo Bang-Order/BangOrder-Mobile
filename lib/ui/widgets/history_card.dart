@@ -11,7 +11,7 @@ class HistoryCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => OrderStatusPage()),
+          MaterialPageRoute(builder: (context) => AfterOrderPage()),
         );
       },
       child: Container(
