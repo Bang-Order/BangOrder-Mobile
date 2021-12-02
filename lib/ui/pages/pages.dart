@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bangorder_mobile/controller/_controller.dart';
 import 'package:bangorder_mobile/helpers/helpers.dart';
 import 'package:bangorder_mobile/models/models.dart';

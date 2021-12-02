@@ -11,7 +11,7 @@ class HomepageAppbarComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final statusBarHeight = AppBar().preferredSize.height;
-    final controller = Get.put(HomePageController());
+    final controller = Get.put(ApiController());
 
     return SliverAppBar(
       onStretchTrigger: () async {},

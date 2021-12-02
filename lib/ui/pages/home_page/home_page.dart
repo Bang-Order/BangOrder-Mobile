@@ -1,6 +1,8 @@
 part of '../pages.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -8,10 +10,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomePageController());
+    final controller = Get.put(ApiController());
 
     return Scaffold(
-      body: GetBuilder<HomePageController>(
+      body: GetBuilder<ApiController>(
         builder: (_) => !controller.isLoading
             ? NestedScrollView(
                 headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -61,7 +63,7 @@ class _HomePageState extends State<HomePage> {
     // Get.delete<HomePageController>();
     if (restaurant.getData != null &&
         barcode.getData!.restaurantId != restaurant.getData!.id.toString()) {
-      Get.delete<HomePageController>();
+      Get.delete<ApiController>();
     }
   }
 
@@ -69,6 +71,7 @@ class _HomePageState extends State<HomePage> {
     FirebaseDynamicLinks.instance.onLink(
       onSuccess: (PendingDynamicLinkData? dynamicLink) async {
         final Uri? deepLink = dynamicLink?.link;
+        print('deepLink!.path: '+deepLink!.path);
 
         if (deepLink != null) {
           _insertDataToBarcodeProvider(deepLink);
