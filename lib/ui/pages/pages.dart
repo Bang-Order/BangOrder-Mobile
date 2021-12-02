@@ -74,3 +74,5 @@ part 'webview/webview.dart';
 part 'order_history_page/order_history_page.dart';
 
 part 'order_status_page/components/order_status_page.dart';
+
+part 'home_page/components/recommendation_card.dart';

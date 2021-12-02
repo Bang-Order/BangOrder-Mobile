@@ -8,7 +8,7 @@ class MenuCard extends StatelessWidget {
   MenuCard({
     required this.data,
     required this.context,
-    this.prevPage = null,
+    this.prevPage,
   });
 
   @override

@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of '../../../pages/pages.dart';
 
 class RecommendationCard extends StatelessWidget {
   Menu data;

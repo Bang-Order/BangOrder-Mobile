@@ -60,7 +60,6 @@ class _HomePageState extends State<HomePage> {
     final barcode = Get.put(BarcodeController());
     final restaurant = Get.put(RestaurantController());
 
-    // Get.delete<HomePageController>();
     if (restaurant.getData != null &&
         barcode.getData!.restaurantId != restaurant.getData!.id.toString()) {
       Get.delete<ApiController>();
@@ -71,7 +70,7 @@ class _HomePageState extends State<HomePage> {
     FirebaseDynamicLinks.instance.onLink(
       onSuccess: (PendingDynamicLinkData? dynamicLink) async {
         final Uri? deepLink = dynamicLink?.link;
-        print('deepLink!.path: '+deepLink!.path);
+        print('deepLink!.path: ' + deepLink!.path);
 
         if (deepLink != null) {
           _insertDataToBarcodeProvider(deepLink);
