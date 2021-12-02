@@ -1,7 +1,9 @@
-import 'package:bangorder_mobile/router/router.gr.dart';
 import 'package:bangorder_mobile/shared/shared.dart';
+import 'package:bangorder_mobile/ui/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,18 +11,25 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final _appRouter = AppRouter();
-
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp.router(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bangorder',
       theme: ThemeData(
         primarySwatch: yellowColor,
       ),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      routerDelegate: _appRouter.delegate(),
+      getPages: [
+        GetPage(
+          name: '/',
+          page: () => LandingPage(),
+        ),
+        GetPage(
+          name: '/:id',
+          page: () => HomePage(),
+          transition: Transition.cupertino,
+        ),
+      ],
     );
   }
 }

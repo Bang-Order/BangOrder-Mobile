@@ -173,4 +173,3 @@ class _ScanQrPageState extends State<ScanQrPage> {
     }
   }
 }
-// 6hEqt7pc5DeTRbVGA
