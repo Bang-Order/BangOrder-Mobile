@@ -1,7 +1,6 @@
 import 'package:bangorder_mobile/controller/_controller.dart';
 import 'package:bangorder_mobile/helpers/helpers.dart';
 import 'package:bangorder_mobile/models/models.dart';
-import 'package:bangorder_mobile/providers/providers.dart';
 import 'package:bangorder_mobile/shared/shared.dart';
 import 'package:bangorder_mobile/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,9 +10,10 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:bangorder_mobile/ui/widgets/widgets.dart';
 import 'package:search_page/search_page.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -48,6 +48,8 @@ part 'home_page/components/appbar.dart';
 part 'home_page/components/menu_item_list.dart';
 
 part 'home_page/components/fab_checkout.dart';
+
+part 'home_page/components/shimmer_screen.dart';
 
 part 'home_page/components/loading_screen.dart';
 

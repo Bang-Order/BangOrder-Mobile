@@ -13,17 +13,20 @@ class MenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Get.put(CartController());
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: data.isAvailable == 1
-            ? () => DetailPageHelper(context).navigate(
+            ? () => Get.put(DetailMenuPageController()).constructor(
                   menu: data,
                   previousPage: prevPage!,
                 )
             : null,
-        child: Consumer<CartProvider>(
-          builder: (context, cart, _) => Container(
+        child: GetBuilder(
+          init: CartController(),
+          builder: (_) => Container(
             decoration: BoxDecoration(
               border: Border(
                 left: BorderSide(

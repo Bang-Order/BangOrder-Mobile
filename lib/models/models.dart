@@ -15,3 +15,4 @@ part 'page_enum.dart';
 part 'barcode.dart';
 
 part 'order_response.dart';
+part 'order_history.dart';

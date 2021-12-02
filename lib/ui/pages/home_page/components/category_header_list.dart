@@ -5,14 +5,18 @@ class HomepageMenuCategoryComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MenuCategoryServiceProvider>(
-      builder: (context, menuCategory, _) => !menuCategory.loading
+    final controller = Get.put(HomePageController());
+
+    return GetBuilder(
+      init: HomePageController(),
+      builder: (_) => controller.menuCategory.data.isNotEmpty
           ? ListView.builder(
               shrinkWrap: true,
               controller: ScrollController(),
-              itemCount: menuCategory.data.length,
-              itemBuilder: (context, index) =>
-                  _categoryHeader(menuCategory.getMenuCategoryByIndex(index)),
+              itemCount: controller.menuCategory.data.length,
+              itemBuilder: (context, index) => _categoryHeader(
+                controller.menuCategory.getMenuCategoryByIndex(index),
+              ),
             )
           : SizedBox(),
     );

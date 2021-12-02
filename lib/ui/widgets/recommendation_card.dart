@@ -11,12 +11,14 @@ class RecommendationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Get.put(CartController());
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(5),
         onTap: data.isAvailable == 1
-            ? () => DetailPageHelper(context).navigate(
+            ? () => Get.put(DetailMenuPageController()).constructor(
                   menu: data,
                   previousPage: PageEnum.HomePage,
                 )
@@ -25,20 +27,23 @@ class RecommendationCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  image: DecorationImage(
-                    colorFilter: data.isAvailable == 0
-                        ? ColorFilter.mode(
-                            Colors.black.withOpacity(0.5),
-                            BlendMode.dstATop,
-                          )
-                        : null,
-                    image: NetworkImage(data.image),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: data.isAvailable == 1
+                    ? Image.network(
+                        data.image,
+                        fit: BoxFit.cover,
+                      )
+                    : ColorFiltered(
+                        colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.5),
+                          BlendMode.dstATop,
+                        ),
+                        child: Image.network(
+                          data.image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
               ),
             ),
             SizedBox(height: defaultMargin / 2),
@@ -49,8 +54,9 @@ class RecommendationCard extends StatelessWidget {
                   : menuTitleTransparentStyle,
             ),
             SizedBox(height: defaultMargin / 2),
-            Consumer<CartProvider>(
-              builder: (context, cart, _) => Row(
+            GetBuilder(
+              init: CartController(),
+              builder: (_) => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(

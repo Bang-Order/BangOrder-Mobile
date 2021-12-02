@@ -1,11 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:bangorder_mobile/helpers/helpers.dart';
+import 'package:bangorder_mobile/controller/_controller.dart';
 import 'package:bangorder_mobile/models/models.dart';
-import 'package:bangorder_mobile/providers/providers.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 
 part 'menu_services.dart';
 

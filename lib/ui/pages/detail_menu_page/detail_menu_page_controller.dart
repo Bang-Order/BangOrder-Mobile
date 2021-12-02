@@ -1,18 +1,14 @@
-part of 'providers.dart';
+part of '../../../controller/_controller.dart';
 
-class DetailPageProvider extends ChangeNotifier {
+class DetailMenuPageController extends GetxController {
+  final cart = Get.put(CartController());
   late Menu _menu;
   late PageEnum _previousPage;
   late bool _isUpdate = false;
   late int _initQuantity;
   late String _initNotes;
 
-  DetailPageProvider({
-    required Menu menu,
-    required PageEnum previousPage,
-    required context,
-  }) {
-    final cart = Provider.of<CartProvider>(context, listen: false);
+  void constructor({required Menu menu, required PageEnum previousPage}) {
     if (cart.isContainData(menu)) {
       this.menu = cart.getItemById(menu);
       isUpdate = true;
@@ -24,16 +20,18 @@ class DetailPageProvider extends ChangeNotifier {
       this.menu.quantity = 1;
     }
     this.previousPage = previousPage;
+
+    Get.to(DetailMenuPage());
   }
 
   void incrementQuantity() {
     menu.quantity += 1;
-    notifyListeners();
+    update();
   }
 
   void decrementQuantity() {
     menu.quantity -= 1;
-    notifyListeners();
+    update();
   }
 
   double pricing() {
@@ -41,23 +39,20 @@ class DetailPageProvider extends ChangeNotifier {
   }
 
   void removeMenuInCart(context) {
-    final cart = Provider.of<CartProvider>(context, listen: false);
     cart.deleteItem(menu.id);
-    notifyListeners();
+    update();
     pop(context);
   }
 
   void updateMenuInCart(context) {
-    final cart = Provider.of<CartProvider>(context, listen: false);
     cart.updateItem(menu, menu);
-    notifyListeners();
+    update();
     pop(context);
   }
 
   void addMenuToCart(context) {
-    final cart = Provider.of<CartProvider>(context, listen: false);
     cart.addItem(menu);
-    notifyListeners();
+    update();
     pop(context);
   }
 
@@ -83,7 +78,6 @@ class DetailPageProvider extends ChangeNotifier {
 
   Future<bool> exit(context) {
     if (isUpdate) {
-      final cart = Provider.of<CartProvider>(context, listen: false);
       menu.quantity = initQuantity;
       menu.notes.text = initNotes;
       cart.updateItem(menu, menu);
@@ -95,47 +89,46 @@ class DetailPageProvider extends ChangeNotifier {
     }
     if (_menu.quantity == 0) _menu.quantity = 1;
 
-    notifyListeners();
+    update();
 
     pop(context);
-    print('exit');
     return Future.value(true);
   }
 
-////////////////////////////////////////////////////////////////////////////////
-
-  PageEnum get previousPage => _previousPage;
-
-  set previousPage(PageEnum value) {
-    _previousPage = value;
-    notifyListeners();
-  }
-
-  bool get isUpdate => _isUpdate;
-
-  set isUpdate(bool value) {
-    _isUpdate = value;
-    notifyListeners();
-  }
+  //////////////////////////////////////////////////////////////////////////////
 
   String get initNotes => _initNotes;
 
   set initNotes(String value) {
     _initNotes = value;
-    notifyListeners();
+    update();
   }
 
   int get initQuantity => _initQuantity;
 
   set initQuantity(int value) {
     _initQuantity = value;
-    notifyListeners();
+    update();
+  }
+
+  bool get isUpdate => _isUpdate;
+
+  set isUpdate(bool value) {
+    _isUpdate = value;
+    update();
+  }
+
+  PageEnum get previousPage => _previousPage;
+
+  set previousPage(PageEnum value) {
+    _previousPage = value;
+    update();
   }
 
   Menu get menu => _menu;
 
   set menu(Menu value) {
     _menu = value;
-    notifyListeners();
+    update();
   }
 }
