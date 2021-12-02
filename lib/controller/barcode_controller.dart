@@ -1,10 +1,17 @@
 part of '_controller.dart';
 
 class BarcodeController extends GetxController {
-  // late BarcodeModel _data;
-  BarcodeModel? _data = BarcodeModel(restaurantTableId: '1', restaurantId: '1');
+  late BarcodeModel _data;
 
   BarcodeModel? get getData => _data;
+
+  void setDataFromDeeplink(deepLink) {
+    BarcodeModel barcodeModel = new BarcodeModel(
+      restaurantId: deepLink.queryParameters.values.first,
+      restaurantTableId: deepLink.queryParameters.values.last,
+    );
+    setData = barcodeModel;
+  }
 
   bool isNull() {
     return getData != null;

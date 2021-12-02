@@ -3,7 +3,7 @@ part of '../../pages.dart';
 class RestaurantInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ApiController());
+    final controller = Get.put(HomePageController());
 
     return Container(
       color: Colors.white,
@@ -11,10 +11,10 @@ class RestaurantInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(controller.restaurant.getData!.name, style: quantityStyle),
+          Text(controller.api.restaurant.getData!.name, style: quantityStyle),
           SizedBox(height: defaultMargin),
           Text(
-            controller.restaurant.getData!.address,
+            controller.api.restaurant.getData!.address,
             style: restaurantDescriptionStyle,
             maxLines: 2,
           ),
