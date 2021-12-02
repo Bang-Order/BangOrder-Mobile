@@ -8,7 +8,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-  bool _enabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,8 @@ class _HomePageState extends State<HomePage> {
         ],
         body: SmartRefresher(
           controller: _refreshController,
-          enablePullUp: true,
+          enablePullUp: false,
+          enablePullDown: true,
           header: WaterDropHeader(
             waterDropColor: yellowColor,
           ),
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                 HomepageRecommendationMenuComponent(),
                 SizedBox(height: 8),
                 HomepageMenuCategoryComponent(),
-                SizedBox(height: 100),
+                SizedBox(height: 8),
               ],
             ),
           ),
@@ -72,27 +72,8 @@ class _HomePageState extends State<HomePage> {
       listen: false,
     );
     if (barcode.data.restaurantId != restaurant.data.id.toString()) {
-      _callApi();
+      CallApi().callApi(context);
     }
-  }
-
-  _callApi() {
-    Provider.of<RestaurantServiceProvider>(
-      context,
-      listen: false,
-    ).init(context);
-    Provider.of<MenuCategoryServiceProvider>(
-      context,
-      listen: false,
-    ).init(context);
-    Provider.of<MenuServiceProvider>(
-      context,
-      listen: false,
-    ).init(context);
-    Provider.of<OrderProvider>(
-      context,
-      listen: false,
-    );
   }
 
   Future<void> _getOnLink() async {

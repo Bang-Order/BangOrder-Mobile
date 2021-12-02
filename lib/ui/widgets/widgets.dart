@@ -7,6 +7,7 @@ import 'package:bangorder_mobile/models/models.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:bangorder_mobile/providers/providers.dart';
+import 'package:shimmer/shimmer.dart';
 
 part 'menu_card.dart';
 
@@ -19,3 +20,7 @@ part 'history_card.dart';
 part 'total_price.dart';
 
 part 'ordered_menu_card.dart';
+
+part 'shimmer_recommendation_card.dart';
+
+part 'shimmer_menu_card.dart';

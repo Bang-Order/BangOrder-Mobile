@@ -5,7 +5,6 @@ class RestaurantInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final restaurant = context.watch<RestaurantServiceProvider>();
     final barcode = context.watch<BarcodeProvider>();
-    bool _enabled = true;
 
     return !restaurant.loading
         ? Container(
@@ -30,39 +29,52 @@ class RestaurantInfo extends StatelessWidget {
             ),
           )
         : Container(
-          color: Colors.white,
-          padding: EdgeInsets.all(defaultMargin),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Shimmer.fromColors(
-                baseColor: Colors.yellow,
-                highlightColor: Colors.grey.shade100,
-                child: Container(
-                  color: Colors.white,
-                  height: 20,
+            color: Colors.white,
+            padding: EdgeInsets.all(defaultMargin),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade100,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(10))
+                    ),
+                    height: 20,
+                    margin: EdgeInsets.only(right: 150),
+                  ),
                 ),
-              ),
-              SizedBox(height: defaultMargin),
-              Shimmer.fromColors(
-                baseColor: Colors.red,
-                highlightColor: Colors.green,
-                child: Container(
-                  color: Colors.white,
-                  height: 20,
+                SizedBox(height: defaultMargin),
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade100,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10))
+                    ),
+                    height: 10,
+                    margin: EdgeInsets.only(right: 50),
+                  ),
                 ),
-              ),
-              SizedBox(height: defaultMargin),
-              Shimmer.fromColors(
-                baseColor: Colors.purple,
-                highlightColor: Colors.blue,
-                child: Container(
-                  color: Colors.white,
-                  height: 20,
+                SizedBox(height: defaultMargin),
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade100,
+                  period: Duration(seconds: 2),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10))
+                    ),
+                    height: 10,
+                    margin: EdgeInsets.only(right: 250),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
+              ],
+            ),
+          );
   }
 }

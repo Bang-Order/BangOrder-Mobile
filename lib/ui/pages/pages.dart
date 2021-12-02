@@ -25,6 +25,7 @@ import 'dart:convert';
 import 'package:lottie/lottie.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 part 'checkout_page/checkout_page.dart';
 
