@@ -5,11 +5,15 @@ class DetailMenuPageImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DetailPageProvider>(
-      builder: (context, provider, _) => Container(
+    final controller = Get.put(DetailMenuPageController());
+
+    return GetBuilder(
+      init: DetailMenuPageController(),
+      builder: (_) => Container(
         height: MediaQuery.of(context).size.height * 0.35,
-        child: Image.network(
-          provider.menu.image,
+        child:
+        Image.network(
+          controller.menu.image,
           fit: BoxFit.cover,
         ),
       ),

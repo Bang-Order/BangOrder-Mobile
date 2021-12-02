@@ -1,11 +1,16 @@
 part of '_controller.dart';
 
 class BarcodeController extends GetxController {
-  BarcodeModel _data = BarcodeModel(restaurantTableId: '1', restaurantId: '1');
+  // late BarcodeModel _data;
+  BarcodeModel? _data = BarcodeModel(restaurantTableId: '1', restaurantId: '1');
 
-  BarcodeModel get data => _data;
+  BarcodeModel? get getData => _data;
 
-  set data(BarcodeModel value) {
+  bool isNull() {
+    return getData != null;
+  }
+
+  set setData(BarcodeModel value) {
     _data = value;
     update();
   }

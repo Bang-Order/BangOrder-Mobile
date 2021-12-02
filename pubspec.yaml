@@ -47,6 +47,7 @@ dependencies:
   firebase_database: ^8.1.0
   firebase_core: ^1.10.0
   sliding_up_panel: ^2.0.0+1
+  blur: ^3.0.0
 
 
 dev_dependencies:

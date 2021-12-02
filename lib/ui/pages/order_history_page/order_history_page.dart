@@ -5,6 +5,8 @@ class OrderHistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OrderHistoryPageController());
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Riwayat Pesanan'),

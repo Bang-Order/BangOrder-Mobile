@@ -128,11 +128,11 @@ class _ScanQrPageState extends State<ScanQrPage> {
       _launchUrl(result.code);
     } else {
       print("masuk ke else");
-      final provider = Provider.of<BarcodeProvider>(context, listen: false);
+      final provider = Get.put(BarcodeController());
       barcodeModel = _decodeToString(result.code);
-      provider.data = barcodeModel;
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => HomePage()));
+      provider.setData = barcodeModel;
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
     }
   }
 
