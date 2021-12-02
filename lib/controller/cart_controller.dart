@@ -1,29 +1,22 @@
-part of 'providers.dart';
+part of '_controller.dart';
 
-class CartProvider with ChangeNotifier {
-  late List<Menu> _items = [];
-
-  List<Menu> get items => _items;
-
-  set items(List<Menu> value) {
-    _items = value;
-    notifyListeners();
-  }
+class CartController extends GetxController {
+  List<Menu> _items = [];
 
   void addItem(Menu cart) {
     items.add(cart);
-    notifyListeners();
+    update();
   }
 
   void deleteItem(int id) {
     items.removeWhere((element) => element.id == id);
-    notifyListeners();
+    update();
   }
 
   void updateItem(Menu data, Menu updatedData) {
     Menu menu = getItemById(data);
     menu = updatedData;
-    notifyListeners();
+    update();
   }
 
   double getTotalPrice() {
@@ -51,5 +44,12 @@ class CartProvider with ChangeNotifier {
   Menu getItemById(Menu menu) {
     int index = items.indexWhere((element) => element.id == menu.id);
     return items.elementAt(index);
+  }
+
+  List<Menu> get items => _items;
+
+  set items(List<Menu> value) {
+    _items = value;
+    update();
   }
 }

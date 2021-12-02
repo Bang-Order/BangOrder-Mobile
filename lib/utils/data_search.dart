@@ -41,8 +41,7 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<Menu> keyword =
-        Provider.of<MenuServiceProvider>(context, listen: false).data;
+    List<Menu> keyword = Get.put(MenuController()).data;
     List<Menu> suggestionList = query.isEmpty
         ? []
         : keyword

@@ -5,6 +5,8 @@ class CheckoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CheckoutPageController());
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -17,9 +19,7 @@ class CheckoutPage extends StatelessWidget {
             Icons.arrow_back_outlined,
             color: blackColor,
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: controller.backOnClick,
         ),
       ),
       body: Column(
@@ -32,24 +32,25 @@ class CheckoutPage extends StatelessWidget {
               style: reviewOrder,
             ),
           ),
-          Consumer<CartProvider>(
-            builder: (context, cart, _) => Container(
+          GetBuilder(
+            init: CartController(),
+            builder: (_) => Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: ListView.separated(
                 shrinkWrap: true,
                 controller: ScrollController(),
                 itemBuilder: (context, index) => _customCard(
-                  cart.items[index],
+                  controller.cart.items[index],
                   context,
                 ),
                 separatorBuilder: (context, index) => Divider(
                   height: 16,
                   color: blackColor,
                 ),
-                itemCount: cart.items.length,
+                itemCount: controller.cart.items.length,
               ),
             ),
-          )
+          ),
         ],
       ),
       bottomNavigationBar: Column(
@@ -64,12 +65,13 @@ class CheckoutPage extends StatelessWidget {
                   "Total",
                   style: metodePembayaranStyle,
                 ),
-                Consumer<CartProvider>(
-                  builder: (context, cart, _) => Text(
-                    currency(cart.getTotalPrice()),
+                GetBuilder(
+                  init: CartController(),
+                  builder: (_) => Text(
+                    currency(controller.cart.getTotalPrice()),
                     style: totalPriceOrder,
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -87,7 +89,7 @@ class CheckoutPage extends StatelessWidget {
                 fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
               ),
               onPressed: () {
-                OrderHelper(context).makeOrder();
+                controller.order.makeOrder(context);
               },
             ),
           ),
@@ -132,7 +134,8 @@ class CheckoutPage extends StatelessWidget {
                       "Edit",
                       style: editTextCheckoutStyle,
                     ),
-                    onTap: () => DetailPageHelper(context).navigate(
+                    onTap: () =>
+                        Get.put(DetailMenuPageController()).constructor(
                       menu: data,
                       previousPage: PageEnum.CheckoutPage,
                     ),

@@ -10,19 +10,14 @@ class HomepageAppbarComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final value = context.watch<RestaurantServiceProvider>();
-    RefreshController _refreshController =
-        RefreshController(initialRefresh: false);
+    final statusBarHeight = AppBar().preferredSize.height;
+    final controller = Get.put(HomePageController());
 
     return SliverAppBar(
-      stretch: true,
-      onStretchTrigger: () async {
-        CallApi().callApi(context);
-      },
-      stretchTriggerOffset: 300,
+      onStretchTrigger: () async {},
       title: innerBoxIsScrolled
           ? Text(
-              value.data.name,
+              controller.restaurant.getData!.name,
               style: innerBoxIsScrolled
                   ? appbarTextStyle
                   : appbarScrolledTextStyle,
@@ -44,7 +39,6 @@ class HomepageAppbarComponent extends StatelessWidget {
             ),
             (route) => false,
           );
-          // Navigator.popUntil(context, ModalRoute.withName('/'));
         },
       ),
       actions: [
@@ -58,10 +52,7 @@ class HomepageAppbarComponent extends StatelessWidget {
             onPressed: () => showSearch(
               context: context,
               delegate: SearchPage<Menu>(
-                items: Provider.of<MenuServiceProvider>(
-                  context,
-                  listen: false,
-                ).data,
+                items: controller.menu.data,
                 builder: (t) => MenuCard(
                   data: t,
                   context: context,
@@ -76,43 +67,26 @@ class HomepageAppbarComponent extends StatelessWidget {
       floating: true,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
-        stretchModes: [
-          StretchMode.zoomBackground,
-        ],
-        background: value.data.image.isNotEmpty
-            ? Stack(
-                fit: StackFit.expand,
-                children: [
-                  Consumer<RestaurantServiceProvider>(
-                    builder: (BuildContext context, value, Widget? child) =>
-                        Image.network(
-                      value.data.image,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.black87, Colors.transparent],
-                        begin: Alignment.topCenter,
-                        end: Alignment.center,
-                      ),
-                    ),
-                  )
-                ],
-              )
-            : Shimmer.fromColors(
-                baseColor: Colors.grey.shade300,
-                highlightColor: Colors.grey.shade100,
-                child: Container(
-                  color: Colors.white,
-                  height: MediaQuery.of(context).size.width -
-                      AppBar().preferredSize.height,
+        background: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.network(
+              controller.restaurant.getData!.image,
+              fit: BoxFit.cover,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.black87, Colors.transparent],
+                  begin: Alignment.topCenter,
+                  end: Alignment.center,
                 ),
               ),
+            )
+          ],
+        ),
       ),
-      expandedHeight:
-          MediaQuery.of(context).size.width - AppBar().preferredSize.height,
+      expandedHeight: MediaQuery.of(context).size.width - statusBarHeight,
     );
   }
 }

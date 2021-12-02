@@ -5,8 +5,11 @@ class DetailMenuNote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DetailPageProvider>(
-      builder: (context, provider, _) => Container(
+    final controller = Get.put(DetailMenuPageController());
+
+    return GetBuilder(
+      init: DetailMenuPageController(),
+      builder: (_) => Container(
         color: Colors.white,
         padding: EdgeInsets.all(defaultMargin),
         child: Column(
@@ -20,7 +23,7 @@ class DetailMenuNote extends StatelessWidget {
             ),
             SizedBox(height: defaultMargin),
             TextField(
-              controller: provider.menu.notes,
+              controller: controller.menu.notes,
               maxLines: 3,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(

@@ -1,20 +1,27 @@
 part of '../../pages.dart';
 
 class MenuItemList extends StatelessWidget {
-  MenuCategory menuCategory;
+  final MenuCategory menuCategory;
 
-  MenuItemList({Key? key, required this.menuCategory}) : super(key: key);
+  const MenuItemList({
+    Key? key,
+    required this.menuCategory,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MenuServiceProvider>(
-      builder: (context, menu, _) => !menu.loading
+    final controller = Get.put(HomePageController());
+
+    return GetBuilder(
+      init: RestaurantController(),
+      builder: (_) => controller.menu.data.isNotEmpty
           ? ListView.builder(
               shrinkWrap: true,
               controller: ScrollController(),
-              itemCount: menu.getMenuByCategoryId(menuCategory).length,
+              itemCount:
+                  controller.menu.getMenuByCategoryId(menuCategory).length,
               itemBuilder: (context, i) => MenuCard(
-                data: menu.getMenuByCategoryId(menuCategory)[i],
+                data: controller.menu.getMenuByCategoryId(menuCategory)[i],
                 context: context,
                 prevPage: PageEnum.HomePage,
               ),

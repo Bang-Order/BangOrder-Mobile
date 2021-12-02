@@ -34,13 +34,13 @@ class OrderStatusPageController extends GetxController {
 
   DatabaseReference get getReference {
     final barcode = Get.put(BarcodeController());
-    print('barcode.data.restaurantId: ' + barcode.data.restaurantId);
+    print('barcode.data.restaurantId: ' + barcode.getData!.restaurantId);
     print('order.getOrderResponse!.id: ' + orderResponse.id.toString());
 
     return FirebaseDatabase(databaseURL: getURL)
         .reference()
         .child("orders")
-        .child(barcode.data.restaurantId)
+        .child(barcode.getData!.restaurantId)
         .child(orderResponse.id.toString())
         .child('order_status');
   }

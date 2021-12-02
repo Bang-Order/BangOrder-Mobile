@@ -11,43 +11,34 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomePageController());
+
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          HomepageAppbarComponent(
-            innerBoxIsScrolled: innerBoxIsScrolled,
-            key: Key(
-              'HomepageAppbarComponent',
-            ),
-          ),
-        ],
-        body: SmartRefresher(
-          controller: _refreshController,
-          enablePullUp: false,
-          enablePullDown: true,
-          header: WaterDropHeader(
-            waterDropColor: yellowColor,
-          ),
-          onRefresh: () async {
-            //monitor fetch data from network
-            await Future.delayed(Duration(milliseconds: 1000));
-            CallApi().callApi(context);
-            if (mounted) setState(() {});
-            _refreshController.refreshCompleted();
-          },
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                RestaurantInfo(),
-                SizedBox(height: 8),
-                HomepageRecommendationMenuComponent(),
-                SizedBox(height: 8),
-                HomepageMenuCategoryComponent(),
-                SizedBox(height: 8),
-              ],
-            ),
-          ),
-        ),
+      body: GetBuilder<HomePageController>(
+        builder: (_) => !controller.isLoading
+            ? NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                  HomepageAppbarComponent(
+                    innerBoxIsScrolled: innerBoxIsScrolled,
+                    key: Key(
+                      'HomepageAppbarComponent',
+                    ),
+                  ),
+                ],
+                body: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      RestaurantInfo(),
+                      SizedBox(height: 8),
+                      HomepageRecommendationMenuComponent(),
+                      SizedBox(height: 8),
+                      HomepageMenuCategoryComponent(),
+                      SizedBox(height: 100),
+                    ],
+                  ),
+                ),
+              )
+            : HomePageLoadingScreen(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: HomepageFABComponent(
@@ -66,13 +57,14 @@ class _HomePageState extends State<HomePage> {
   void _init() async {
     await _getInitialLink();
     await _getOnLink();
-    final barcode = Provider.of<BarcodeProvider>(context, listen: false);
-    final restaurant = Provider.of<RestaurantServiceProvider>(
-      context,
-      listen: false,
-    );
-    if (barcode.data.restaurantId != restaurant.data.id.toString()) {
-      CallApi().callApi(context);
+
+    final barcode = Get.put(BarcodeController());
+    final restaurant = Get.put(RestaurantController());
+
+    // Get.delete<HomePageController>();
+    if (restaurant.getData != null &&
+        barcode.getData!.restaurantId != restaurant.getData!.id.toString()) {
+      Get.delete<HomePageController>();
     }
   }
 
@@ -106,11 +98,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _insertDataToBarcodeProvider(deepLink) {
-    final provider = Provider.of<BarcodeProvider>(context, listen: false);
+    final provider = Get.put(BarcodeController());
     BarcodeModel barcodeModel = new BarcodeModel(
       restaurantId: deepLink.queryParameters.values.first,
       restaurantTableId: deepLink.queryParameters.values.last,
     );
-    provider.data = barcodeModel;
+    provider.setData = barcodeModel;
   }
 }

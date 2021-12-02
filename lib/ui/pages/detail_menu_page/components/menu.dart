@@ -1,12 +1,15 @@
 part of '../../../pages/pages.dart';
 
 class DetailMenuPageMenuInfo extends StatelessWidget {
-
   DetailMenuPageMenuInfo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DetailPageProvider>(builder: (context, provider, _) => Container(
+    final provider = Get.put(DetailMenuPageController());
+
+    return GetBuilder(
+      init: DetailMenuPageController(),
+      builder: (_) => Container(
         color: Colors.white,
         padding: EdgeInsets.all(defaultMargin),
         child: Row(

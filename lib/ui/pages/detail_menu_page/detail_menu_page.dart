@@ -5,10 +5,11 @@ class DetailMenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(DetailMenuPageController());
+
     return WillPopScope(
       onWillPop: () {
-        final x = Provider.of<DetailPageProvider>(context, listen: false);
-        return x.exit(context);
+        return controller.exit(context);
       },
       child: Scaffold(
         appBar: detailMenuPageAppbar(context),

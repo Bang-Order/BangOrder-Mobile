@@ -5,12 +5,15 @@ class DetailMenuPageAddToBasketButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DetailPageProvider>(
-      builder: (context, provider, _) => Container(
+    final controller = Get.put(DetailMenuPageController());
+
+    return GetBuilder(
+      init: DetailMenuPageController(),
+      builder: (_) => Container(
         width: MediaQuery.of(context).size.width,
-        child: provider.isUpdate && provider.menu.quantity == 0
+        child: controller.isUpdate && controller.menu.quantity == 0
             ? ElevatedButton(
-                onPressed: () => provider.removeMenuInCart(context),
+                onPressed: () => controller.removeMenuInCart(context),
                 child: Text(
                   'Hapus Pesanan',
                   style: deleteStyle,
@@ -23,12 +26,12 @@ class DetailMenuPageAddToBasketButton extends StatelessWidget {
                   ),
                 ),
               )
-            : provider.isUpdate
+            : controller.isUpdate
                 ? ElevatedButton(
-                    onPressed: () => provider.updateMenuInCart(context),
+                    onPressed: () => controller.updateMenuInCart(context),
                     child: Text(
                       'Tambahkan ke Keranjang - ' +
-                          currency(provider.pricing()),
+                          currency(controller.pricing()),
                       style: cartStyle,
                     ),
                     style: ElevatedButton.styleFrom(
@@ -39,10 +42,10 @@ class DetailMenuPageAddToBasketButton extends StatelessWidget {
                     ),
                   )
                 : ElevatedButton(
-                    onPressed: () => provider.addMenuToCart(context),
+                    onPressed: () => controller.addMenuToCart(context),
                     child: Text(
                       'Tambahkan ke Keranjang - ' +
-                          currency(provider.pricing()),
+                          currency(controller.pricing()),
                       style: cartStyle,
                     ),
                     style: ElevatedButton.styleFrom(

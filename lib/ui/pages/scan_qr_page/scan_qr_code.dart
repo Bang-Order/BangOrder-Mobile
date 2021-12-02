@@ -111,7 +111,7 @@ class _ScanQrPageState extends State<ScanQrPage> {
       setState(() {
         while (scanOnce == 0) {
           result = scanData;
-          print("result.code: " + result!.code!);
+          print("result.code: " + result!.code);
           _checkingUrl(result!);
           controller.pauseCamera();
           break;
@@ -128,9 +128,9 @@ class _ScanQrPageState extends State<ScanQrPage> {
       _launchUrl(result.code!);
     } else {
       print("masuk ke else");
-      final provider = Provider.of<BarcodeProvider>(context, listen: false);
-      barcodeModel = _decodeToString(result.code!);
-      provider.data = barcodeModel;
+      final provider = Get.put(BarcodeController());
+      barcodeModel = _decodeToString(result.code);
+      provider.setData = barcodeModel;
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => HomePage()));
     }

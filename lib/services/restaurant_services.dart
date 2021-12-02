@@ -1,31 +1,31 @@
 part of 'services.dart';
 
 class RestaurantServices {
-  BuildContext _context;
-
-  RestaurantServices(this._context);
-
-  Future<Restaurant> getRestaurantInfo() async {
-    final provider = Provider.of<BarcodeProvider>(_context, listen: false);
+  static Future<Restaurant> getRestaurantInfo() async {
+    final barcode = Get.put(BarcodeController());
     final url = BaseURL +
         'restaurants/' +
-        provider.data.restaurantId +
+        barcode.getData!.restaurantId +
         '/tables/' +
-        provider.data.restaurantTableId;
-    print('restaurantId: ' + provider.data.restaurantId.toString());
-    print('restaurantTableId: ' + provider.data.restaurantTableId.toString());
+        barcode.getData!.restaurantTableId;
+    print('restaurantId: ' + barcode.getData!.restaurantId.toString());
+    print(
+        'restaurantTableId: ' + barcode.getData!.restaurantTableId.toString());
 
-    final response = await http.get(Uri.parse(url), headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },);
+    final response = await http.get(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
 
     if (response.statusCode == 200) {
-      print(response.body);
+      print('RESTAURANT INFOOO' + response.body);
       return _parse(response.body);
     } else {
       throw Exception('Failed to load data ' + response.statusCode.toString());
     }
   }
 
-  Restaurant _parse(data) => Restaurant.fromJson(jsonDecode(data));
+  static Restaurant _parse(data) => Restaurant.fromJson(jsonDecode(data));
 }

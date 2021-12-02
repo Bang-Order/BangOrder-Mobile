@@ -1,15 +1,19 @@
 part of '../../../pages/pages.dart';
 
 AppBar detailMenuPageAppbar(context) {
+  final provider = Get.put(DetailMenuPageController());
+
   return AppBar(
-    title: Consumer<DetailPageProvider>(
-      builder: (context, provider, _) => Text(
+    title: GetBuilder(
+      init: DetailMenuPageController(),
+      builder: (_) => Text(
         provider.menu.name,
         style: appbarTextStyle,
       ),
     ),
-    leading: Consumer<DetailPageProvider>(
-      builder: (context, provider, _) => IconButton(
+    leading: GetBuilder(
+      init: DetailMenuPageController(),
+      builder: (_) => IconButton(
         icon: Icon(
           Icons.arrow_back_outlined,
           color: blackColor,

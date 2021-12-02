@@ -5,8 +5,11 @@ class DetailMenuPageQuantityButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DetailPageProvider>(
-      builder: (context, provider, _) => Container(
+    final controller = Get.put(DetailMenuPageController());
+
+    return GetBuilder(
+      init: DetailMenuPageController(),
+      builder: (_) => Container(
         margin: EdgeInsets.all(defaultMargin),
         padding: EdgeInsets.all(3),
         decoration: BoxDecoration(
@@ -19,9 +22,9 @@ class DetailMenuPageQuantityButton extends StatelessWidget {
             Container(
               width: 39,
               height: 39,
-              child: provider.isUpdate && provider.menu.quantity > 0
+              child: controller.isUpdate && controller.menu.quantity > 0
                   ? ElevatedButton(
-                      onPressed: provider.decrementQuantity,
+                      onPressed: controller.decrementQuantity,
                       child: Icon(
                         Icons.remove_rounded,
                         color: Colors.white,
@@ -31,9 +34,9 @@ class DetailMenuPageQuantityButton extends StatelessWidget {
                         padding: EdgeInsets.all(0),
                       ),
                     )
-                  : !provider.isUpdate && provider.menu.quantity > 1
+                  : !controller.isUpdate && controller.menu.quantity > 1
                       ? ElevatedButton(
-                          onPressed: provider.decrementQuantity,
+                          onPressed: controller.decrementQuantity,
                           child: Icon(
                             Icons.remove_rounded,
                             color: Colors.white,
@@ -59,7 +62,7 @@ class DetailMenuPageQuantityButton extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(left: 20, right: 20),
               child: Text(
-                provider.menu.quantity.toString(),
+                controller.menu.quantity.toString(),
                 style: quantityStyle,
               ),
             ),
@@ -67,7 +70,7 @@ class DetailMenuPageQuantityButton extends StatelessWidget {
               width: 39,
               height: 39,
               child: ElevatedButton(
-                onPressed: provider.incrementQuantity,
+                onPressed: controller.incrementQuantity,
                 child: Icon(
                   Icons.add_rounded,
                   color: Colors.white,
