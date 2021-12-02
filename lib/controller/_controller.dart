@@ -16,7 +16,7 @@ part '../ui/pages/checkout_page/checkout_page_controller.dart';
 
 part '../ui/pages/detail_menu_page/detail_menu_page_controller.dart';
 
-part '../ui/pages/home_page/home_page_controller.dart';
+part 'api_controller.dart';
 
 part 'barcode_controller.dart';
 

@@ -165,6 +165,7 @@ class _ScanQrPageState extends State<ScanQrPage> {
 
   _launchUrl(String validUrl) async {
     String url = validUrl;
+    print('URLURL: ' + url);
     if (await canLaunch(url)) {
       await launch(url);
     } else {
