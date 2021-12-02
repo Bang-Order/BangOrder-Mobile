@@ -5,13 +5,6 @@ class ApiController extends GetxController {
   final restaurant = Get.put(RestaurantController());
   final menuCategory = Get.put(MenuCategoryController());
   final menu = Get.put(MenuController());
-  final barcode = Get.put(BarcodeController());
-
-  @override
-  void onInit() async {
-    await callApi();
-    super.onInit();
-  }
 
   Future<void> callApi() async {
     isLoading = true;

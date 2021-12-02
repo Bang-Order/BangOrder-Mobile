@@ -12,7 +12,11 @@ class HomepageFABComponent extends StatelessWidget {
       builder: (_) => controller.order.getOrderResponse != null
           ? ElevatedButton(
               onPressed: () {
-                Get.to(AfterOrderPage());
+                Get.to(
+                  AfterOrderPage(),
+                  transition: Transition.fade,
+                  duration: Duration(milliseconds: 500),
+                );
               },
               child: Text(
                 'Status Pesanan',
@@ -36,11 +40,10 @@ class HomepageFABComponent extends StatelessWidget {
               builder: (_) => controller.cart.items.isNotEmpty
                   ? ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CheckoutPage(),
-                          ),
+                        Get.to(
+                          CheckoutPage(),
+                          transition: Transition.cupertino,
+                          duration: Duration(milliseconds: 500),
                         );
                       },
                       child: Row(

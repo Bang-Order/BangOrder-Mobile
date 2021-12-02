@@ -3,7 +3,7 @@ part of '../../pages.dart';
 class HomepageRecommendationMenuComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ApiController());
+    final controller = Get.put(HomePageController());
 
     return GetBuilder(
       init: ApiController(),
@@ -24,7 +24,7 @@ class HomepageRecommendationMenuComponent extends StatelessWidget {
               shrinkWrap: true,
               itemCount: 4,
               itemBuilder: (context, i) => RecommendationCard(
-                data: controller.menu.getRecommendationMenu[i],
+                data: controller.api.menu.getRecommendationMenu[i],
                 context: context,
               ),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

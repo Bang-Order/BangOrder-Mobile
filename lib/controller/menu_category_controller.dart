@@ -3,7 +3,6 @@ part of '_controller.dart';
 class MenuCategoryController extends GetxController {
   late List<MenuCategory> _data;
 
-
   Future<void> callApi() async {
     data = await MenuCategoryServices.getMenuCategory();
   }

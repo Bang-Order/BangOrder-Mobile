@@ -10,10 +10,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-part 'menu_card.dart';
-
-part 'recommendation_card.dart';
-
 part 'popup.dart';
 
 part 'history_card.dart';
@@ -21,4 +17,7 @@ part 'history_card.dart';
 part 'total_price.dart';
 
 part 'ordered_menu_card.dart';
+
 part 'network_image.dart';
+
+part 'menu_card.dart';
