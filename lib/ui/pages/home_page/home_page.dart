@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
                   ),
                   onRefresh: () async {
                     //monitor fetch data from network
-                    await controller.callApi();
+                    await controller.api.callApi();
                     _refreshController.refreshCompleted();
                   },
                   child: SingleChildScrollView(

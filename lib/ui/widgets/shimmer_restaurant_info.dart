@@ -7,7 +7,7 @@ class ShimmerRestaurantInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      margin: EdgeInsets.only(top: 16),
+      margin: EdgeInsets.only(top: 32),
       padding: EdgeInsets.all(defaultMargin),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
