@@ -1,9 +1,9 @@
-part of 'widgets.dart';
+part of '_widgets.dart';
 
-class TotalPrice extends StatelessWidget {
+class TotalPriceWidget extends StatelessWidget {
   final String price;
 
-  const TotalPrice({
+  const TotalPriceWidget({
     Key? key,
     required this.price,
   }) : super(key: key);

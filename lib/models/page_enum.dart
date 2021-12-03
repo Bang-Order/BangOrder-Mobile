@@ -1,4 +1,4 @@
-part of 'models.dart';
+part of '_models.dart';
 
 enum PageEnum {
   HomePage,

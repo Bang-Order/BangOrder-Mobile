@@ -1,4 +1,4 @@
-part of '../pages.dart';
+part of '../_pages.dart';
 
 class DetailMenuPage extends StatelessWidget {
   const DetailMenuPage({Key? key}) : super(key: key);
@@ -8,9 +8,7 @@ class DetailMenuPage extends StatelessWidget {
     final controller = Get.put(DetailMenuPageController());
 
     return WillPopScope(
-      onWillPop: () {
-        return controller.exit(context);
-      },
+      onWillPop: () => controller.exit(),
       child: Scaffold(
         appBar: detailMenuPageAppbar(context),
         body: SingleChildScrollView(

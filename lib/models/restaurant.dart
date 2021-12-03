@@ -1,4 +1,4 @@
-part of 'models.dart';
+part of '_models.dart';
 
 class Restaurant {
   int id;
@@ -28,3 +28,5 @@ class Restaurant {
     );
   }
 }
+
+Restaurant parseRestaurant(data) => Restaurant.fromJson(jsonDecode(data));

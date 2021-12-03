@@ -42,51 +42,45 @@ class DetailMenuPageController extends GetxController {
     return double.parse(menu.price) * menu.quantity;
   }
 
-  void removeMenuInCart(context) {
+  void removeMenuInCart() {
     cart.deleteItem(menu.id);
     update();
-    pop(context);
+    pop();
   }
 
-  void updateMenuInCart(context) {
+  void updateMenuInCart() {
     cart.updateItem(menu, menu);
     update();
-    pop(context);
+    pop();
   }
 
-  void addMenuToCart(context) {
+  void addMenuToCart() {
     cart.addItem(menu);
     update();
-    pop(context);
+    pop();
   }
 
-  void pop(context) {
+  void pop() {
     switch (previousPage) {
       case PageEnum.HomePage:
-        Navigator.pop(context);
+        Get.back();
         break;
       case PageEnum.SearchPage:
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => HomePage()),
-          (route) => false,
-        );
+        Get.off(HomePage());
         break;
       case PageEnum.CheckoutPage:
-        Navigator.pop(context);
+        Get.back();
         break;
       case PageEnum.DetailPage:
         break;
     }
-    print("STACK POP: " + Navigator.of(context).toString());
   }
 
-  Future<bool> exit(context) {
+  Future<bool> exit() {
     if (isUpdate) {
       menu.quantity = initQuantity;
       menu.notes.text = initNotes;
       cart.updateItem(menu, menu);
-      print("NOTE: " + menu.notes.text);
-      print('initnote: ' + initNotes);
     } else if (!isUpdate) {
       menu.quantity = 1;
       menu.notes = TextEditingController();
@@ -95,7 +89,7 @@ class DetailMenuPageController extends GetxController {
 
     update();
 
-    pop(context);
+    pop();
     return Future.value(true);
   }
 

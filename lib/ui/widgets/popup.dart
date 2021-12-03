@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of '_widgets.dart';
 
 class Popup {
   BuildContext _context;
@@ -31,7 +31,7 @@ class Popup {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () => Navigator.pop(_context),
+                    onPressed: () => Get.back(),
                     child: Text(
                       'Tidak',
                       style: successPopupButton,
@@ -92,7 +92,7 @@ class Popup {
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => Navigator.pop(_context),
+              onPressed: () => Get.back(),
               child: Text(
                 'Oke',
                 style: successPopupButton,

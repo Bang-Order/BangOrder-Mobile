@@ -1,4 +1,4 @@
-part of '../../pages.dart';
+part of '../../_pages.dart';
 
 class HomepageAppbarComponent extends StatelessWidget {
   late bool innerBoxIsScrolled;
@@ -30,14 +30,7 @@ class HomepageAppbarComponent extends StatelessWidget {
           color: innerBoxIsScrolled ? blackColor : Colors.white,
         ),
         onPressed: () {
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => LandingPage(
-                key: Key('LandingPage'),
-              ),
-            ),
-            (route) => false,
-          );
+          Get.offAll(LandingPage());
         },
       ),
       actions: [
@@ -81,7 +74,7 @@ class HomepageAppbarComponent extends StatelessWidget {
                   end: Alignment.center,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

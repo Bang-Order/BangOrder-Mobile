@@ -1,4 +1,4 @@
-part of 'models.dart';
+part of '_models.dart';
 
 class OrderResponse {
   String? restaurantName;

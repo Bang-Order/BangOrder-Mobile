@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of '_widgets.dart';
 
 class ShimmerRestaurantInfo extends StatelessWidget {
   const ShimmerRestaurantInfo({Key? key}) : super(key: key);

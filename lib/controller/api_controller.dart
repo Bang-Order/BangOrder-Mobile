@@ -2,6 +2,7 @@ part of '_controller.dart';
 
 class ApiController extends GetxController {
   bool _isLoading = true;
+
   final restaurant = Get.put(RestaurantController());
   final menuCategory = Get.put(MenuCategoryController());
   final menu = Get.put(MenuController());

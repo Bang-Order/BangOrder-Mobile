@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of '_widgets.dart';
 
 class ShimmerRecommendationCard extends StatelessWidget {
   const ShimmerRecommendationCard({Key? key}) : super(key: key);

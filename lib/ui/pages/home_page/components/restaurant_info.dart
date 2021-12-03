@@ -1,4 +1,4 @@
-part of '../../pages.dart';
+part of '../../_pages.dart';
 
 class RestaurantInfo extends StatelessWidget {
   @override

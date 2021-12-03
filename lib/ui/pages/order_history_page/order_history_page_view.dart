@@ -1,4 +1,4 @@
-part of '../pages.dart';
+part of '../_pages.dart';
 
 class OrderHistoryPage extends StatelessWidget {
   const OrderHistoryPage({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class OrderHistoryPage extends StatelessWidget {
             Icons.arrow_back_outlined,
             color: blackColor,
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Get.back(),
         ),
       ),
       body: Container(
@@ -25,7 +25,7 @@ class OrderHistoryPage extends StatelessWidget {
           vertical: defaultMargin / 2,
         ),
         child: FutureBuilder<List<OrderResponse>>(
-          future: HistoryHelper.getAllOrder(),
+          future: DatabaseOrderHistory.getAllOrder(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data!.isEmpty) {

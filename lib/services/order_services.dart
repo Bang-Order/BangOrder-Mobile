@@ -1,4 +1,4 @@
-part of 'services.dart';
+part of '_services.dart';
 
 class OrderServices {
   static Future postOrder(Order order) async {

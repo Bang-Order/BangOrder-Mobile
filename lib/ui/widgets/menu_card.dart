@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of '_widgets.dart';
 
 class MenuCard extends StatelessWidget {
   Menu data;
@@ -13,6 +13,7 @@ class MenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('this.prevPage: ' + this.prevPage.toString());
     final cart = Get.put(CartController());
 
     return Material(

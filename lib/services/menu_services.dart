@@ -1,4 +1,4 @@
-part of 'services.dart';
+part of '_services.dart';
 
 class MenuServices {
   static Future<List<Menu>> getMenu() async {
@@ -14,15 +14,9 @@ class MenuServices {
 
     if (response.statusCode == 200) {
       print("MENUUU: " + response.body);
-      return _parseMenus(response.body);
+      return parseMenus(response.body);
     } else {
       throw Exception('Failed to load data ' + response.statusCode.toString());
     }
-  }
-
-  static List<Menu> _parseMenus(String responseBody) {
-    return List<Menu>.from(
-      json.decode(responseBody)['data'].map((x) => Menu.fromJson(x)),
-    );
   }
 }

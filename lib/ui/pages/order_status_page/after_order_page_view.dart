@@ -1,4 +1,4 @@
-part of '../pages.dart';
+part of '../_pages.dart';
 
 class AfterOrderPage extends StatelessWidget {
   const AfterOrderPage({Key? key}) : super(key: key);
@@ -15,9 +15,9 @@ class AfterOrderPage extends StatelessWidget {
           switch (snapshot.data.snapshot.value) {
             case 'payment_pending':
               return WebViewPage(
+                backOnClick: () => Get.off(HomePage()),
                 title: "Payment",
-                selectedUrl:
-                    controller.orderResponse.invoiceUrl,
+                selectedUrl: controller.orderResponse.invoiceUrl,
               );
             case 'antri':
               return OrderStatusPage(

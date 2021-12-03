@@ -1,4 +1,4 @@
-part of '../../pages.dart';
+part of '../../_pages.dart';
 
 class HomepageFABComponent extends StatelessWidget {
   const HomepageFABComponent({Key? key}) : super(key: key);

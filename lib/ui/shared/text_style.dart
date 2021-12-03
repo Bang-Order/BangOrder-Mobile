@@ -1,4 +1,4 @@
-part of 'shared.dart';
+part of '_shared.dart';
 
 TextStyle appbarTextStyle = TextStyle(
   fontSize: 20,

@@ -1,4 +1,4 @@
-part of '../../pages.dart';
+part of '../../_pages.dart';
 
 class HomepageMenuCategoryComponent extends StatefulWidget {
   const HomepageMenuCategoryComponent({Key? key}) : super(key: key);

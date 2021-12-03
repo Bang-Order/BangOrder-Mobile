@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bangorder_mobile/controller/_controller.dart';
-import 'package:bangorder_mobile/models/models.dart';
+import 'package:bangorder_mobile/models/_models.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:http/http.dart' as http;

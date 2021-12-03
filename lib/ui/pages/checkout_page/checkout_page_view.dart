@@ -1,4 +1,4 @@
-part of '../pages.dart';
+part of '../_pages.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class CheckoutPage extends StatelessWidget {
             Icons.arrow_back_outlined,
             color: blackColor,
           ),
-          onPressed: controller.backOnClick,
+          onPressed: () => Get.back(),
         ),
       ),
       body: Column(

@@ -1,4 +1,4 @@
-part of '../../pages.dart';
+part of '../../_pages.dart';
 
 class HomepageRecommendationMenuComponent extends StatelessWidget {
   @override

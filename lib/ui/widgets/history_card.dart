@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of '_widgets.dart';
 
 class HistoryCard extends StatelessWidget {
   late OrderResponse data;
@@ -9,10 +9,7 @@ class HistoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => AfterOrderPage()),
-        );
+        Get.to(AfterOrderPage());
       },
       child: Container(
         padding: EdgeInsets.symmetric(

@@ -1,4 +1,4 @@
-part of 'shared.dart';
+part of '_shared.dart';
 
 double defaultMargin = 16.0;
 
