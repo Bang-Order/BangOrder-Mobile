@@ -10,6 +10,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:bangorder_mobile/ui/widgets/widgets.dart';
 import 'package:search_page/search_page.dart';
@@ -77,3 +78,5 @@ part 'webview/webview.dart';
 part 'order_history_page/order_history_page.dart';
 
 part 'order_status_page/components/order_status_page.dart';
+
+part 'home_page/components/recommendation_card.dart';

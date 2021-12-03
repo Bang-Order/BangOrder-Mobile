@@ -21,7 +21,11 @@ class DetailMenuPageController extends GetxController {
     }
     this.previousPage = previousPage;
 
-    Get.to(DetailMenuPage());
+    Get.to(
+      DetailMenuPage(),
+      transition: Transition.cupertino,
+      duration: Duration(milliseconds: 500),
+    );
   }
 
   void incrementQuantity() {

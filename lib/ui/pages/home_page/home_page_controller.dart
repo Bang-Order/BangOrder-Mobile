@@ -1,30 +1,48 @@
 part of '../../../controller/_controller.dart';
 
 class HomePageController extends GetxController {
-  bool _isLoading = true;
-  final restaurant = Get.put(RestaurantController());
-  final menuCategory = Get.put(MenuCategoryController());
-  final menu = Get.put(MenuController());
+  final api = Get.put(ApiController());
   final barcode = Get.put(BarcodeController());
 
   @override
   void onInit() async {
-    await callApi();
+    await _getDeepLinkFromOutside();
+    await _getDeepLinkFromInside();
     super.onInit();
   }
 
-  Future<void> callApi() async {
-    isLoading = true;
-    await restaurant.callApi();
-    await menuCategory.callApi();
-    await menu.callApi();
-    isLoading = false;
+  Future<void> _getDeepLinkFromInside() async {
+    FirebaseDynamicLinks.instance.onLink(
+      onSuccess: (PendingDynamicLinkData? dynamicLink) async {
+        final Uri? deepLink = dynamicLink?.link;
+        if (deepLink != null) {
+          final controller = Get.put(HomePageController());
+          controller.getDeeplinkSuccess(deepLink);
+        } else {
+          Get.back();
+        }
+      },
+      onError: (OnLinkErrorException e) async {
+        print(e.message);
+        Get.back();
+      },
+    );
   }
 
-  bool get isLoading => _isLoading;
+  Future<void> _getDeepLinkFromOutside() async {
+    print('_getInitialLink');
+    final PendingDynamicLinkData? data =
+        await FirebaseDynamicLinks.instance.getInitialLink();
+    final Uri? deepLink = data?.link;
 
-  set isLoading(bool value) {
-    _isLoading = value;
-    update();
+    if (deepLink != null) {
+      final controller = Get.put(HomePageController());
+      controller.getDeeplinkSuccess(deepLink);
+    }
+  }
+
+  void getDeeplinkSuccess(deeplink) {
+    barcode.setDataFromDeeplink(deeplink);
+    api.callApi();
   }
 }

@@ -2,6 +2,8 @@ import 'package:bangorder_mobile/shared/shared.dart';
 import 'package:bangorder_mobile/ui/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,14 +19,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: yellowColor,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (_) => LandingPage(),
-        '/home': (_) => HomePage(),
-        '/kZwrvR1p5eeVtcWU6': (_) => HomePage(),
-        '/6hEqt7pc5DeTRbVGA': (_) => HomePage(),
-        // '/home': (_) => OrderStatusPage(),
-      },
+      getPages: [
+        GetPage(
+          name: '/',
+          page: () => LandingPage(),
+        ),
+        GetPage(
+          name: '/:id',
+          page: () => HomePage(),
+          transition: Transition.cupertino,
+        ),
+      ],
     );
   }
 }

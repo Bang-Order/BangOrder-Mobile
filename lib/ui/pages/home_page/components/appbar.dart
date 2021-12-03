@@ -14,10 +14,9 @@ class HomepageAppbarComponent extends StatelessWidget {
     final controller = Get.put(HomePageController());
 
     return SliverAppBar(
-      onStretchTrigger: () async {},
       title: innerBoxIsScrolled
           ? Text(
-              controller.restaurant.getData!.name,
+              controller.api.restaurant.getData!.name,
               style: innerBoxIsScrolled
                   ? appbarTextStyle
                   : appbarScrolledTextStyle,
@@ -52,7 +51,7 @@ class HomepageAppbarComponent extends StatelessWidget {
             onPressed: () => showSearch(
               context: context,
               delegate: SearchPage<Menu>(
-                items: controller.menu.data,
+                items: controller.api.menu.data,
                 builder: (t) => MenuCard(
                   data: t,
                   context: context,
@@ -71,7 +70,7 @@ class HomepageAppbarComponent extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             Image.network(
-              controller.restaurant.getData!.image,
+              controller.api.restaurant.getData!.image,
               fit: BoxFit.cover,
             ),
             Container(

@@ -10,7 +10,7 @@ class MenuItemList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomePageController());
+    final controller = Get.put(ApiController());
 
     return GetBuilder(
       init: RestaurantController(),

@@ -1,6 +1,6 @@
 part of '../pages.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatelessWidget{
   const LandingPage({Key? key}) : super(key: key);
 
   @override

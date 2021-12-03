@@ -11,10 +11,6 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
-part 'menu_card.dart';
-
-part 'recommendation_card.dart';
-
 part 'popup.dart';
 
 part 'history_card.dart';
@@ -32,3 +28,5 @@ part 'shimmer_menu_card.dart';
 part 'shimmer_restaurant_info.dart';
 
 part 'shimmer_recommendation_section.dart';
+
+part 'menu_card.dart';
