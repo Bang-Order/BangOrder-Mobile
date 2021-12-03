@@ -39,6 +39,7 @@ class _HomepageMenuCategoryComponentState
         iconColor: Colors.black,
         tilePadding: EdgeInsets.symmetric(
           horizontal: defaultMargin,
+          vertical: 0,
         ),
         title: Text(
           data.name,

@@ -1,3 +1,4 @@
+import 'package:bangorder_mobile/controller/_controller.dart';
 import 'package:bangorder_mobile/helpers/helpers.dart';
 import 'package:bangorder_mobile/shared/shared.dart';
 import 'package:bangorder_mobile/utils/utils.dart';
@@ -21,8 +22,13 @@ part 'history_card.dart';
 part 'total_price.dart';
 
 part 'ordered_menu_card.dart';
+
 part 'network_image.dart';
 
 part 'shimmer_recommendation_card.dart';
 
 part 'shimmer_menu_card.dart';
+
+part 'shimmer_restaurant_info.dart';
+
+part 'shimmer_recommendation_section.dart';

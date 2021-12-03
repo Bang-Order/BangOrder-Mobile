@@ -9,5 +9,3 @@ import 'package:bangorder_mobile/models/models.dart';
 part 'number_format.dart';
 
 part 'data_search.dart';
-
-part 'call_api.dart';

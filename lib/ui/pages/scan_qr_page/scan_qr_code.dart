@@ -123,9 +123,9 @@ class _ScanQrPageState extends State<ScanQrPage> {
   }
 
   _checkingUrl(Barcode result) async {
-    if (result.code!.contains("https")) {
+    if (result.code.contains("https")) {
       print("masuk ke if satu");
-      _launchUrl(result.code!);
+      _launchUrl(result.code);
     } else {
       print("masuk ke else");
       final provider = Get.put(BarcodeController());

@@ -29,7 +29,7 @@ class MenuItemList extends StatelessWidget {
           : ListView.builder(
               shrinkWrap: true,
               controller: ScrollController(),
-              itemCount: menu.getMenuByCategoryId(menuCategory).length,
+              itemCount: controller.menu.getMenuByCategoryId(menuCategory).length,
               itemBuilder: (_, i) => ShimmerMenuCard(),
             ),
     );

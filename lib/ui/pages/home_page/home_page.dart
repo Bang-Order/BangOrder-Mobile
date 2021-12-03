@@ -25,16 +25,29 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ],
-                body: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      RestaurantInfo(),
-                      SizedBox(height: 8),
-                      HomepageRecommendationMenuComponent(),
-                      SizedBox(height: 8),
-                      HomepageMenuCategoryComponent(),
-                      SizedBox(height: 100),
-                    ],
+                body: SmartRefresher(
+                  controller: _refreshController,
+                  enablePullUp: false,
+                  enablePullDown: true,
+                  header: WaterDropHeader(
+                    waterDropColor: yellowColor,
+                  ),
+                  onRefresh: () async {
+                    //monitor fetch data from network
+                    await controller.callApi();
+                    _refreshController.refreshCompleted();
+                  },
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        RestaurantInfo(),
+                        SizedBox(height: 8),
+                        HomepageRecommendationMenuComponent(),
+                        SizedBox(height: 8),
+                        HomepageMenuCategoryComponent(),
+                        SizedBox(height: 100),
+                      ],
+                    ),
                   ),
                 ),
               )

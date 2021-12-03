@@ -9,12 +9,16 @@ class HomePageController extends GetxController {
 
   @override
   void onInit() async {
+    await callApi();
+    super.onInit();
+  }
+
+  Future<void> callApi() async {
     isLoading = true;
     await restaurant.callApi();
     await menuCategory.callApi();
     await menu.callApi();
     isLoading = false;
-    super.onInit();
   }
 
   bool get isLoading => _isLoading;
