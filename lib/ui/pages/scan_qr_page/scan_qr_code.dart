@@ -47,18 +47,18 @@ class _ScanQrPageState extends State<ScanQrPage> {
       ),
       body: Stack(
         children: <Widget>[
-          Container(child: _buildQrView(context)),
-          Align(
-            alignment: FractionalOffset.bottomCenter,
-            child: Container(
-                margin: EdgeInsets.only(right: 80, left: 80, bottom: 250),
-                width: MediaQuery.of(context).size.width,
-                child: Text(
-                  "Arahkan kamera anda ke QR Code yang tersedia pada meja",
-                  textAlign: TextAlign.center,
-                  style: scanTipsStyle,
-                ),
-                color: Colors.transparent),
+          Container(
+            child: _buildQrView(context),
+          ),
+          Positioned(
+            left: MediaQuery.of(context).size.width * 0.2,
+            right: MediaQuery.of(context).size.width * 0.2,
+            top: MediaQuery.of(context).size.width * 1.2,
+            child: Text(
+              "Arahkan kamera anda ke QR Code yang tersedia pada meja",
+              textAlign: TextAlign.center,
+              style: scanTipsStyle,
+            ),
           )
         ],
       ),

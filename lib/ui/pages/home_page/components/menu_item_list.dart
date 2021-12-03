@@ -26,7 +26,12 @@ class MenuItemList extends StatelessWidget {
                 prevPage: PageEnum.HomePage,
               ),
             )
-          : SizedBox(),
+          : ListView.builder(
+              shrinkWrap: true,
+              controller: ScrollController(),
+              itemCount: controller.menu.getMenuByCategoryId(menuCategory).length,
+              itemBuilder: (_, i) => ShimmerMenuCard(),
+            ),
     );
   }
 }

@@ -1,8 +1,15 @@
 part of '../../pages.dart';
 
-class HomepageMenuCategoryComponent extends StatelessWidget {
+class HomepageMenuCategoryComponent extends StatefulWidget {
   const HomepageMenuCategoryComponent({Key? key}) : super(key: key);
 
+  @override
+  State<HomepageMenuCategoryComponent> createState() =>
+      _HomepageMenuCategoryComponentState();
+}
+
+class _HomepageMenuCategoryComponentState
+    extends State<HomepageMenuCategoryComponent> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomePageController());
@@ -30,6 +37,7 @@ class HomepageMenuCategoryComponent extends StatelessWidget {
         iconColor: Colors.black,
         tilePadding: EdgeInsets.symmetric(
           horizontal: defaultMargin,
+          vertical: 0,
         ),
         title: Text(
           data.name,

@@ -52,7 +52,9 @@ class Popup {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      PaymentHelper(_context).navigateToWebView();
+                      final cart = Get.put(CartController());
+                      cart.items = [];
+                      Get.to(AfterOrderPage());
                     },
                     child: Text(
                       'Ya',

@@ -4,7 +4,7 @@ import 'package:bangorder_mobile/models/models.dart';
 import 'package:bangorder_mobile/shared/shared.dart';
 import 'package:bangorder_mobile/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide RefreshIndicator, RefreshIndicatorState;
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -25,6 +25,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
 import 'package:lottie/lottie.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:auto_route/auto_route.dart';
 
 part 'checkout_page/checkout_page.dart';
 
