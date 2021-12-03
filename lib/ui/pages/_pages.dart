@@ -4,7 +4,7 @@ import 'package:bangorder_mobile/models/_models.dart';
 import 'package:bangorder_mobile/ui/shared/_shared.dart';
 import 'package:bangorder_mobile/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide RefreshIndicator, RefreshIndicatorState;
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -14,9 +14,7 @@ import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:bangorder_mobile/ui/widgets/_widgets.dart';
 import 'package:search_page/search_page.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'dart:developer';
 import 'dart:io';
@@ -24,6 +22,7 @@ import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
 import 'package:lottie/lottie.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 part 'checkout_page/checkout_page_view.dart';
 

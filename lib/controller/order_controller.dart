@@ -28,8 +28,7 @@ class OrderController extends GetxController {
     );
     print('ORDER SUCCESSFULLY CREATED');
 
-    final cart = Get.put(CartController());
-    cart.items = [];
+
   }
 
   bool isOrderNull() {

@@ -51,7 +51,11 @@ class Popup {
                 SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () => Get.to(AfterOrderPage()),
+                    onPressed: () {
+                      final cart = Get.put(CartController());
+                      cart.items = [];
+                      Get.to(AfterOrderPage());
+                    },
                     child: Text(
                       'Ya',
                       style: successPopupButton,
