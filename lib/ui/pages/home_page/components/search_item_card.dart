@@ -1,4 +1,4 @@
-part of '../../pages.dart';
+part of '../../_pages.dart';
 
 class SPSearchItemCard extends StatelessWidget {
   Menu _menu;

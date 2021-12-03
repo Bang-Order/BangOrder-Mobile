@@ -1,4 +1,4 @@
-part of 'models.dart';
+part of '_models.dart';
 
 List<OrderHistory> orderHistoryFromJson(String str) {
   return List<OrderHistory>.from(json.decode(str)['data'].map((x) {

@@ -1,4 +1,4 @@
-part of '../../../pages/pages.dart';
+part of '../../../pages/_pages.dart';
 
 class DetailMenuPageQuantityButton extends StatelessWidget {
   const DetailMenuPageQuantityButton({Key? key}) : super(key: key);

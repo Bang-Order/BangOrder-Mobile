@@ -1,4 +1,4 @@
-part of '../../pages.dart';
+part of '../../_pages.dart';
 
 class OrderStatusPage extends StatelessWidget {
   final double statusBarHeight;
@@ -30,7 +30,7 @@ class OrderStatusPage extends StatelessWidget {
             color: blackColor,
           ),
           onPressed: () {
-            if(title =='Sudah Diantar'){
+            if (title == 'Sudah Diantar') {
               Get.put(OrderController()).setOrderResponse = null;
               controller.dispose();
             }
@@ -71,20 +71,6 @@ class OrderStatusPage extends StatelessWidget {
                     style: orderStatusSubTitleStyle,
                     textAlign: TextAlign.center,
                   ),
-                ],
-                if (title == 'Belum Bayar') ...[
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.to(WebViewPage(
-                          title: "Payment",
-                          selectedUrl: controller.getInvoiceURL(),
-                        ));
-                      },
-                      child: Text('Bayar Sekarang'),
-                    ),
-                  )
                 ],
               ],
             ),
@@ -134,7 +120,7 @@ class OrderStatusPage extends StatelessWidget {
                 // Text(controller.getOrderedMenu()![index].name),
                 ),
           ),
-          TotalPrice(
+          TotalPriceWidget(
             price: controller.getTotalPrice(),
           ),
         ],

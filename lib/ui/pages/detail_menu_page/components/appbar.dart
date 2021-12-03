@@ -1,13 +1,13 @@
-part of '../../../pages/pages.dart';
+part of '../../../pages/_pages.dart';
 
 AppBar detailMenuPageAppbar(context) {
-  final provider = Get.put(DetailMenuPageController());
+  final controller = Get.put(DetailMenuPageController());
 
   return AppBar(
     title: GetBuilder(
       init: DetailMenuPageController(),
       builder: (_) => Text(
-        provider.menu.name,
+        controller.menu.name,
         style: appbarTextStyle,
       ),
     ),
@@ -18,9 +18,7 @@ AppBar detailMenuPageAppbar(context) {
           Icons.arrow_back_outlined,
           color: blackColor,
         ),
-        onPressed: () {
-          provider.exit(context);
-        },
+        onPressed: controller.exit,
       ),
     ),
   );

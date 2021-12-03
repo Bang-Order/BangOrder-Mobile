@@ -1,4 +1,4 @@
-part of 'models.dart';
+part of '_models.dart';
 
 class MenuCategory {
   int id;
@@ -15,4 +15,10 @@ class MenuCategory {
       name: json['name'],
     );
   }
+}
+
+List<MenuCategory> parseMenuCategories(String responseBody) {
+  return List<MenuCategory>.from(json.decode(responseBody)['data'].map((x) {
+    return MenuCategory.fromJson(x);
+  }));
 }

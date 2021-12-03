@@ -1,4 +1,4 @@
-part of 'services.dart';
+part of '_services.dart';
 
 class RestaurantServices {
   static Future<Restaurant> getRestaurantInfo() async {
@@ -21,11 +21,9 @@ class RestaurantServices {
 
     if (response.statusCode == 200) {
       print('RESTAURANT INFOOO' + response.body);
-      return _parse(response.body);
+      return parseRestaurant(response.body);
     } else {
       throw Exception('Failed to load data ' + response.statusCode.toString());
     }
   }
-
-  static Restaurant _parse(data) => Restaurant.fromJson(jsonDecode(data));
 }

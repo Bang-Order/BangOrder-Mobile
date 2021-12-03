@@ -32,7 +32,7 @@ class HomePageController extends GetxController {
   Future<void> _getDeepLinkFromOutside() async {
     print('_getInitialLink');
     final PendingDynamicLinkData? data =
-        await FirebaseDynamicLinks.instance.getInitialLink();
+    await FirebaseDynamicLinks.instance.getInitialLink();
     final Uri? deepLink = data?.link;
 
     if (deepLink != null) {

@@ -22,7 +22,7 @@ class OrderController extends GetxController {
   void orderSuccess(OrderResponse response) {
     final order = Get.put(OrderController());
     order.setOrderResponse = response;
-    HistoryHelper.insertOrder(
+    DatabaseOrderHistory.insertOrder(
       response,
       Get.put(RestaurantController()).getData!,
     );

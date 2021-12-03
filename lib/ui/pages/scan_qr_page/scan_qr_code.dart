@@ -1,4 +1,4 @@
-part of '../pages.dart';
+part of '../_pages.dart';
 
 class ScanQrPage extends StatefulWidget {
   const ScanQrPage({Key? key}) : super(key: key);
@@ -40,9 +40,7 @@ class _ScanQrPageState extends State<ScanQrPage> {
             Icons.arrow_back_outlined,
             color: blackColor,
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Get.back(),
         ),
       ),
       body: Stack(
@@ -131,8 +129,6 @@ class _ScanQrPageState extends State<ScanQrPage> {
       final provider = Get.put(BarcodeController());
       barcodeModel = _decodeToString(result.code);
       provider.setData = barcodeModel;
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
     }
   }
 

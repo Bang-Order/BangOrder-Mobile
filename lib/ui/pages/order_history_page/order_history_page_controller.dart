@@ -13,7 +13,7 @@ class OrderHistoryPageController extends GetxController {
   }
 
   Future<List<String>> getOrderId() async {
-    List<OrderResponse> getOrder = await HistoryHelper.getAllOrder();
+    List<OrderResponse> getOrder = await DatabaseOrderHistory.getAllOrder();
     List<String> orderId = [];
 
     getOrder.forEach((element) {

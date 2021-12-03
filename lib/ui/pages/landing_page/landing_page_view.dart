@@ -1,6 +1,6 @@
-part of '../pages.dart';
+part of '../_pages.dart';
 
-class LandingPage extends StatelessWidget{
+class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
 
   @override
@@ -48,12 +48,7 @@ class LandingPage extends StatelessWidget{
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ScanQrPage(),
-                        ),
-                      );
+                      Get.to(ScanQrPage());
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.only(top: 16, bottom: 16),
@@ -68,12 +63,7 @@ class LandingPage extends StatelessWidget{
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => OrderHistoryPage(),
-                        ),
-                      );
+                      Get.to(OrderHistoryPage());
                     },
                     style: ElevatedButton.styleFrom(
                       side: BorderSide(color: yellowColor, width: 1.0),

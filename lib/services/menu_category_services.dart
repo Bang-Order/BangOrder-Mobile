@@ -1,7 +1,6 @@
-part of 'services.dart';
+part of '_services.dart';
 
 class MenuCategoryServices {
-
   static Future<List<MenuCategory>> getMenuCategory() async {
     final provider = Get.put(BarcodeController());
     final url = BaseURL +
@@ -17,14 +16,9 @@ class MenuCategoryServices {
 
     if (response.statusCode == 200) {
       print("MENUCATEGORYYY: " + response.body);
-      return _parseMenuCategories(response.body);
+      return parseMenuCategories(response.body);
     } else {
       throw Exception('Failed to load data' + response.statusCode.toString());
     }
-  }
-
-  static List<MenuCategory> _parseMenuCategories(String responseBody) {
-    return List<MenuCategory>.from(
-        json.decode(responseBody)['data'].map((x) => MenuCategory.fromJson(x)));
   }
 }

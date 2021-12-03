@@ -1,4 +1,4 @@
-part of '../../../pages/pages.dart';
+part of '../../../pages/_pages.dart';
 
 class DetailMenuNote extends StatelessWidget {
   const DetailMenuNote({Key? key}) : super(key: key);

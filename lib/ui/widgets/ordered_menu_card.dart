@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of '_widgets.dart';
 
 class OrderedMenuCard extends StatelessWidget {
   final String quantity;

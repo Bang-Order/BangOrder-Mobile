@@ -1,4 +1,4 @@
-part of '../../../pages/pages.dart';
+part of '../../../pages/_pages.dart';
 
 class DetailMenuPageAddToBasketButton extends StatelessWidget {
   const DetailMenuPageAddToBasketButton({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class DetailMenuPageAddToBasketButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: controller.isUpdate && controller.menu.quantity == 0
             ? ElevatedButton(
-                onPressed: () => controller.removeMenuInCart(context),
+                onPressed: controller.removeMenuInCart,
                 child: Text(
                   'Hapus Pesanan',
                   style: deleteStyle,
@@ -28,7 +28,7 @@ class DetailMenuPageAddToBasketButton extends StatelessWidget {
               )
             : controller.isUpdate
                 ? ElevatedButton(
-                    onPressed: () => controller.updateMenuInCart(context),
+                    onPressed: controller.updateMenuInCart,
                     child: Text(
                       'Tambahkan ke Keranjang - ' +
                           currency(controller.pricing()),
@@ -42,7 +42,7 @@ class DetailMenuPageAddToBasketButton extends StatelessWidget {
                     ),
                   )
                 : ElevatedButton(
-                    onPressed: () => controller.addMenuToCart(context),
+                    onPressed: controller.addMenuToCart,
                     child: Text(
                       'Tambahkan ke Keranjang - ' +
                           currency(controller.pricing()),
