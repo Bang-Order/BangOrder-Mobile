@@ -46,7 +46,11 @@ class AfterOrderPage extends StatelessWidget {
               return SizedBox();
           }
         } else {
-          return HomePage();
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         }
       },
     );
