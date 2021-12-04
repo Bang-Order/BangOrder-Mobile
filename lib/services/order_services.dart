@@ -4,16 +4,17 @@ class OrderServices {
   static Future postOrder(Order order) async {
     final provider = Get.put(BarcodeController());
     final response = await http.post(
-      Uri.parse(BaseURL + 'restaurants/${provider.getData!.restaurantId}/orders'),
+      Uri.parse(
+          BaseURL + 'restaurants/${provider.getData!.restaurantId}/orders'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(order.toJson(order)),
     );
     if (response.statusCode == 201) {
-      final data = jsonDecode(response.body)['data'];
-      final finalResponse = OrderResponse.fromJson(data);
-      Get.put(OrderController()).orderSuccess(finalResponse);
+      final orderResponse = orderHistoryFromJson2(response.body);
+      Get.put(OrderController()).orderSuccess(orderResponse);
+
       return true;
     } else {
       return false;
@@ -22,33 +23,21 @@ class OrderServices {
 
   static Future<List<OrderHistory>> getOrderHistory(
       List<String> orderId) async {
-    orderId.forEach((element) {
-      print('element: ' + element);
-    });
-    final queryParameters = {
-      'order_id': orderId,
-    };
-    final uri = Uri.http('192.168.0.7',
-        '/BangOrder-Backend/public/api/orders/history/', queryParameters);
-    final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-    final response = await http.get(uri, headers: headers);
+    print(jsonEncode({"order_id": orderId}));
+    final response = await http.post(
+      Uri.parse(
+          'http://192.168.0.7/BangOrder-Backend/public/api/orders/history'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({"order_id": orderId}),
+    );
 
-    // final url = Uri.parse(BaseURL + 'orders/history');
-    // final newURI = url.replace(queryParameters: body);
-    //
-    // final response = await http.get(
-    //   newURI,
-    //   headers: <String, String>{
-    //     'Content-Type': 'application/json; charset=UTF-8',
-    //   },
-    // );
-    // print('DATA ORDER SERCIVES: ' + response.body);
     if (response.statusCode == 200) {
       print('SUCCESS');
-
       return orderHistoryFromJson(response.body);
     } else {
-      print('FAILED');
+      print('FAILED ${response.statusCode}');
       return [];
     }
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 part 'menu_category.dart';
@@ -14,5 +13,4 @@ part 'page_enum.dart';
 
 part 'barcode.dart';
 
-part 'order_response.dart';
 part 'order_history.dart';
