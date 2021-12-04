@@ -54,7 +54,10 @@ class Popup {
                     onPressed: () {
                       final cart = Get.put(CartController());
                       cart.items = [];
-                      Get.to(AfterOrderPage());
+                      Get.put(AfterOrderPageController()).goToPage(
+                        orderHistory:
+                            Get.put(OrderController()).getOrderResponse,
+                      );
                     },
                     child: Text(
                       'Ya',

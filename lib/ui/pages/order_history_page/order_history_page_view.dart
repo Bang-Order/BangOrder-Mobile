@@ -20,34 +20,26 @@ class OrderHistoryPage extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: defaultMargin / 2,
-        ),
-        child: FutureBuilder<List<OrderResponse>>(
-          future: DatabaseOrderHistory.getAllOrder(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              if (snapshot.data!.isEmpty) {
-                return Center(child: Text('ORDER IS EMPTY'));
-              }
-              return ListView.separated(
-                shrinkWrap: true,
-                controller: ScrollController(),
-                itemBuilder: (context, index) => HistoryCard(
-                  data: snapshot.data![index],
+      body: GetBuilder<OrderHistoryPageController>(
+        builder: (_) => controller.orderHistory.isNotEmpty
+            ? Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: defaultMargin / 2,
                 ),
-                separatorBuilder: (context, index) => Divider(
-                  color: Colors.black,
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  controller: ScrollController(),
+                  itemCount: controller.orderHistory.length,
+                  itemBuilder: (context, index) => HistoryCard(
+                    data: controller.orderHistory[index],
+                    // data: snapshot.data![index],
+                  ),
+                  separatorBuilder: (context, index) => Divider(
+                    color: Colors.black,
+                  ),
                 ),
-                itemCount: snapshot.data!.length,
-              );
-            } else if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
-            }
-            return Center(child: CircularProgressIndicator());
-          },
-        ),
+              )
+            : Center(child: Text('ORDER IS EMPTY')),
       ),
     );
   }
