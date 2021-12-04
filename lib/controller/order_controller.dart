@@ -1,13 +1,14 @@
 part of '_controller.dart';
 
 class OrderController extends GetxController {
-  OrderResponse? _orderResponse;
+  OrderHistory? _orderResponse;
 
   void makeOrder(context) async {
     final provider = Get.put(CartController());
 
     final order = Order(
-      restaurantTableId: 1,
+      restaurantTableId:
+          int.parse(Get.put(BarcodeController()).getData!.restaurantId),
       totalPrice: provider.getTotalPrice(),
       orderItems: provider.items,
     );
@@ -19,25 +20,20 @@ class OrderController extends GetxController {
     }
   }
 
-  void orderSuccess(OrderResponse response) {
+  void orderSuccess(OrderHistory response) {
     final order = Get.put(OrderController());
     order.setOrderResponse = response;
-    DatabaseOrderHistory.insertOrder(
-      response,
-      Get.put(RestaurantController()).getData!,
-    );
+    DatabaseOrderHistory.insertOrder(response);
     print('ORDER SUCCESSFULLY CREATED');
-
-
   }
 
   bool isOrderNull() {
     return getOrderResponse == null;
   }
 
-  OrderResponse? get getOrderResponse => _orderResponse;
+  OrderHistory? get getOrderResponse => _orderResponse;
 
-  set setOrderResponse(OrderResponse? value) {
+  set setOrderResponse(OrderHistory? value) {
     _orderResponse = value;
     update();
   }
