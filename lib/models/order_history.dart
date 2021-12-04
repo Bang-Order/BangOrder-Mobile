@@ -6,7 +6,7 @@ class OrderHistory {
   int tableId;
   String tableNumber;
   String transactionId;
-  String invoiceUrl;
+  String? invoiceUrl;
   String orderStatus;
   List<OrderItem> orderItems;
   String totalPrice;

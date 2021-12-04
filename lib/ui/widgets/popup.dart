@@ -2,10 +2,11 @@ part of '_widgets.dart';
 
 class Popup {
   BuildContext _context;
-
   Popup(this._context);
 
   void showSuccessPopup() {
+    final controller = Get.put(CheckoutPageController());
+
     showDialog(
       context: _context,
       builder: (_context) => AlertDialog(
@@ -51,13 +52,18 @@ class Popup {
                 SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      final cart = Get.put(CartController());
-                      cart.items = [];
-                      Get.put(AfterOrderPageController()).goToPage(
-                        orderHistory:
-                            Get.put(OrderController()).getOrderResponse,
-                      );
+                    onPressed: () async {
+                      if (await controller.order.makeOrder()) {
+                        final cart = Get.put(CartController());
+                        cart.items = [];
+                        Get.put(AfterOrderPageController()).goToPage(
+                          orderHistory:
+                          Get.put(OrderController()).getOrderResponse,
+                        );
+                      } else {
+                        Get.back();
+                        showFailedPopup();
+                      }
                     },
                     child: Text(
                       'Ya',

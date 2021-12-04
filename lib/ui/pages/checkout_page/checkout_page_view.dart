@@ -22,36 +22,38 @@ class CheckoutPage extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            padding: EdgeInsets.all(16),
-            child: Text(
-              "Review Order",
-              style: reviewOrder,
-            ),
-          ),
-          GetBuilder(
-            init: CartController(),
-            builder: (_) => Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: ListView.separated(
-                shrinkWrap: true,
-                controller: ScrollController(),
-                itemBuilder: (context, index) => _customCard(
-                  controller.cart.items[index],
-                  context,
-                ),
-                separatorBuilder: (context, index) => Divider(
-                  height: 16,
-                  color: blackColor,
-                ),
-                itemCount: controller.cart.items.length,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              padding: EdgeInsets.all(16),
+              child: Text(
+                "Review Order",
+                style: reviewOrder,
               ),
             ),
-          ),
-        ],
+            GetBuilder(
+              init: CartController(),
+              builder: (_) => Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  controller: ScrollController(),
+                  itemBuilder: (context, index) => _customCard(
+                    controller.cart.items[index],
+                    context,
+                  ),
+                  separatorBuilder: (context, index) => Divider(
+                    height: 16,
+                    color: blackColor,
+                  ),
+                  itemCount: controller.cart.items.length,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
@@ -89,7 +91,8 @@ class CheckoutPage extends StatelessWidget {
                 fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
               ),
               onPressed: () {
-                controller.order.makeOrder(context);
+                Popup(context).showSuccessPopup();
+                // controller.order.makeOrder(context);
               },
             ),
           ),

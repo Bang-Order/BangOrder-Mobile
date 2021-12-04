@@ -3,7 +3,7 @@ part of '_controller.dart';
 class OrderController extends GetxController {
   OrderHistory? _orderResponse;
 
-  void makeOrder(context) async {
+  Future<bool> makeOrder() async {
     final provider = Get.put(CartController());
 
     final order = Order(
@@ -14,9 +14,11 @@ class OrderController extends GetxController {
     );
 
     if (isOrderNull() && !await OrderServices.postOrder(order)) {
-      Popup(context).showFailedPopup();
+      return false;
+      // Popup(context).showFailedPopup();
     } else {
-      Popup(context).showSuccessPopup();
+      return true;
+      // Popup(context).showSuccessPopup();
     }
   }
 
