@@ -18,7 +18,7 @@ class OrderStatusPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(OrderStatusPageController());
+    final controller = Get.put(AfterOrderPageController());
 
     return Scaffold(
       appBar: AppBar(
@@ -34,7 +34,7 @@ class OrderStatusPage extends StatelessWidget {
               Get.put(OrderController()).setOrderResponse = null;
               controller.dispose();
             }
-            Get.to(HomePage());
+            Get.offAll(LandingPage());
           },
         ),
       ),
@@ -92,7 +92,7 @@ class OrderStatusPage extends StatelessWidget {
   }
 
   Widget _panel(scrollController) {
-    final controller = Get.put(OrderStatusPageController());
+    final controller = Get.put(AfterOrderPageController());
 
     return Container(
       child: Column(

@@ -1,15 +1,18 @@
 part of '_widgets.dart';
 
 class HistoryCard extends StatelessWidget {
-  late OrderResponse data;
+  final OrderHistory data;
 
-  HistoryCard({Key? key, required this.data}) : super(key: key);
+  const HistoryCard({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(AfterOrderPage());
+        Get.put(AfterOrderPageController()).goToPage(orderHistory: data);
       },
       child: Container(
         padding: EdgeInsets.symmetric(
@@ -18,12 +21,12 @@ class HistoryCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Image.network(data.image!),
-              ),
-            ),
+            // Expanded(
+            //   child: ClipRRect(
+            //     borderRadius: BorderRadius.circular(5),
+            //     child: Image.network(data.ima!),
+            //   ),
+            // ),
             Expanded(
               flex: 3,
               child: Container(
@@ -34,7 +37,8 @@ class HistoryCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      data.restaurantName!,
+                      // data.restaurantName,
+                      data.id.toString(),
                       style: GoogleFonts.manrope(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -50,7 +54,7 @@ class HistoryCard extends StatelessWidget {
                     ),
                     SizedBox(height: defaultMargin / 2),
                     Text(
-                      data.createdAt!,
+                      data.createdAt,
                       style: GoogleFonts.manrope(
                         fontSize: 12,
                         fontWeight: FontWeight.w300,

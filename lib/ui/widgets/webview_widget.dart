@@ -22,7 +22,7 @@ class WebViewPage extends StatelessWidget {
             Icons.close_rounded,
             color: blackColor,
           ),
-          onPressed: () => backOnClick,
+          onPressed: () => Get.offAll(LandingPage()),
         ),
       ),
       body: WebView(
