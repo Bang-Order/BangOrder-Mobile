@@ -6,7 +6,7 @@ class AfterOrderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
-    final controller = Get.put(OrderStatusPageController());
+    final controller = Get.put(AfterOrderPageController());
 
     return StreamBuilder(
       stream: controller.getReference.onValue,
@@ -17,7 +17,7 @@ class AfterOrderPage extends StatelessWidget {
               return WebViewPage(
                 backOnClick: () => Get.off(HomePage()),
                 title: "Payment",
-                selectedUrl: controller.orderResponse.invoiceUrl,
+                selectedUrl: controller.orderHistory.invoiceUrl,
               );
             case 'antri':
               return OrderStatusPage(
@@ -46,11 +46,8 @@ class AfterOrderPage extends StatelessWidget {
               return SizedBox();
           }
         } else {
-          return Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
+          return Get.put(DetailOrderHistoryController())
+              .returnPage(controller.orderHistory);
         }
       },
     );

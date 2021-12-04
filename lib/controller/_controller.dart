@@ -8,7 +8,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-part '../ui/pages/order_status_page/order_status_page_controller.dart';
+part '../ui/pages/order_status_page/after_order_page_controller.dart';
 
 part '../ui/pages/order_history_page/order_history_page_controller.dart';
 
@@ -17,6 +17,8 @@ part '../ui/pages/checkout_page/checkout_page_controller.dart';
 part '../ui/pages/detail_menu_page/detail_menu_page_controller.dart';
 
 part '../ui/pages/home_page/home_page_controller.dart';
+
+part '../ui/pages/detail_order_history_page/detail_order_history_controller.dart';
 
 part 'api_controller.dart';
 

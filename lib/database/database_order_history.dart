@@ -3,7 +3,7 @@ part of '_database.dart';
 class DatabaseOrderHistory {
   static Future<void> createTables(Database database) async {
     await database.execute(
-      'CREATE TABLE history(id INTEGER PRIMARY KEY, restaurant_name TEXT, image TEXT, table_id INTEGER, transaction_id TEXT, invoice_url TEXT, order_status TEXT, total_price TEXT, created_at TEXT)',
+      'CREATE TABLE history(id INTEGER PRIMARY KEY)',
     );
   }
 
@@ -17,45 +17,21 @@ class DatabaseOrderHistory {
     );
   }
 
-  static Future<void> insertOrder(
-      OrderResponse order, Restaurant restaurantName) async {
+  static Future<void> insertOrder(OrderHistory order) async {
     final db = await DatabaseOrderHistory.db();
     await db.insert(
       'history',
-      order.fromHistory(restaurantName),
+      {'id': order.id},
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-  static Future<List<OrderResponse>> getAllOrder() async {
+  static Future<List<int>> getAllOrder() async {
+    print("getAllOrder");
     final db = await DatabaseOrderHistory.db();
 
     final List<Map<String, dynamic>> maps = await db.query('history');
-    print("getAllOrder");
-    return List.generate(maps.length, (i) {
-      return OrderResponse(
-        id: maps[i]['id'],
-        image: maps[i]['image'],
-        restaurantName: maps[i]['restaurant_name'],
-        tableId: maps[i]['table_id'],
-        transactionId: maps[i]['transaction_id'],
-        invoiceUrl: maps[i]['invoice_url'],
-        orderStatus: maps[i]['order_status'],
-        totalPrice: maps[i]['total_price'],
-        createdAt: maps[i]['created_at'],
-      );
-    });
-  }
-
-  static Future<void> updateOrder(OrderResponse order) async {
-    final db = await DatabaseOrderHistory.db();
-
-    await db.update(
-      'history',
-      order.toJson(),
-      where: 'id = ?',
-      whereArgs: [order.id],
-    );
+    return List.generate(maps.length, (i) => maps[i]['id']);
   }
 
   static Future<void> deleteOrder(int id) async {

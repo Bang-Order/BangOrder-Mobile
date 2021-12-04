@@ -1,15 +1,5 @@
 part of '_models.dart';
 
-List<OrderHistory> orderHistoryFromJson(String str) {
-  return List<OrderHistory>.from(json.decode(str)['data'].map((x) {
-    return OrderHistory.fromJson(x);
-  }));
-}
-
-String orderHistoryToJson(List<OrderHistory> data) {
-  return json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-}
-
 class OrderHistory {
   int id;
   int restaurantId;
@@ -97,4 +87,18 @@ class OrderItem {
       "notes": notes,
     };
   }
+}
+
+List<OrderHistory> orderHistoryFromJson(String str) {
+  return List<OrderHistory>.from(jsonDecode(str)['data'].map((x) {
+    return OrderHistory.fromJson(x);
+  }));
+}
+
+OrderHistory orderHistoryFromJson2(data) {
+  return OrderHistory.fromJson(jsonDecode(data)['data']);
+}
+
+String orderHistoryToJson(List<OrderHistory> data) {
+  return json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 }

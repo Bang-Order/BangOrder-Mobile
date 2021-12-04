@@ -14,7 +14,8 @@ class Order {
   Map<String, dynamic> toJson(Order order) => {
         "restaurant_table_id": restaurantTableId,
         "total_price": totalPrice,
-        "order_items":
-            order.orderItems.map((Menu menu) => menu.toJson(menu)).toList(),
+        "order_items": order.orderItems.map((Menu menu) {
+          return menu.toJson(menu);
+        }).toList(),
       };
 }
