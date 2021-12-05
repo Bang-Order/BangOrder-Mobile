@@ -1,4 +1,4 @@
-package com.example.bangorder_mobile
+package com.bangorder.mobile
 
 import io.flutter.embedding.android.FlutterActivity
 

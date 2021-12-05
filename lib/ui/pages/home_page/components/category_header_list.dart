@@ -1,15 +1,8 @@
 part of '../../_pages.dart';
 
-class HomepageMenuCategoryComponent extends StatefulWidget {
+class HomepageMenuCategoryComponent extends StatelessWidget {
   const HomepageMenuCategoryComponent({Key? key}) : super(key: key);
 
-  @override
-  State<HomepageMenuCategoryComponent> createState() =>
-      _HomepageMenuCategoryComponentState();
-}
-
-class _HomepageMenuCategoryComponentState
-    extends State<HomepageMenuCategoryComponent> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomePageController());
@@ -17,6 +10,7 @@ class _HomepageMenuCategoryComponentState
     return GetBuilder(
       init: ApiController(),
       builder: (_) => ListView.builder(
+        padding: EdgeInsets.symmetric(vertical: defaultMargin / 2),
         shrinkWrap: true,
         controller: ScrollController(),
         itemCount: controller.api.menuCategory.data.length,
@@ -31,9 +25,9 @@ class _HomepageMenuCategoryComponentState
     return Container(
       color: Colors.white,
       child: ExpansionTile(
-        childrenPadding: EdgeInsets.only(
-          bottom: defaultMargin / 2,
-        ),
+        // childrenPadding: EdgeInsets.only(
+        //   bottom: defaultMargin / 2,
+        // ),
         iconColor: Colors.black,
         tilePadding: EdgeInsets.symmetric(
           horizontal: defaultMargin,
