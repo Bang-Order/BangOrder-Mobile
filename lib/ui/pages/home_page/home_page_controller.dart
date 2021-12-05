@@ -11,6 +11,18 @@ class HomePageController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void dispose() {
+    Get.delete<HomePageController>();
+    Get.delete<CartController>();
+  }
+
+  Future<bool> exit() {
+    Get.offAll(LandingPage());
+    dispose();
+    return Future.value(true);
+  }
+
   Future<void> _getDeepLinkFromInside() async {
     FirebaseDynamicLinks.instance.onLink(
       onSuccess: (PendingDynamicLinkData? dynamicLink) async {

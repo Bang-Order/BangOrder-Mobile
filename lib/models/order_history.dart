@@ -73,7 +73,7 @@ class OrderItem {
   String name;
   int quantity;
   String price;
-  dynamic notes;
+  String? notes;
 
   OrderItem({
     required this.name,
