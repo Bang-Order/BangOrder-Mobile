@@ -15,4 +15,4 @@ part 'restaurant_services.dart';
 
 part 'order_services.dart';
 
-const BaseURL = 'http://192.168.1.6/BangOrder-Backend/public/api/';
+const BaseURL = 'http://192.168.0.7/BangOrder-Backend/public/api/';
