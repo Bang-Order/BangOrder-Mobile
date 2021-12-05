@@ -31,10 +31,11 @@ class OrderHistoryPage extends StatelessWidget {
                     shrinkWrap: true,
                     controller: ScrollController(),
                     itemCount: controller.orderHistory.length,
-                    itemBuilder: (context, index) => HistoryCard(
-                      data: controller.orderHistory[index],
-                      // data: snapshot.data![index],
-                    ),
+                    itemBuilder: (context, index) => Text(controller.orderHistory[index].totalPrice ),
+                    //     HistoryCard(
+                    //   data: controller.orderHistory[index],
+                    //   // data: snapshot.data![index],
+                    // ),
                     separatorBuilder: (context, index) => Divider(
                       color: Colors.black,
                     ),
