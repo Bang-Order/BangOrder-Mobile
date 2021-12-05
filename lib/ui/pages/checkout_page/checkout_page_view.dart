@@ -78,9 +78,10 @@ class CheckoutPage extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 12,
+            padding: EdgeInsets.only(
+              right: 16,
+              bottom: 16,
+              left: 16,
             ),
             child: ElevatedButton(
               child: Text(
