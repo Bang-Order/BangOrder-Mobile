@@ -1,10 +1,13 @@
 part of '../_pages.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomePageController());
-    RefreshController _refreshController = RefreshController(initialRefresh: false);
+    RefreshController _refreshController =
+        RefreshController(initialRefresh: false);
 
     return Scaffold(
       body: GetBuilder<ApiController>(

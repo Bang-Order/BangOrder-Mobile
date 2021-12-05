@@ -46,8 +46,15 @@ class AfterOrderPage extends StatelessWidget {
               return SizedBox();
           }
         } else {
-          return Get.put(DetailOrderHistoryController())
-              .returnPage(controller.orderHistory);
+          return OrderStatusPage(
+            title: 'Sudah Diantar',
+            lottieURL:
+            'https://assets1.lottiefiles.com/private_files/lf30_fqBsFC.json',
+            subTitle: 'Pesanan Anda sudah diantar. Selamat menikmati!',
+            statusBarHeight: statusBarHeight,
+          );
+          // return Get.put(DetailOrderHistoryController())
+          //     .returnPage(controller.orderHistory);
         }
       },
     );

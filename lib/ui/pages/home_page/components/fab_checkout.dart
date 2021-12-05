@@ -13,7 +13,7 @@ class HomepageFABComponent extends StatelessWidget {
           ? ElevatedButton(
               onPressed: () {
                 Get.to(
-                  CheckoutPage(),
+                  CheckoutPage(key: Key('CheckoutPage')),
                   transition: Transition.cupertino,
                   duration: Duration(milliseconds: 500),
                 );
