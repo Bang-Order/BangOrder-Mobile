@@ -13,21 +13,26 @@ class WebViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        centerTitle: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.close_rounded,
-            color: blackColor,
+    return WillPopScope(
+      onWillPop: () async {
+        return await Get.offAll(LandingPage());
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(
+              Icons.close_rounded,
+              color: blackColor,
+            ),
+            onPressed: () => Get.offAll(LandingPage()),
           ),
-          onPressed: () => Get.offAll(LandingPage()),
         ),
-      ),
-      body: WebView(
-        initialUrl: selectedUrl,
-        javascriptMode: JavascriptMode.unrestricted,
+        body: WebView(
+          initialUrl: selectedUrl,
+          javascriptMode: JavascriptMode.unrestricted,
+        ),
       ),
     );
   }

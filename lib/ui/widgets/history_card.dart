@@ -91,24 +91,27 @@ class HistoryCard extends StatelessWidget {
                       style: menuPriceStyle,
                     ),
                     SizedBox(height: defaultMargin / 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image.asset(
-                            controller.decisionLogoPaymentMethod(data.paymentMethod!),
-                            height: 24,
-                            width: 24,
-                            fit: BoxFit.cover,
+                    if (data.paymentMethod != null)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.asset(
+                              controller.decisionLogoPaymentMethod(
+                                  data.paymentMethod!),
+                              height: 24,
+                              width: 24,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        Text(
-                          data.paymentMethod!,
-                          style: menuSubTitleStyle,
-                        ),
-                      ],
-                    ),
+                          SizedBox(width: 4,),
+                          Text(
+                            data.paymentMethod!,
+                            style: menuSubTitleStyle,
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ),

@@ -29,7 +29,7 @@ class OrderHistoryPageController extends GetxController {
     } else if (paymentMethod == "DANA") {
       return "assets/images/dana_logo.png";
     } else if (paymentMethod == "OVO") {
-      return "assets/images/ovo_logo.png";
+      return "assets/images/icon_ovo.png";
     } else {
       return "assets/images/qris_logo.png";
     }

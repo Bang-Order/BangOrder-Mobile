@@ -49,6 +49,7 @@ class RecommendationCard extends StatelessWidget {
             SizedBox(height: defaultMargin / 2),
             Text(
               data.name,
+              maxLines: 2,
               style: data.isAvailable == 1
                   ? recommendationTitle
                   : menuTitleTransparentStyle,

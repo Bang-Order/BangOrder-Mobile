@@ -54,6 +54,8 @@ class MenuCard extends StatelessWidget {
                       children: [
                         Text(
                           data.name,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: data.isAvailable == 1
                               ? menuTitleStyle
                               : menuTitleTransparentStyle,
@@ -63,6 +65,8 @@ class MenuCard extends StatelessWidget {
                         ),
                         Text(
                           data.description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: data.isAvailable == 1
                               ? menudescriptionStyle
                               : menudescriptionTransparentStyle,

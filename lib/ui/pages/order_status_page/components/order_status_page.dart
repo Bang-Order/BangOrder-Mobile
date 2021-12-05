@@ -20,73 +20,78 @@ class OrderStatusPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(AfterOrderPageController());
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Order Status Page'),
-        centerTitle: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_outlined,
-            color: blackColor,
+    return WillPopScope(
+      onWillPop: () async {
+        return await Get.offAll(LandingPage());
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Status Pesanan'),
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_outlined,
+              color: blackColor,
+            ),
+            onPressed: () {
+              if (title == 'Sudah Diantar') {
+                Get.put(OrderController()).setOrderResponse = null;
+                controller.dispose();
+              }
+              Get.offAll(LandingPage());
+            },
           ),
-          onPressed: () {
-            if (title == 'Sudah Diantar') {
-              Get.put(OrderController()).setOrderResponse = null;
-              controller.dispose();
-            }
-            Get.offAll(LandingPage());
-          },
         ),
-      ),
-      body: Stack(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            height: MediaQuery.of(context).size.height * 0.9 -
-                AppBar().preferredSize.height -
-                statusBarHeight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
-                  style: orderStatusTitleStyle,
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 32),
-                if (lottieURL != null)
-                  Lottie.network(
-                    lottieURL!,
-                    height: MediaQuery.of(context).size.height * 0.3,
-                  ),
-                if (lottieLocal != null)
-                  Lottie.asset(
-                    lottieLocal!,
-                    height: MediaQuery.of(context).size.height * 0.3,
-                  ),
-                if (subTitle != null) ...[
+        body: Stack(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              height: MediaQuery.of(context).size.height * 0.9 -
+                  AppBar().preferredSize.height -
+                  statusBarHeight,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Text(
-                    subTitle!,
-                    style: orderStatusSubTitleStyle,
+                    title,
+                    style: orderStatusTitleStyle,
                     textAlign: TextAlign.center,
                   ),
+                  SizedBox(height: 32),
+                  if (lottieURL != null)
+                    Lottie.network(
+                      lottieURL!,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                    ),
+                  if (lottieLocal != null)
+                    Lottie.asset(
+                      lottieLocal!,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                    ),
+                  if (subTitle != null) ...[
+                    Text(
+                      subTitle!,
+                      style: orderStatusSubTitleStyle,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
-          ),
-          SlidingUpPanel(
-            backdropEnabled: true,
-            maxHeight: MediaQuery.of(context).size.height * 0.6,
-            minHeight: MediaQuery.of(context).size.height * 0.1,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+            SlidingUpPanel(
+              backdropEnabled: true,
+              maxHeight: MediaQuery.of(context).size.height * 0.5,
+              minHeight: MediaQuery.of(context).size.height * 0.1,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+              panelBuilder: (scrollController) => _panel(scrollController),
+              collapsed: _collapsedPanel(),
             ),
-            panelBuilder: (scrollController) => _panel(scrollController),
-            collapsed: _collapsedPanel(),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -95,35 +100,184 @@ class OrderStatusPage extends StatelessWidget {
     final controller = Get.put(AfterOrderPageController());
 
     return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            padding: EdgeInsets.all(defaultMargin),
-            child: Text(
-              'Daftar Pesanan',
-              style: orderListStyle,
+      // margin: EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        controller: scrollController,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(
+              height: 16,
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-                controller: scrollController,
-                itemCount: controller.getOrderedMenu()!.length,
-                itemBuilder: (context, index) => OrderedMenuCard(
-                      quantity: controller
-                          .getOrderedMenu()![index]
-                          .quantity
-                          .toString(),
-                      menuName: controller.getOrderedMenu()![index].name,
-                      price: controller.getOrderedMenu()![index].price,
-                    )
-                // Text(controller.getOrderedMenu()![index].name),
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                "Detail Pesanan",
+                style: orderListStyle,
+              ),
+            ),
+            SizedBox(
+              height: defaultMargin,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+              padding: EdgeInsets.all(defaultMargin / 2),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade500,
                 ),
-          ),
-          TotalPriceWidget(
-            price: controller.getTotalPrice(),
-          ),
-        ],
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Info Struk",
+                    style: orderListStyle,
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.all(0),
+                    minLeadingWidth: 20,
+                    title: Text(
+                      controller.orderHistory.restaurantName,
+                      style: menuTitleStyle,
+                    ),
+                    leading: ClipRRect(
+                      child: Image.network(
+                        controller.orderHistory.imageUrl,
+                        height: 32,
+                        width: 32,
+                      ),
+                    ),
+                    trailing: Text(
+                      controller.orderHistory.createdAt,
+                      style: menuSubTitleStyle,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: defaultMargin,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade500,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              ),
+              padding: EdgeInsets.all(defaultMargin / 2),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Daftar Pesanan',
+                    style: orderListStyle,
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: controller.getOrderedMenu()!.length,
+                        itemBuilder: (context, index) => _customCard(
+                          controller.orderHistory.orderItems[index],
+                          context,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: defaultMargin,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+              padding: EdgeInsets.all(defaultMargin/2),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade500,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Info Pembayaran",
+                    style: orderListStyle,
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              child: Image.asset(
+                                Get.put(OrderHistoryPageController())
+                                    .decisionLogoPaymentMethod(controller
+                                        .orderHistory.paymentMethod!),
+                                height: 32,
+                                width: 32,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 6,
+                            ),
+                            Text(
+                              controller.orderHistory.paymentMethod!,
+                              style: fabCheckoutStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                      Text(
+                        controller.orderHistory.totalPrice,
+                        style: cartStyle,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Total',
+                          style: totalPriceOrder,
+                        ),
+                        Text(
+                          controller.orderHistory.totalPrice,
+                          style: totalPriceOrder,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: defaultMargin,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -144,9 +298,59 @@ class OrderStatusPage extends StatelessWidget {
             Icons.expand_less_rounded,
           ),
           Text(
-            'Lihat Daftar Pesanan',
+            'Lihat Detail Pesanan',
             style: orderListHeaderStyle,
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _customCard(OrderItem data, BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Container(
+              child: Text(
+                data.quantity.toString() + "x",
+                style: cartStyle,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 5,
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    data.name.toString(),
+                    style: menuTitleStyle,
+                  ),
+                  SizedBox(height: 6),
+                  if (data.notes != null)
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 6),
+                      child: Text(data.notes!),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(
+              alignment: Alignment.centerRight,
+              child: Text(
+                data.price,
+                style: menuTitleStyle,
+              ),
+            ),
+          )
         ],
       ),
     );

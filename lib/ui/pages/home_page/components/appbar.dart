@@ -29,10 +29,7 @@ class HomepageAppbarComponent extends StatelessWidget {
           Icons.arrow_back_outlined,
           color: innerBoxIsScrolled ? blackColor : Colors.white,
         ),
-        onPressed: () {
-          Get.close(2);
-          // Get.offAll(LandingPage());
-        },
+        onPressed: controller.exit,
       ),
       actions: [
         Container(
