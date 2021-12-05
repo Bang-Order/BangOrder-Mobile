@@ -17,7 +17,7 @@ class AfterOrderPage extends StatelessWidget {
               return WebViewPage(
                 backOnClick: () => Get.off(HomePage()),
                 title: "Payment",
-                selectedUrl: controller.orderHistory.invoiceUrl,
+                selectedUrl: controller.orderHistory.invoiceUrl!,
               );
             case 'antri':
               return OrderStatusPage(

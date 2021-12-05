@@ -20,4 +20,18 @@ class OrderHistoryPageController extends GetxController {
 
     return orderId;
   }
+
+  String decisionLogoPaymentMethod(String paymentMethod) {
+    if (paymentMethod == "LinkAja") {
+      return "assets/images/linkaja_logo.png";
+    } else if (paymentMethod == "ShopeePay") {
+      return "assets/images/shopeepay_logo.png";
+    } else if (paymentMethod == "DANA") {
+      return "assets/images/dana_logo.png";
+    } else if (paymentMethod == "OVO") {
+      return "assets/images/ovo_logo.png";
+    } else {
+      return "assets/images/qris_logo.png";
+    }
+  }
 }

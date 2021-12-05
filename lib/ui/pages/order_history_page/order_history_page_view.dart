@@ -20,26 +20,28 @@ class OrderHistoryPage extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
       ),
-      body: GetBuilder<OrderHistoryPageController>(
-        builder: (_) => controller.orderHistory.isNotEmpty
-            ? Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: defaultMargin / 2,
-                ),
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  controller: ScrollController(),
-                  itemCount: controller.orderHistory.length,
-                  itemBuilder: (context, index) => HistoryCard(
-                    data: controller.orderHistory[index],
-                    // data: snapshot.data![index],
+      body: SingleChildScrollView(
+        child: GetBuilder<OrderHistoryPageController>(
+          builder: (_) => controller.orderHistory.isNotEmpty
+              ? Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: defaultMargin / 2,
                   ),
-                  separatorBuilder: (context, index) => Divider(
-                    color: Colors.black,
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    controller: ScrollController(),
+                    itemCount: controller.orderHistory.length,
+                    itemBuilder: (context, index) => HistoryCard(
+                      data: controller.orderHistory[index],
+                      // data: snapshot.data![index],
+                    ),
+                    separatorBuilder: (context, index) => Divider(
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              )
-            : Center(child: Text('ORDER IS EMPTY')),
+                )
+              : Center(child: Text('ORDER IS EMPTY')),
+        ),
       ),
     );
   }

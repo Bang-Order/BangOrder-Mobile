@@ -6,8 +6,11 @@ class OrderHistory {
   int tableId;
   String tableNumber;
   String transactionId;
-  String invoiceUrl;
+  String? invoiceUrl;
   String orderStatus;
+  String? paymentMethod;
+  String restaurantName;
+  String imageUrl;
   List<OrderItem> orderItems;
   String totalPrice;
   String createdAt;
@@ -19,6 +22,9 @@ class OrderHistory {
     required this.tableNumber,
     required this.transactionId,
     required this.invoiceUrl,
+    required this.paymentMethod,
+    required this.restaurantName,
+    required this.imageUrl,
     required this.orderStatus,
     required this.orderItems,
     required this.totalPrice,
@@ -29,11 +35,14 @@ class OrderHistory {
     return OrderHistory(
       id: json["id"],
       restaurantId: json["restaurant_id"],
+      restaurantName: json["restaurant_name"],
+      imageUrl: json["restaurant_image"],
       tableId: json["table_id"],
       tableNumber: json["table_number"],
       transactionId: json["transaction_id"],
       invoiceUrl: json["invoice_url"],
       orderStatus: json["order_status"],
+      paymentMethod: json["payment_method"],
       orderItems: List<OrderItem>.from(
           json["order_items"].map((x) => OrderItem.fromJson(x))),
       totalPrice: json["total_price"],
@@ -47,7 +56,10 @@ class OrderHistory {
       "restaurant_id": restaurantId,
       "table_id": tableId,
       "table_number": tableNumber,
+      "restaurant_image": imageUrl,
+      "restaurant_name": restaurantName,
       "transaction_id": transactionId,
+      "payment_method": paymentMethod,
       "invoice_url": invoiceUrl,
       "order_status": orderStatus,
       "order_items": List<dynamic>.from(orderItems.map((x) => x.toJson())),
