@@ -203,7 +203,7 @@ class OrderStatusPage extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-              padding: EdgeInsets.all(defaultMargin/2),
+              padding: EdgeInsets.all(defaultMargin / 2),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.grey.shade500,
@@ -220,38 +220,114 @@ class OrderStatusPage extends StatelessWidget {
                   SizedBox(
                     height: 4,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                  StreamBuilder(
+                    stream: controller.getPaymentMethod.onValue,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<dynamic> snapshot) {
+                      if (controller.isTrue(snapshot)) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            ClipRRect(
-                              child: Image.asset(
-                                Get.put(OrderHistoryPageController())
-                                    .decisionLogoPaymentMethod(controller
-                                        .orderHistory.paymentMethod!),
-                                height: 32,
-                                width: 32,
+                            Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    child: Image.asset(
+                                      Get.put(OrderHistoryPageController())
+                                          .decisionLogoPaymentMethod(
+                                              snapshot.data.snapshot.value),
+                                      height: 32,
+                                      width: 32,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 6,
+                                  ),
+                                  Text(
+                                    snapshot.data.snapshot.value,
+                                    style: fabCheckoutStyle,
+                                  )
+                                ],
                               ),
                             ),
-                            SizedBox(
-                              width: 6,
+                            Text(
+                              controller.orderHistory.totalPrice,
+                              style: cartStyle,
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    child: Image.asset(
+                                      Get.put(OrderHistoryPageController())
+                                          .decisionLogoPaymentMethod(controller.orderHistory.paymentMethod!),
+                                      height: 32,
+                                      width: 32,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 6,
+                                  ),
+                                  Text(
+                                    controller.orderHistory.paymentMethod!,
+                                    style: fabCheckoutStyle,
+                                  )
+                                ],
+                              ),
                             ),
                             Text(
-                              controller.orderHistory.paymentMethod!,
-                              style: fabCheckoutStyle,
-                            )
+                              controller.orderHistory.totalPrice,
+                              style: cartStyle,
+                            ),
                           ],
-                        ),
-                      ),
-                      Text(
-                        controller.orderHistory.totalPrice,
-                        style: cartStyle,
-                      ),
-                    ],
+                        );
+                      }
+                    },
                   ),
+
+                  // if (controller.orderHistory.paymentMethod != null)
+
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Container(
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.start,
+                  //         children: [
+                  //           ClipRRect(
+                  //             child: Image.asset(
+                  //               Get.put(OrderHistoryPageController())
+                  //                   .decisionLogoPaymentMethod(controller
+                  //                       .orderHistory.paymentMethod!),
+                  //               height: 32,
+                  //               width: 32,
+                  //             ),
+                  //           ),
+                  //           SizedBox(
+                  //             width: 6,
+                  //           ),
+                  //           Text(
+                  //             controller.orderHistory.paymentMethod!,
+                  //             style: fabCheckoutStyle,
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     Text(
+                  //       controller.orderHistory.totalPrice,
+                  //       style: cartStyle,
+                  //     ),
+                  //   ],
+                  // ),
+
                   SizedBox(
                     height: 16,
                   ),

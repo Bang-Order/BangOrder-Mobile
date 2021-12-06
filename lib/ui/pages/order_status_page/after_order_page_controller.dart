@@ -28,13 +28,22 @@ class AfterOrderPageController extends GetxController {
     return orderHistory.orderItems;
   }
 
-  DatabaseReference get getReference {
+  DatabaseReference get getOrderStatus {
     return FirebaseDatabase(databaseURL: getURL)
         .reference()
         .child("orders")
         .child(orderHistory.restaurantId.toString())
         .child(orderHistory.id.toString())
         .child('order_status');
+  }
+
+  DatabaseReference get getPaymentMethod {
+    return FirebaseDatabase(databaseURL: getURL)
+        .reference()
+        .child("orders")
+        .child(orderHistory.restaurantId.toString())
+        .child(orderHistory.id.toString())
+        .child('payment_method');
   }
 
   bool isTrue(AsyncSnapshot<dynamic> snapshot) {
