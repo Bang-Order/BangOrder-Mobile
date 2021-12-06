@@ -21,7 +21,7 @@ class OrderHistoryPageController extends GetxController {
     return orderId;
   }
 
-  String decisionLogoPaymentMethod(String paymentMethod) {
+  String decisionLogoPaymentMethod(String? paymentMethod) {
     if (paymentMethod == "LinkAja") {
       return "assets/images/linkaja_logo.png";
     } else if (paymentMethod == "ShopeePay") {

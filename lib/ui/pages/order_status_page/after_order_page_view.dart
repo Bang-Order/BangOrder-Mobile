@@ -9,7 +9,7 @@ class AfterOrderPage extends StatelessWidget {
     final controller = Get.put(AfterOrderPageController());
 
     return StreamBuilder(
-      stream: controller.getReference.onValue,
+      stream: controller.getOrderStatus.onValue,
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (controller.isTrue(snapshot)) {
           switch (snapshot.data.snapshot.value) {
