@@ -4,6 +4,7 @@ import 'package:bangorder_mobile/utils/utils.dart';
 import 'package:bangorder_mobile/ui/pages/_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:bangorder_mobile/models/_models.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
