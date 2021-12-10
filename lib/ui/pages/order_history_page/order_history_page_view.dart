@@ -27,16 +27,18 @@ class OrderHistoryPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     vertical: defaultMargin / 2,
                   ),
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    controller: ScrollController(),
-                    itemCount: controller.orderHistory.length,
-                    itemBuilder: (context, index) => HistoryCard(
-                      data: controller.orderHistory[index],
-                      // data: snapshot.data![index],
-                    ),
-                    separatorBuilder: (context, index) => Divider(
-                      color: Colors.black,
+                  child: Scrollbar(
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      controller: ScrollController(),
+                      itemCount: controller.orderHistory.length,
+                      itemBuilder: (context, index) => HistoryCard(
+                        data: controller.orderHistory[index],
+                        // data: snapshot.data![index],
+                      ),
+                      separatorBuilder: (context, index) => Divider(
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 )

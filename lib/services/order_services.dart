@@ -26,7 +26,7 @@ class OrderServices {
     print(jsonEncode({"order_id": orderId}));
     final response = await http.post(
       Uri.parse(
-          'http://192.168.1.6/BangOrder-Backend/public/api/orders/history'),
+          'https://api.bangorder.me/api/orders/history'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
