@@ -187,6 +187,7 @@ class OrderStatusPage extends StatelessWidget {
                     children: [
                       ListView.builder(
                         shrinkWrap: true,
+                        controller: ScrollController(),
                         itemCount: controller.getOrderedMenu()!.length,
                         itemBuilder: (context, index) => _customCard(
                           controller.orderHistory.orderItems[index],
