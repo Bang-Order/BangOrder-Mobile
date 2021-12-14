@@ -1,13 +1,13 @@
 part of '../../_pages.dart';
 
-class OrderStatusPage extends StatelessWidget {
+class OrderStatusPageView extends StatelessWidget {
   final double statusBarHeight;
   final String title;
   final String? subTitle;
   final String? lottieURL;
   final String? lottieLocal;
 
-  const OrderStatusPage({
+  const OrderStatusPageView({
     Key? key,
     required this.title,
     this.lottieURL,

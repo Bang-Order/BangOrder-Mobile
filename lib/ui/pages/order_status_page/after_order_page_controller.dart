@@ -1,6 +1,7 @@
 part of '../../../controller/_controller.dart';
 
 class AfterOrderPageController extends GetxController {
+  late bool isPaid;
   late OrderHistory orderHistory;
 
   void goToPage({required orderHistory}) {

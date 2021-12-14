@@ -20,14 +20,14 @@ class AfterOrderPage extends StatelessWidget {
                 selectedUrl: controller.orderHistory.invoiceUrl!,
               );
             case 'antri':
-              return OrderStatusPage(
+              return OrderStatusPageView(
                 title: 'Sedang Antri',
                 lottieLocal: 'assets/images/antrian.json',
                 subTitle: 'Pesanan Anda masih berada dalam antrian masak.',
                 statusBarHeight: statusBarHeight,
               );
             case 'dimasak':
-              return OrderStatusPage(
+              return OrderStatusPageView(
                 title: 'Sedang Dimasak',
                 lottieURL:
                     'https://assets7.lottiefiles.com/packages/lf20_jbt4j3ea.json',
@@ -35,7 +35,7 @@ class AfterOrderPage extends StatelessWidget {
                 statusBarHeight: statusBarHeight,
               );
             case 'selesai':
-              return OrderStatusPage(
+              return OrderStatusPageView(
                 title: 'Sudah Diantar',
                 lottieURL:
                     'https://assets1.lottiefiles.com/private_files/lf30_fqBsFC.json',
@@ -46,15 +46,18 @@ class AfterOrderPage extends StatelessWidget {
               return SizedBox();
           }
         } else {
-          return OrderStatusPage(
-            title: 'Sudah Diantar',
-            lottieURL:
-            'https://assets1.lottiefiles.com/private_files/lf30_fqBsFC.json',
-            subTitle: 'Pesanan Anda sudah diantar. Selamat menikmati!',
-            statusBarHeight: statusBarHeight,
+          if (controller.orderHistory.paymentMethod != null) {
+            return OrderStatusPageView(
+              title: 'Sudah Diantar',
+              lottieURL:
+                  'https://assets1.lottiefiles.com/private_files/lf30_fqBsFC.json',
+              subTitle: 'Pesanan Anda sudah diantar. Selamat menikmati!',
+              statusBarHeight: statusBarHeight,
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
           );
-          // return Get.put(DetailOrderHistoryController())
-          //     .returnPage(controller.orderHistory);
         }
       },
     );
