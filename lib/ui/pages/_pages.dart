@@ -69,7 +69,7 @@ part 'landing_page/landing_page_view.dart';
 
 part 'order_history_page/order_history_page_view.dart';
 
-part 'order_status_page/components/order_status_page.dart';
+part 'order_status_page/components/order_status_page_view.dart';
 
 part 'home_page/components/recommendation_card.dart';
 part 'detail_order_history_page/detail_order_history_page.dart';

@@ -44,7 +44,6 @@ class CheckoutPageBottomNavBarComponent extends StatelessWidget {
             ),
             onPressed: () {
               Popup(context).showSuccessPopup();
-              // controller.order.makeOrder(context);
             },
           ),
         ),

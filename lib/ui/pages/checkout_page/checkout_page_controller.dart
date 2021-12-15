@@ -4,7 +4,32 @@ class CheckoutPageController extends GetxController {
   final cart = Get.put(CartController());
   final order = Get.put(OrderController());
 
+  bool _isLoading = false;
+
   void backOnClick() {
     Get.back();
+  }
+
+  void yesOnClick(BuildContext context) async {
+    isLoading = true;
+
+    if (await order.makeOrder()) {
+      Get.put(AfterOrderPageController()).goToPage(
+        orderHistory: Get.put(OrderController()).getOrderResponse,
+      );
+
+      final cart = Get.put(CartController());
+      cart.items = [];
+    } else {
+      Get.back();
+      Popup(context).showFailedPopup();
+    }
+  }
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool value) {
+    _isLoading = value;
+    update();
   }
 }
