@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:bangorder_mobile/ui/pages/_pages.dart';
 import 'package:bangorder_mobile/ui/shared/_shared.dart';
+import 'package:bangorder_mobile/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -11,6 +14,7 @@ void main() async {
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
   ).then((_) {
+    HttpOverrides.global = MyHttpOverrides();
     runApp(MyApp());
   });
 }
@@ -27,7 +31,8 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/',
-          page: () => LandingPage(),
+          // page: () => LandingPage(),
+          page: () => HomePage(),
         ),
         GetPage(
           name: '/:id',

@@ -10,7 +10,7 @@ class DetailMenuPageImage extends StatelessWidget {
     return GetBuilder(
       init: DetailMenuPageController(),
       builder: (_) => Container(
-        height: MediaQuery.of(context).size.height * 0.35,
+        height: MediaQuery.of(context).size.width,
         child:
         Image.network(
           controller.menu.image,

@@ -2,9 +2,9 @@ part of '_models.dart';
 
 class Menu {
   int id;
-  int categoryId;
+  int? categoryId;
   String name;
-  String description;
+  String? description;
   String price;
   String image;
   int isAvailable;

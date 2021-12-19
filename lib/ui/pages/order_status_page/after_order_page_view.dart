@@ -54,11 +54,11 @@ class AfterOrderPage extends StatelessWidget {
               subTitle: 'Pesanan Anda sudah diantar. Selamat menikmati!',
               statusBarHeight: statusBarHeight,
             );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
-          return Center(
-            widthFactor: 20,
-            child: CircularProgressIndicator(),
-          );
         }
       },
     );
