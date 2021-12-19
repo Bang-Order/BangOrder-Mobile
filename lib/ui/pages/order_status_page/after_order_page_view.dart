@@ -16,7 +16,7 @@ class AfterOrderPage extends StatelessWidget {
             case 'payment_pending':
               return WebViewPage(
                 backOnClick: () => Get.off(HomePage()),
-                title: "Payment",
+                title: "Pembayaran",
                 selectedUrl: controller.orderHistory.invoiceUrl!,
               );
             case 'antri':
@@ -56,6 +56,7 @@ class AfterOrderPage extends StatelessWidget {
             );
           }
           return Center(
+            widthFactor: 20,
             child: CircularProgressIndicator(),
           );
         }

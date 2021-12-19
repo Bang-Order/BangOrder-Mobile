@@ -269,7 +269,8 @@ class OrderStatusPageView extends StatelessWidget {
                                   ClipRRect(
                                     child: Image.asset(
                                       Get.put(OrderHistoryPageController())
-                                          .decisionLogoPaymentMethod(controller.orderHistory.paymentMethod!),
+                                          .decisionLogoPaymentMethod(controller
+                                              .orderHistory.paymentMethod!),
                                       height: 32,
                                       width: 32,
                                     ),
@@ -293,42 +294,6 @@ class OrderStatusPageView extends StatelessWidget {
                       }
                     },
                   ),
-
-                  // if (controller.orderHistory.paymentMethod != null)
-
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Container(
-                  //       child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.start,
-                  //         children: [
-                  //           ClipRRect(
-                  //             child: Image.asset(
-                  //               Get.put(OrderHistoryPageController())
-                  //                   .decisionLogoPaymentMethod(controller
-                  //                       .orderHistory.paymentMethod!),
-                  //               height: 32,
-                  //               width: 32,
-                  //             ),
-                  //           ),
-                  //           SizedBox(
-                  //             width: 6,
-                  //           ),
-                  //           Text(
-                  //             controller.orderHistory.paymentMethod!,
-                  //             style: fabCheckoutStyle,
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     Text(
-                  //       controller.orderHistory.totalPrice,
-                  //       style: cartStyle,
-                  //     ),
-                  //   ],
-                  // ),
-
                   SizedBox(
                     height: 16,
                   ),

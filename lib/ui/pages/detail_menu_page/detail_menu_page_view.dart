@@ -9,31 +9,34 @@ class DetailMenuPage extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () => controller.exit(),
-      child: Scaffold(
-        appBar: detailMenuPageAppbar(context),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              DetailMenuPageImage(key: Key('DetailMenuPageImage')),
-              DetailMenuPageMenuInfo(key: Key('DetailMenuPageMenuInfo')),
-              SizedBox(height: defaultMargin / 2),
-              DetailMenuNote(key: Key('DetailMenuNote'))
-            ],
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          appBar: detailMenuPageAppbar(context),
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                DetailMenuPageImage(key: Key('DetailMenuPageImage')),
+                DetailMenuPageMenuInfo(key: Key('DetailMenuPageMenuInfo')),
+                SizedBox(height: defaultMargin / 2),
+                DetailMenuNote(key: Key('DetailMenuNote'))
+              ],
+            ),
           ),
-        ),
-        bottomNavigationBar: Container(
-          color: Colors.white,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              DetailMenuPageQuantityButton(
-                key: Key('DetailMenuPageBottomNavBar'),
-              ),
-              DetailMenuPageAddToBasketButton(
-                key: Key('DetailMenuPageAddToBasketButton'),
-              ),
-            ],
+          bottomNavigationBar: Container(
+            color: Colors.white,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DetailMenuPageQuantityButton(
+                  key: Key('DetailMenuPageBottomNavBar'),
+                ),
+                DetailMenuPageAddToBasketButton(
+                  key: Key('DetailMenuPageAddToBasketButton'),
+                ),
+              ],
+            ),
           ),
         ),
       ),

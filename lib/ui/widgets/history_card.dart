@@ -13,7 +13,7 @@ class HistoryCard extends StatelessWidget {
     final controller = Get.put(OrderHistoryPageController());
 
     return Slidable(
-      key: const ValueKey(0),
+      key: ValueKey(data.id),
       endActionPane: ActionPane(
         motion: ScrollMotion(),
         dismissible: DismissiblePane(onDismissed: () {
@@ -66,7 +66,6 @@ class HistoryCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        // data.restaurantName,
                         data.restaurantName,
                         style: orderedMenuPriceStyle,
                       ),
@@ -98,9 +97,9 @@ class HistoryCard extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: Container(
-                  alignment: Alignment.topCenter,
+                  alignment: Alignment.topRight,
                   color: Colors.transparent,
-                  margin: EdgeInsets.only(left: 8),
+                  margin: EdgeInsets.only(left: 8, right: 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.start,
