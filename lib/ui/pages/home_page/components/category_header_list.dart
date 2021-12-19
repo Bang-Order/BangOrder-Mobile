@@ -13,15 +13,18 @@ class HomepageMenuCategoryComponent extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: defaultMargin / 2),
         shrinkWrap: true,
         controller: ScrollController(),
-        itemCount: controller.api.menuCategory.data.length,
-        itemBuilder: (context, index) => _categoryHeader(
-          controller.api.menuCategory.getMenuCategoryByIndex(index),
-        ),
+        itemCount: controller.getMenuCategoryItemCount(),
+        itemBuilder: (context, index) => index !=
+                controller.getMenuCategoryItemCount() - 1
+            ? _categoryHeader(
+                data: controller.api.menuCategory.getMenuCategoryByIndex(index),
+              )
+            : _categoryHeader(),
       ),
     );
   }
 
-  Widget _categoryHeader(MenuCategory data) {
+  Widget _categoryHeader({MenuCategory? data}) {
     return Container(
       color: Colors.white,
       child: ExpansionTile(
@@ -34,7 +37,7 @@ class HomepageMenuCategoryComponent extends StatelessWidget {
           vertical: 0,
         ),
         title: Text(
-          data.name,
+          data != null ? data.name : 'Lainnya',
           style: categoryHeaderStyle,
         ),
         children: [

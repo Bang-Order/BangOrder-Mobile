@@ -60,17 +60,19 @@ class MenuCard extends StatelessWidget {
                               ? menuTitleStyle
                               : menuTitleTransparentStyle,
                         ),
-                        SizedBox(
-                          height: defaultMargin / 2,
-                        ),
-                        Text(
-                          data.description,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: data.isAvailable == 1
-                              ? menudescriptionStyle
-                              : menudescriptionTransparentStyle,
-                        ),
+                        if (data.description != null) ...[
+                          SizedBox(
+                            height: defaultMargin / 2,
+                          ),
+                          Text(
+                            data.description!,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: data.isAvailable == 1
+                                ? menudescriptionStyle
+                                : menudescriptionTransparentStyle,
+                          ),
+                        ],
                         SizedBox(
                           height: defaultMargin / 2,
                         ),

@@ -11,9 +11,25 @@ class MenuController extends GetxController {
     return data.isNotEmpty;
   }
 
+  bool isMenuCategoryEmpty() {
+    for (Menu item in data) {
+      if (item.categoryId == null) {
+        print('EMPTY');
+        return true;
+      }
+    }
+    return false;
+  }
+
   List<Menu> getMenuByCategoryId(MenuCategory menuCategory) {
     return data.where((element) {
       return element.categoryId == menuCategory.id;
+    }).toList();
+  }
+
+  List<Menu> getMenuByNullMenuCategory() {
+    return data.where((element) {
+      return element.categoryId == null;
     }).toList();
   }
 

@@ -5,7 +5,7 @@ class DetailMenuPageMenuInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Get.put(DetailMenuPageController());
+    final controller = Get.put(DetailMenuPageController());
 
     return GetBuilder(
       init: DetailMenuPageController(),
@@ -21,25 +21,27 @@ class DetailMenuPageMenuInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    provider.menu.name,
+                    controller.menu.name,
                     style: detailMenuStyle,
                   ),
-                  SizedBox(height: 6),
-                  Text(
-                    provider.menu.description,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: blackColor,
-                      fontWeight: FontWeight.w300,
-                      fontFamily: 'Manrope',
+                  if (controller.menu.description != null) ...[
+                    SizedBox(height: 6),
+                    Text(
+                      controller.menu.description!,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: blackColor,
+                        fontWeight: FontWeight.w300,
+                        fontFamily: 'Manrope',
+                      ),
                     ),
-                  ),
+                  ],
                 ],
               ),
             ),
             SizedBox(width: 18),
             Text(
-              currency(double.parse(provider.menu.price)),
+              currency(double.parse(controller.menu.price)),
               style: detailMenuStyle,
             ),
           ],

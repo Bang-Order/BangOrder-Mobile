@@ -105,9 +105,12 @@ class HistoryCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        "Rp " + data.totalPrice,
-                        style: menuPriceStyle,
+                      Container(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          data.totalPrice,
+                          style: menuPriceStyle,
+                        ),
                       ),
                       SizedBox(height: defaultMargin / 2),
                       if (data.paymentMethod != null)
