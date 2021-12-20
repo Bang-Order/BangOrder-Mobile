@@ -107,7 +107,7 @@ class HistoryCard extends StatelessWidget {
                       Container(
                         alignment: Alignment.topRight,
                         child: Text(
-                          data.totalPrice,
+                          "Rp. " + data.totalPrice,
                           style: menuPriceStyle,
                         ),
                       ),

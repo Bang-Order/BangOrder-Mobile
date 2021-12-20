@@ -20,7 +20,7 @@ class RestaurantInfo extends StatelessWidget {
           ),
           SizedBox(height: defaultMargin),
           Text(
-            "Nomor Meja: " + controller.barcode.getData!.restaurantTableId,
+            "Nomor Meja: " + controller.api.restaurant.getData!.tableNumber,
             style: menuTitleStyle,
           ),
         ],
