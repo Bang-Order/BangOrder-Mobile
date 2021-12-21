@@ -6,6 +6,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomePageController());
+    ScrollController scrollController = ScrollController();
+    RefreshController refreshController = RefreshController(
+      initialRefresh: false,
+    );
 
     return WillPopScope(
       onWillPop: () => controller.exit(),
@@ -22,15 +26,18 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                   body: SmartRefresher(
-                    controller: controller.refreshController,
+                    controller: refreshController,
                     enablePullUp: false,
                     enablePullDown: true,
                     header: WaterDropHeader(
                       waterDropColor: yellowColor,
                     ),
-                    onRefresh: controller.onRefresh,
+                    onRefresh: () async {
+                      await controller.api.callApi();
+                      refreshController.refreshCompleted();
+                    },
                     child: VsScrollbar(
-                      controller: controller.scrollController,
+                      controller: scrollController,
                       showTrackOnHover: true,// default false
                       isAlwaysShown: true, // default false
                       scrollbarFadeDuration: Duration(milliseconds: 500), // default : Duration(milliseconds: 300)
@@ -42,7 +49,7 @@ class HomePage extends StatelessWidget {
                         color: Colors.purple.shade900, // default ColorScheme Theme
                       ),
                       child: SingleChildScrollView(
-                        controller: controller.scrollController,
+                        controller: scrollController,
                         child: Column(
                           children: [
                             RestaurantInfo(),

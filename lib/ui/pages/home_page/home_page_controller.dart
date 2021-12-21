@@ -1,10 +1,6 @@
 part of '../../../controller/_controller.dart';
 
 class HomePageController extends GetxController {
-  ScrollController scrollController = ScrollController();
-  RefreshController refreshController = RefreshController(
-    initialRefresh: false,
-  );
 
   final api = Get.put(ApiController());
   final barcode = Get.put(BarcodeController());
@@ -64,10 +60,10 @@ class HomePageController extends GetxController {
     api.callApi();
   }
 
-  void onRefresh() async {
-    await api.callApi();
-    refreshController.refreshCompleted();
-  }
+  // void onRefresh() async {
+  //   await api.callApi();
+  //   refreshController.refreshCompleted();
+  // }
 
   int getMenuCategoryItemCount() {
     int itemCount = api.menuCategory.data.length;
