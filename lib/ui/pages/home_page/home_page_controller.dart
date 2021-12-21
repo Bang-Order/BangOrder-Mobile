@@ -8,12 +8,12 @@ class HomePageController extends GetxController {
 
   final api = Get.put(ApiController());
   final barcode = Get.put(BarcodeController());
+  final menuCategory = Get.put(MenuCategoryController());
 
   @override
   void onInit() async {
-    getDeeplinkSuccess(Uri.parse('https://google.com?restaurant=1&table_id=1'));
-    // await _getDeepLinkFromOutside();
-    // await _getDeepLinkFromInside();
+    await _getDeepLinkFromOutside();
+    await _getDeepLinkFromInside();
     super.onInit();
   }
 
@@ -34,7 +34,8 @@ class HomePageController extends GetxController {
       onSuccess: (PendingDynamicLinkData? dynamicLink) async {
         final Uri? deepLink = dynamicLink?.link;
         if (deepLink != null) {
-          getDeeplinkSuccess(deepLink);
+          final controller = Get.put(HomePageController());
+          controller.getDeeplinkSuccess(deepLink);
         } else {
           Get.back();
         }
@@ -53,7 +54,8 @@ class HomePageController extends GetxController {
     final Uri? deepLink = data?.link;
 
     if (deepLink != null) {
-      getDeeplinkSuccess(deepLink);
+      final controller = Get.put(HomePageController());
+      controller.getDeeplinkSuccess(deepLink);
     }
   }
 
@@ -78,5 +80,10 @@ class HomePageController extends GetxController {
 
   bool isMenuCategoryEmpty() {
     return api.menu.isMenuCategoryEmpty();
+  }
+
+  bool isOtherMenuEmpty(index) {
+    return index == getMenuCategoryItemCount() - 1 &&
+        api.menu.isMenuCategoryEmpty();
   }
 }

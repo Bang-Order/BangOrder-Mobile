@@ -4,13 +4,13 @@ class OrderController extends GetxController {
   OrderHistory? _orderResponse;
 
   Future<bool> makeOrder() async {
-    final provider = Get.put(CartController());
+    final cart = Get.put(CartController());
+    final barcode = Get.put(BarcodeController());
 
     final order = Order(
-      restaurantTableId:
-          int.parse(Get.put(BarcodeController()).getData!.restaurantId),
-      totalPrice: provider.getTotalPrice(),
-      orderItems: provider.items,
+      restaurantTableId: int.parse(barcode.getData!.restaurantTableId),
+      totalPrice: cart.getTotalPrice(),
+      orderItems: cart.items,
     );
 
     if (isOrderNull() && !await OrderServices.postOrder(order)) {
