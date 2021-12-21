@@ -19,7 +19,10 @@ class WebViewPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(title),
+          title: Text(
+            title,
+            style: appbarTextStyle,
+          ),
           centerTitle: true,
           leading: IconButton(
             icon: Icon(

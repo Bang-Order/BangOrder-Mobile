@@ -26,8 +26,10 @@ class OrderStatusPageView extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Status Pesanan'),
-          centerTitle: true,
+          title: Text(
+            'Status Pesanan',
+            style: appbarTextStyle,
+          ),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_outlined,
@@ -269,7 +271,8 @@ class OrderStatusPageView extends StatelessWidget {
                                   ClipRRect(
                                     child: Image.asset(
                                       Get.put(OrderHistoryPageController())
-                                          .decisionLogoPaymentMethod(controller.orderHistory.paymentMethod!),
+                                          .decisionLogoPaymentMethod(controller
+                                              .orderHistory.paymentMethod!),
                                       height: 32,
                                       width: 32,
                                     ),

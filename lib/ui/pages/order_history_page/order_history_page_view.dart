@@ -9,8 +9,10 @@ class OrderHistoryPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Riwayat Pesanan'),
-        centerTitle: true,
+        title: Text(
+          'Riwayat Pesanan',
+          style: appbarTextStyle,
+        ),
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(
@@ -41,53 +43,7 @@ class OrderHistoryPage extends StatelessWidget {
                       ),
                     ),
                   )
-                : haveNotOrderedYet,
-      ),
-    );
-  }
-
-  Widget get haveNotOrderedYet {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            padding: EdgeInsets.all(16),
-            child: Text(
-              'Belum Ada Riwayat Pesanan',
-              textAlign: TextAlign.center,
-              style: orderListStyle,
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(
-              left: 16,
-              right: 16,
-              bottom: 32,
-            ),
-            child: Text(
-              'Silahkan pesan terlebih dahulu',
-              textAlign: TextAlign.center,
-              style: successPopupTitle,
-            ),
-          ),
-          Lottie.asset(
-            'assets/images/empty_history.json',
-            width: Get.width,
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 16),
-            padding: EdgeInsets.all(16),
-            child: ElevatedButton(
-              onPressed: () => Get.off(
-                ScanQrPage(),
-                duration: Duration(milliseconds: 500),
-              ),
-              child: Text('Pesan Sekarang'),
-            ),
-          )
-        ],
+                : HaveNotOrderedYet(key: Key('HaveNotOrderedYet')),
       ),
     );
   }
