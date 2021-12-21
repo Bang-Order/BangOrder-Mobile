@@ -76,3 +76,4 @@ part 'home_page/components/recommendation_card.dart';
 part 'detail_order_history_page/detail_order_history_page.dart';
 part 'checkout_page/components/bottom_nav_bar.dart';
 part 'checkout_page/components/cart_list.dart';
+part 'order_history_page/components/have_not_ordered_yet.dart';

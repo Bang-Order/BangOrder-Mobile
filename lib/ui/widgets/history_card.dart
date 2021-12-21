@@ -31,115 +31,118 @@ class HistoryCard extends StatelessWidget {
           ),
         ],
       ),
-      child: InkWell(
-        onTap: () {
-          Get.put(AfterOrderPageController()).goToPage(orderHistory: data);
-        },
-        child: Container(
-          color: Colors.transparent,
-          padding: EdgeInsets.symmetric(
-            horizontal: defaultMargin,
-            vertical: defaultMargin / 2,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                flex: 2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Image.network(
-                    data.imageUrl,
+      child: Material(
+        color: Colors.white,
+        child: InkWell(
+          onTap: () {
+            Get.put(AfterOrderPageController()).goToPage(orderHistory: data);
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: defaultMargin,
+              vertical: defaultMargin / 2,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image.network(
+                      data.imageUrl,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Container(
-                  color: Colors.transparent,
-                  margin: EdgeInsets.only(left: 8),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: defaultMargin / 2,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        data.restaurantName,
-                        style: orderedMenuPriceStyle,
-                      ),
-                      SizedBox(height: defaultMargin / 2),
-                      if (data.orderItems.length == 1) ...[
+                Expanded(
+                  flex: 5,
+                  child: Container(
+                    color: Colors.transparent,
+                    margin: EdgeInsets.only(left: 8),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: defaultMargin / 2,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         Text(
-                          data.orderItems[0].name,
-                          style: menuSubTitleStyle,
+                          // data.restaurantName,
+                          data.restaurantName,
+                          style: orderedMenuPriceStyle,
                         ),
-                      ] else ...[
+                        SizedBox(height: defaultMargin / 2),
+                        if (data.orderItems.length == 1) ...[
+                          Text(
+                            data.orderItems[0].name,
+                            style: menuSubTitleStyle,
+                          ),
+                        ] else ...[
+                          Text(
+                            data.orderItems[0].name +
+                                " dan " +
+                                (data.orderItems.length - 1).toString() +
+                                " lainnya",
+                            style: menuSubTitleStyle,
+                            maxLines: 3,
+                          ),
+                        ],
+                        SizedBox(height: defaultMargin / 2),
                         Text(
-                          data.orderItems[0].name +
-                              " dan " +
-                              (data.orderItems.length - 1).toString() +
-                              " lainnya",
+                          data.createdAt,
                           style: menuSubTitleStyle,
-                          maxLines: 3,
                         ),
                       ],
-                      SizedBox(height: defaultMargin / 2),
-                      Text(
-                        data.createdAt,
-                        style: menuSubTitleStyle,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Container(
-                  alignment: Alignment.topRight,
-                  color: Colors.transparent,
-                  margin: EdgeInsets.only(left: 8, right: 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          "Rp. " + data.totalPrice,
-                          style: menuPriceStyle,
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    color: Colors.transparent,
+                    margin: EdgeInsets.only(left: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          alignment: Alignment.topRight,
+                          child: Text(
+                            data.totalPrice,
+                            style: menuPriceStyle,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: defaultMargin / 2),
-                      if (data.paymentMethod != null)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(5),
-                              child: Image.asset(
-                                controller.decisionLogoPaymentMethod(
-                                    data.paymentMethod!),
-                                height: 24,
-                                width: 24,
-                                fit: BoxFit.cover,
+                        SizedBox(height: defaultMargin / 2),
+                        if (data.paymentMethod != null)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: Image.asset(
+                                  controller.decisionLogoPaymentMethod(
+                                      data.paymentMethod!),
+                                  height: 24,
+                                  width: 24,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Text(
-                              data.paymentMethod!,
-                              style: menuSubTitleStyle,
-                            ),
-                          ],
-                        ),
-                    ],
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                data.paymentMethod!,
+                                style: menuSubTitleStyle,
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

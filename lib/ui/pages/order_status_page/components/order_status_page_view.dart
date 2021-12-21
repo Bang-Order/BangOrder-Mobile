@@ -26,8 +26,10 @@ class OrderStatusPageView extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Status Pesanan'),
-          centerTitle: true,
+          title: Text(
+            'Status Pesanan',
+            style: appbarTextStyle,
+          ),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_outlined,

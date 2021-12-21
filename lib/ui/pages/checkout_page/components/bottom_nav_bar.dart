@@ -11,7 +11,11 @@ class CheckoutPageBottomNavBarComponent extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.only(
+            top: 16,
+            right: 16,
+            left: 16,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -62,7 +62,8 @@ class MenuCard extends StatelessWidget {
                               ? menuTitleStyle
                               : menuTitleTransparentStyle,
                         ),
-                        if (data.description != null) ...[
+                        if (data.description != null &&
+                            data.description != 'null') ...[
                           SizedBox(
                             height: defaultMargin / 2,
                           ),
