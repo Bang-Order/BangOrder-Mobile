@@ -31,8 +31,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/',
-          // page: () => LandingPage(),
-          page: () => HomePage(),
+          page: () => LandingPage(),
         ),
         GetPage(
           name: '/:id',

@@ -37,7 +37,9 @@ class MenuCard extends StatelessWidget {
               ),
             ),
             padding: EdgeInsets.symmetric(
-              vertical: defaultMargin / 2,
+              vertical: prevPage == PageEnum.SearchPage
+                  ? defaultMargin
+                  : defaultMargin / 2,
               horizontal: defaultMargin,
             ),
             child: Row(

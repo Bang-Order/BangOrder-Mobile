@@ -50,6 +50,7 @@ class Menu {
     return {
       'menu_id': menu.id,
       'quantity': menu.quantity,
+      'notes': menu.notes.text
     };
   }
 }

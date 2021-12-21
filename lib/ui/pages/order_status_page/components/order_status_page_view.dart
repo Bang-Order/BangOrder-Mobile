@@ -109,7 +109,7 @@ class OrderStatusPageView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(
-              height: 16,
+              height: defaultMargin * 2,
             ),
             Container(
               alignment: Alignment.center,
@@ -124,17 +124,11 @@ class OrderStatusPageView extends StatelessWidget {
             Container(
               margin: EdgeInsets.symmetric(horizontal: defaultMargin),
               padding: EdgeInsets.all(defaultMargin / 2),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.shade500,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Info Struk",
+                    "Info Restoran",
                     style: orderListStyle,
                   ),
                   SizedBox(
@@ -145,7 +139,7 @@ class OrderStatusPageView extends StatelessWidget {
                     minLeadingWidth: 20,
                     title: Text(
                       controller.orderHistory.restaurantName,
-                      style: menuTitleStyle,
+                      style: orderedMenuPriceStyle,
                     ),
                     leading: ClipRRect(
                       child: Image.network(
@@ -155,24 +149,18 @@ class OrderStatusPageView extends StatelessWidget {
                       ),
                     ),
                     trailing: Text(
-                      controller.orderHistory.createdAt,
-                      style: menuSubTitleStyle,
+                      "Meja ${controller.orderHistory.tableNumber}",
+                      style: menuTitleStyle,
                     ),
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: defaultMargin,
+              height: defaultMargin / 2,
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.shade500,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              ),
               padding: EdgeInsets.all(defaultMargin / 2),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,13 +175,17 @@ class OrderStatusPageView extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ListView.builder(
+                      ListView.separated(
                         shrinkWrap: true,
                         controller: ScrollController(),
                         itemCount: controller.getOrderedMenu()!.length,
                         itemBuilder: (context, index) => _customCard(
                           controller.orderHistory.orderItems[index],
                           context,
+                        ),
+                        separatorBuilder: (context, index) => Divider(
+                          height: defaultMargin / 2,
+                          color: darkGrayColor,
                         ),
                       ),
                     ],
@@ -202,17 +194,11 @@ class OrderStatusPageView extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: defaultMargin,
+              height: defaultMargin / 2,
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: defaultMargin),
               padding: EdgeInsets.all(defaultMargin / 2),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.shade500,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -296,42 +282,6 @@ class OrderStatusPageView extends StatelessWidget {
                       }
                     },
                   ),
-
-                  // if (controller.orderHistory.paymentMethod != null)
-
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Container(
-                  //       child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.start,
-                  //         children: [
-                  //           ClipRRect(
-                  //             child: Image.asset(
-                  //               Get.put(OrderHistoryPageController())
-                  //                   .decisionLogoPaymentMethod(controller
-                  //                       .orderHistory.paymentMethod!),
-                  //               height: 32,
-                  //               width: 32,
-                  //             ),
-                  //           ),
-                  //           SizedBox(
-                  //             width: 6,
-                  //           ),
-                  //           Text(
-                  //             controller.orderHistory.paymentMethod!,
-                  //             style: fabCheckoutStyle,
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     Text(
-                  //       controller.orderHistory.totalPrice,
-                  //       style: cartStyle,
-                  //     ),
-                  //   ],
-                  // ),
-
                   SizedBox(
                     height: 16,
                   ),
@@ -411,12 +361,16 @@ class OrderStatusPageView extends StatelessWidget {
                     data.name.toString(),
                     style: menuTitleStyle,
                   ),
-                  SizedBox(height: 6),
-                  if (data.notes != null)
+                  if (data.notes != null) ...[
+                    SizedBox(height: 6),
                     Container(
                       margin: const EdgeInsets.only(bottom: 6),
-                      child: Text(data.notes!),
+                      child: Text(
+                        data.notes!,
+                        style: menuSubTitleStyle,
+                      ),
                     ),
+                  ],
                 ],
               ),
             ),

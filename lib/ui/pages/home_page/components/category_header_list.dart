@@ -14,12 +14,11 @@ class HomepageMenuCategoryComponent extends StatelessWidget {
         shrinkWrap: true,
         controller: ScrollController(),
         itemCount: controller.getMenuCategoryItemCount(),
-        itemBuilder: (context, index) => index !=
-                controller.getMenuCategoryItemCount() - 1
-            ? _categoryHeader(
-                data: controller.api.menuCategory.getMenuCategoryByIndex(index),
-              )
-            : _categoryHeader(),
+        itemBuilder: (context, index) => controller.isOtherMenuEmpty(index)
+            ? _categoryHeader()
+            : _categoryHeader(
+                data: controller.menuCategory.getMenuCategoryByIndex(index),
+              ),
       ),
     );
   }
