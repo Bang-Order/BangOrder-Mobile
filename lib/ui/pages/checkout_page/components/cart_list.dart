@@ -57,7 +57,10 @@ class CheckoutPageCartListComponent extends StatelessWidget {
                   if (data.notes.text != '')
                     Container(
                       margin: const EdgeInsets.only(bottom: 6),
-                      child: Text(data.notes.text),
+                      child: Text(
+                        data.notes.text,
+                        style: menuSubTitleStyle,
+                      ),
                     ),
                   InkWell(
                     child: Text(
