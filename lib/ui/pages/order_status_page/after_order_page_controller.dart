@@ -3,6 +3,7 @@ part of '../../../controller/_controller.dart';
 class AfterOrderPageController extends GetxController {
   late bool isPaid;
   late OrderHistory orderHistory;
+  String _paymentMethod = '';
 
   void goToPage({required orderHistory}) {
     this.orderHistory = orderHistory;
@@ -56,4 +57,11 @@ class AfterOrderPageController extends GetxController {
   String get getURL {
     return 'https://bangorder-db7d2-default-rtdb.asia-southeast1.firebasedatabase.app';
   }
+  String get paymentMethod => _paymentMethod;
+
+  set paymentMethod(String value) {
+    _paymentMethod = value;
+    update();
+  }
+
 }

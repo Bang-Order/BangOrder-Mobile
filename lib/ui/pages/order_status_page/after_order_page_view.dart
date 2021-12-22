@@ -46,19 +46,13 @@ class AfterOrderPage extends StatelessWidget {
               return SizedBox();
           }
         } else {
-          if (controller.orderHistory.paymentMethod != null) {
-            return OrderStatusPageView(
-              title: 'Sudah Diantar',
-              lottieURL:
-                  'https://assets1.lottiefiles.com/private_files/lf30_fqBsFC.json',
-              subTitle: 'Pesanan Anda sudah diantar. Selamat menikmati!',
-              statusBarHeight: statusBarHeight,
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+          return OrderStatusPageView(
+            title: 'Sudah Diantar',
+            lottieURL:
+                'https://assets1.lottiefiles.com/private_files/lf30_fqBsFC.json',
+            subTitle: 'Pesanan Anda sudah diantar. Selamat menikmati!',
+            statusBarHeight: statusBarHeight,
+          );
         }
       },
     );
