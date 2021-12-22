@@ -214,6 +214,9 @@ class OrderStatusPageView extends StatelessWidget {
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       if (controller.isTrue(snapshot)) {
+                        controller.paymentMethod = snapshot.data.snapshot.value;
+                        print("masuk if");
+                        print("payment///: ${controller.paymentMethod}");
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -225,7 +228,7 @@ class OrderStatusPageView extends StatelessWidget {
                                     child: Image.asset(
                                       Get.put(OrderHistoryPageController())
                                           .decisionLogoPaymentMethod(
-                                              snapshot.data.snapshot.value),
+                                              controller.paymentMethod),
                                       height: 32,
                                       width: 32,
                                     ),
@@ -234,7 +237,7 @@ class OrderStatusPageView extends StatelessWidget {
                                     width: 6,
                                   ),
                                   Text(
-                                    snapshot.data.snapshot.value,
+                                    controller.paymentMethod,
                                     style: fabCheckoutStyle,
                                   )
                                 ],
@@ -247,6 +250,8 @@ class OrderStatusPageView extends StatelessWidget {
                           ],
                         );
                       } else {
+                        print("masuk else");
+                        print("payment///: ${controller.paymentMethod}");
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -257,8 +262,12 @@ class OrderStatusPageView extends StatelessWidget {
                                   ClipRRect(
                                     child: Image.asset(
                                       Get.put(OrderHistoryPageController())
-                                          .decisionLogoPaymentMethod(controller
-                                              .orderHistory.paymentMethod!),
+                                          .decisionLogoPaymentMethod(
+                                        controller.paymentMethod != ''
+                                            ? controller.paymentMethod
+                                            : controller
+                                                .orderHistory.paymentMethod!,
+                                      ),
                                       height: 32,
                                       width: 32,
                                     ),
@@ -267,7 +276,10 @@ class OrderStatusPageView extends StatelessWidget {
                                     width: 6,
                                   ),
                                   Text(
-                                    controller.orderHistory.paymentMethod!,
+                                    controller.paymentMethod != ''
+                                        ? controller.paymentMethod
+                                        : controller
+                                            .orderHistory.paymentMethod!,
                                     style: fabCheckoutStyle,
                                   )
                                 ],
