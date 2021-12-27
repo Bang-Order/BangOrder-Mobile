@@ -26,15 +26,15 @@ class OrderHistoryPageController extends GetxController {
 
   String decisionLogoPaymentMethod(String? paymentMethod) {
     if (paymentMethod == "LinkAja") {
-      return "assets/images/linkaja_logo.png";
+      return "assets/images/icon_linkaja.png";
     } else if (paymentMethod == "ShopeePay") {
       return "assets/images/icon_shopeepay.png";
     } else if (paymentMethod == "DANA") {
-      return "assets/images/dana_logo.png";
+      return "assets/images/icon_dana.png";
     } else if (paymentMethod == "OVO") {
       return "assets/images/icon_ovo.png";
     } else {
-      return "assets/images/qris_logo.png";
+      return "assets/images/icon_qris.png";
     }
   }
 

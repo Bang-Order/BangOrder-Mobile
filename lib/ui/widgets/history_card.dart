@@ -125,7 +125,7 @@ class HistoryCard extends StatelessWidget {
                                       data.paymentMethod!),
                                   height: 24,
                                   width: 24,
-                                  fit: BoxFit.cover,
+                                  // fit: BoxFit.cover,
                                 ),
                               ),
                               SizedBox(

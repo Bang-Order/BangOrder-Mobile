@@ -229,8 +229,8 @@ class OrderStatusPageView extends StatelessWidget {
                                       Get.put(OrderHistoryPageController())
                                           .decisionLogoPaymentMethod(
                                               controller.paymentMethod),
-                                      height: 32,
-                                      width: 32,
+                                      height: 24,
+                                      width: 24,
                                     ),
                                   ),
                                   SizedBox(
