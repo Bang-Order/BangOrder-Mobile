@@ -28,7 +28,7 @@ class OrderHistoryPageController extends GetxController {
     if (paymentMethod == "LinkAja") {
       return "assets/images/linkaja_logo.png";
     } else if (paymentMethod == "ShopeePay") {
-      return "assets/images/shopeepay_logo.png";
+      return "assets/images/icon_shopeepay.png";
     } else if (paymentMethod == "DANA") {
       return "assets/images/dana_logo.png";
     } else if (paymentMethod == "OVO") {
