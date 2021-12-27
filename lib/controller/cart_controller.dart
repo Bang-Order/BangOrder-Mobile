@@ -1,7 +1,7 @@
 part of '_controller.dart';
 
 class CartController extends GetxController {
-  List<Menu> _items = [];
+  var items = <Menu>[].obs;
 
   void addItem(Menu cart) {
     items.add(cart);
@@ -46,10 +46,10 @@ class CartController extends GetxController {
     return items.elementAt(index);
   }
 
-  List<Menu> get items => _items;
-
-  set items(List<Menu> value) {
-    _items = value;
-    update();
-  }
+  // List<Menu> get items => _items;
+  //
+  // set items(List<Menu> value) {
+  //   _items = value;
+  //   update();
+  // }
 }

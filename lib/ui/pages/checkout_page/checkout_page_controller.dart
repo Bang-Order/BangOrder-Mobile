@@ -6,6 +6,16 @@ class CheckoutPageController extends GetxController {
 
   bool _isLoading = false;
 
+  @override
+  void onInit() {
+    super.onInit();
+    ever(cart.items, (_) {
+      if (cart.items.isEmpty) {
+        Get.back();
+      }
+    });
+  }
+
   void backOnClick() {
     Get.back();
   }
@@ -19,7 +29,7 @@ class CheckoutPageController extends GetxController {
       );
 
       final cart = Get.put(CartController());
-      cart.items = [];
+      cart.items = <Menu>[].obs;
     } else {
       Get.back();
       Popup(context).showFailedPopup();

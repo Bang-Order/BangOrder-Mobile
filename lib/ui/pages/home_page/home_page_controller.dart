@@ -8,6 +8,7 @@ class HomePageController extends GetxController {
 
   @override
   void onInit() async {
+    // getDeeplinkSuccess(Uri.parse('https://google.com?restaurant=1&table_id=1'));
     await _getDeepLinkFromOutside();
     await _getDeepLinkFromInside();
     super.onInit();
