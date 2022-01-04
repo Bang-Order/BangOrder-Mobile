@@ -71,6 +71,7 @@ class OrderStatusPageView extends StatelessWidget {
                       lottieLocal!,
                       height: MediaQuery.of(context).size.height * 0.3,
                     ),
+                  SizedBox(height: 32),
                   if (subTitle != null) ...[
                     Text(
                       subTitle!,

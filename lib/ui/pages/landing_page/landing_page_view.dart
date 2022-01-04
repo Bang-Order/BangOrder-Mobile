@@ -34,12 +34,12 @@ class LandingPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              millisecond: 1000,
+              millisecond: 600,
             ),
             Expanded(
               flex: 1,
               child: _animation(
-                millisecond: 1000,
+                millisecond: 700,
                 child: Container(
                   color: Colors.transparent,
                   child: Lottie.asset(
@@ -51,7 +51,7 @@ class LandingPage extends StatelessWidget {
               ),
             ),
             _animation(
-              millisecond: 1300,
+              millisecond: 800,
               child: Container(
                 margin: EdgeInsets.only(bottom: 20, top: 80),
                 width: MediaQuery.of(context).size.width,

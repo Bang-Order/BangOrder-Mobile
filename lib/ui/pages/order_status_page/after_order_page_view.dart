@@ -29,16 +29,18 @@ class AfterOrderPage extends StatelessWidget {
             case 'dimasak':
               return OrderStatusPageView(
                 title: 'Sedang Dimasak',
-                lottieURL:
-                    'https://assets7.lottiefiles.com/packages/lf20_jbt4j3ea.json',
+                lottieLocal: 'assets/images/frying_pan.json',
+                // lottieURL:
+                //     'https://assets7.lottiefiles.com/packages/lf20_jbt4j3ea.json',
                 subTitle: 'Pesanan Anda masih dimasak. Mohon tunggu sebentar',
                 statusBarHeight: statusBarHeight,
               );
             case 'selesai':
               return OrderStatusPageView(
                 title: 'Sudah Diantar',
-                lottieURL:
-                    'https://assets1.lottiefiles.com/private_files/lf30_fqBsFC.json',
+                lottieLocal: 'assets/images/food_prepared.json',
+                // lottieURL:
+                //     'https://assets1.lottiefiles.com/private_files/lf30_fqBsFC.json',
                 subTitle: 'Pesanan Anda sudah diantar. Selamat menikmati!',
                 statusBarHeight: statusBarHeight,
               );
@@ -48,8 +50,9 @@ class AfterOrderPage extends StatelessWidget {
         } else {
           return OrderStatusPageView(
             title: 'Sudah Diantar',
-            lottieURL:
-                'https://assets1.lottiefiles.com/private_files/lf30_fqBsFC.json',
+            lottieLocal: 'assets/images/food_prepared.json',
+            // lottieURL:
+            //     'https://assets1.lottiefiles.com/private_files/lf30_fqBsFC.json',
             subTitle: 'Pesanan Anda sudah diantar. Selamat menikmati!',
             statusBarHeight: statusBarHeight,
           );
